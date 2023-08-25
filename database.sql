@@ -1,7 +1,4 @@
-
-   
--- CREATE DATABASE "first-look"
-
+-- CREATE DATABASE "react-to-do"
 
 -- USER is a reserved keyword with Postgres
 -- You must use double quotes in every query that user is in:
@@ -14,8 +11,16 @@ CREATE TABLE "user" (
     "access_level" INT DEFAULT 0
 );
 
-CREATE TABLE "pets" (
-    "id" SERIAL PRIMARY KEY,
-    "name" VARCHAR(80) NOT NULL,
-    "user_id" INT REFERENCES "user"
+-- (task name, date added, due date, priority level, notes, completion status )
+
+CREATE TABLE tasklist (
+    "id" serial PRIMARY KEY,
+    "taskname" VARCHAR (400) NOT NULL,
+    "dateadded" VARCHAR (50),
+    "duedate" VARCHAR (50),
+    "completionstatus" BOOLEAN DEFAULT FALSE
+    "prioritylevel" VARCHAR (10)
+    "notes" VARCHAR (2000)
 );
+
+-- need to add sample data and sample alert messages 

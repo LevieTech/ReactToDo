@@ -5,7 +5,7 @@ body,
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   margin: 0px;
 }
 
@@ -29,15 +29,19 @@ Button
 .btn {
   display: inline-block;
   padding: 10px 20px;
-  border-color: #014041;
-  border-width: 1px 1px 3px;
-  border-radius: 4px;
-  background-color: #00acb0;
+  border-color: #4e3055;
+  border-width: 2px 2px 2px;
+  border-radius: 10px;
+  background-color: #8ac34e;
   color: #f8f8f8;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
   font-size: 1.1rem;
   outline: 0;
   cursor: pointer;
 }
+/* blue #27a1b4 purp #4e3055 green #8ac34e and black*/
+
 
 .btn_sizeMin {
   min-height: 50px;
@@ -55,7 +59,7 @@ Button
 }
 
 .btn:hover {
-  background-color: #008183;
+  background-color: #4e3055;
   text-decoration: none;
 }
 
@@ -75,6 +79,8 @@ Button
   border-color: #008183;
   color: #008183;
 }
+/* blue #27a1b4 purp #4e3055 green #8ac34e and black/*
+
 
 /* --------------------------------------------------------------------------------
 Alert

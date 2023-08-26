@@ -19,8 +19,22 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import './App.css';
+
+//! Theme for MUI styling
+// blue #27a1b4 purp #4e3055 green #8ac34e and black
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#27a1b4 ',
+    },
+    secondary: {
+      main: '#8ac34e'
+    },
+  }
+}); // End theme
 
 function App() {
   const dispatch = useDispatch();
@@ -32,6 +46,8 @@ function App() {
   }, [dispatch]);
 
   return (
+    <ThemeProvider theme={theme}>
+
     <Router>
       <div>
         <Nav />
@@ -118,6 +134,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    </ThemeProvider>
   );
 }
 

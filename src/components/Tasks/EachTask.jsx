@@ -57,18 +57,6 @@ function EachTask({ task, handleEditTask, date }) {
           {task && new Date(task.dueDate).toLocaleDateString(undefined, { dateStyle: "short" })}
         </div>
 
-        <div
-          style={{
-            fontSize: "20px",
-            color: "Black",
-            fontFamily: "Georgia",
-            borderBottom: "none",
-            fontWeight: "bolder",
-            textShadow: "2px 2px 3px white"
-          }}
-        >
-          {task && task.taskName}
-        </div>
       
         <div
           style={{
@@ -99,11 +87,11 @@ function EachTask({ task, handleEditTask, date }) {
           >
             <DeleteIcon style={{ color: "purple" }} />
           </Button>
-
+          <Link to={`/task/${task.id}/edit`}>
           <Button
             key={task.id}
             task={task}
-            onSubmit={handleEditClick}
+            onClick={handleEditClick}
             component={Link}
             to={`/task/${task.id}/edit`}
             className={`${isHoveredEdit ? "edit-hovered" : ""} edit-container`}
@@ -119,23 +107,9 @@ function EachTask({ task, handleEditTask, date }) {
           >
             <EditIcon sx={{ color: "purple" }} />
           </Button>
-
-          <Link
-            to="/categories"
-            className={`${isHoveredEdit ? "edit-hovered" : ""} edit-container`}
-            onMouseEnter={() => setIsHoveredEdit(true)}
-            onMouseLeave={() => setIsHoveredEdit(false)}
-            style={{
-              fontFamily: "Georgia",
-              color: "black",
-              fontWeight: "bold",
-              fontSize: "20px",
-              textDecoration: "none",
-            
-            }}
-          >
-            <AssignmentSharpIcon sx={{ color: "purple", fontSize: 40, marginRight: "10px" }} />
           </Link>
+
+         
         </div>
       </TableCell>
 

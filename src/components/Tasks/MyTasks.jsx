@@ -26,7 +26,8 @@ function MyTasks ({}) {
 
   const handleDeleteTask = (taskID,event) => {
     event.preventDefault();
-    dispatch({ type: "DELETE_TASK", payload: user, taskID });
+    dispatch({ type: "DELETE_TASK", payload: { user, taskID } });
+
   };
 
   
@@ -107,13 +108,13 @@ function MyTasks ({}) {
                   key={i}
                   task={{
                     id: task.id,
-                    taskName: task.taskName,
-                    dateAdded: task.dateAdded,
+                    taskname: task.taskname,
+                    dateadded: task.dateadded,
                     // dueDate: dueDate.toISOString(),
                     // priorityLevel: priorityLevel.toISOString(),
-                     dueDate: task.dueDate,
-                    priorityLevel: task.priorityLevel,
-                    completionStatus: task.completionStatus,
+                     duedate: task.duedate,
+                    prioritylevel: task.prioritylevel,
+                    completionstatus: task.completionstatus,
 
                   }}
                   handleEditTask={handleEditTask}

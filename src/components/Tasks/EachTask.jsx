@@ -68,7 +68,7 @@ function EachTask({ task, handleEditTask, date }) {
             textShadow: "2px 2px 3px white"
           }}
         >
-          {task && task.taskName}
+          {task && task.taskname}
         </div>
       
         <div style={{ display: "flex" }}>

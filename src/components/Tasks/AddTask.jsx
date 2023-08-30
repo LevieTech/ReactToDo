@@ -9,34 +9,43 @@ function AddTask() {
     const dispatch = useDispatch();
     const { user } = useSelector((store) => store);
 
-    const [taskName, setTaskName] = useState('');
-    const [dateAdded, setDateAdded] = useState('');
-    const [dueDate, setDueDate] = useState('');
-    const [priorityLevel, setPriorityLevel] = useState('');
-    const [completionStatus, setCompletionStatus] = useState('');
+    const [taskname, setTaskName] = useState('');
+    const [dateadded, setDateAdded] = useState('');
+    const [duedate, setDueDate] = useState('');
+    const [prioritylevel, setPriorityLevel] = useState('');
+    const [completionstatus, setCompletionStatus] = useState('');
     const [notes, setNotes] = useState('');
   
     // stores input values into the held states
     const changeTaskName= (event) => {
+      console.log('changeTaskName called with value:', event.target.value);
       setTaskName(event.target.value);
     };
     const changeDateAdded = (event) => {
+      console.log('changeDateAdded called with value:', event.target.value);
       setDateAdded(event.target.value);
     };
     const changeDueDate = (event) => {
+      console.log('changeDueDate called with value:', event.target.value);
+      
       setDueDate(event.target.value);
     };
     const changePriorityLevel = (event) => {
-        setPriorityLevel(event.target.value);
+      console.log('changePriorityLevel called with value:', event.target.value);
+      
+      setPriorityLevel(event.target.value);
       };
       const changecompletionStatus = (event) => {
-        setCompletionStatus(event.target.value);
+        console.log('changecompletionStatus called with value:', event.target.value);
+      setCompletionStatus(event.target.value);
       };
       const changeNotes = (event) => {
-        setNotes(event.target.value);
+        console.log('changeNotes called with value:', event.target.value);
+      setNotes(event.target.value);
       };
 
     useEffect(() => {
+      console.log('useEffect called');
       dispatch({ type: 'GET_SAVED_TASKS' });
     }, []);
   
@@ -45,14 +54,16 @@ function AddTask() {
   
       const taskData = {
         userId: user.id,
-        taskName,
-        dateAdded,
-        dueDate,
-        priorityLevel,
-        completionStatus,
+        taskname,
+        dateadded,
+        duedate,
+        prioritylevel,
+        completionstatus,
         notes,
       };
   
+      console.log('handleSave called with taskData:', taskData);
+
       dispatch({
         type: 'ADD_TASK',
         payload: taskData,
@@ -84,7 +95,7 @@ function AddTask() {
               <TextField
               className="input-field input-border"
                 label="Task Name"
-                value={taskName}
+                value={taskname}
                 onChange={changeTaskName}
                 fullWidth
                 required
@@ -111,7 +122,7 @@ function AddTask() {
               className="input-field date-input input-border"
                 label="Start Date"
                 type="date"
-                value={dateAdded}
+                value={dateadded}
                 onChange={changeDateAdded}
                 required
                 fullWidth
@@ -141,7 +152,7 @@ function AddTask() {
               className="input-field date-input input border"
                 label="   Due Date"
                 type="date"
-                value={dueDate}
+                value={duedate}
                 onChange={changeDueDate}
                 required
                 fullWidth
@@ -172,7 +183,7 @@ function AddTask() {
               <TextField
               className="input-field date-input input border"
                 label="   Priority Level"
-                value={priorityLevel}
+                value={prioritylevel}
                 onChange={changePriorityLevel}
                 required
                 fullWidth
@@ -205,7 +216,7 @@ function AddTask() {
               className="input-field date-input input border"
                 label="   Completion Status"
                 type="completionStatus"
-                value={completionStatus}
+                value={completionstatus}
                 onChange={changecompletionStatus}
                 required
                 fullWidth

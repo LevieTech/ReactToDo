@@ -25,7 +25,7 @@ router.get("/", (req, res) => {
      res.send (result.rows);
     })
     .catch((error) => {
-      console.log("Erro getting tasks in taskrouter:", error);
+      console.log("Error getting tasks in taskrouter:", error);
       res.sendStatus(500);
     });
 });
@@ -37,7 +37,7 @@ router.get("/", (req, res) => {
     const taskID = req.params.id; // Retrieve the user ID from the request parameter
     const queryText = `
       SELECT 
-        t.*,
+        t.*
       FROM 
         "tasklist" t
    WHERE 
@@ -99,11 +99,22 @@ router.post('/allSave', (req, res) => {
     // Access the tasks and user ID from the request body
     const { tasks, userId } = req.body;
 
-    // TODO: logic for saving all tasks here.
+    if (!Array.isArray(tasks)) {
+      return res.status(400).send('Expected an array of tasks');
+  }
 
-    // Send a response after processing.
-    res.sendStatus(200);
+  try {
+      for (const task of tasks) {
+          // Logic to save each task in the database
+          // e.g., using pool.query to insert each task
+      }
+      res.sendStatus(200);
+  } catch (error) {
+      console.log('Error saving tasks:', error);
+      res.sendStatus(500);
+  }
 });
+    
 
 //*PUT /edit: Updates a task in the database. It expects the updated task data in the request body and performs an update query on the "tasklist" table using the provided information.
 router.put('/edit/:id', (req, res) => {

@@ -34,6 +34,11 @@ VALUES ('1', '1', 'Schedule appointment', '7/19/2023', '8/12/2023', 'medium', 'F
 
 
 
+
+
+
+
+
 -- just changed a few things 
 -- database name = react-to-do
 

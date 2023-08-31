@@ -12,7 +12,7 @@ import AddTask from "./AddTask";
 
 
 
-function MyTasks ({}) {
+function MyTasks () {
     const dispatch = useDispatch();
     const history = useHistory();
     const { userTask, savedTasks } = useSelector((store) => store.task);
@@ -21,7 +21,6 @@ function MyTasks ({}) {
 
     useEffect(() => {
      dispatch({ type: "FETCH_TASK" });
-     dispatch({ type: "GET_SAVED_TASKS", payload: user.id }); 
   }, [dispatch, user.id]);
 
   const handleDeleteTask = (taskID,event) => {

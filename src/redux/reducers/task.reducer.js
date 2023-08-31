@@ -10,23 +10,27 @@ function taskReducer(state = initialState, action) {
 
     switch (action.type) {
         case "ADD_TASK":
-        case "SAVE_TASKS":
-            const newUserTasks = [
-                ...state.userTasks,
-                {
-                    ...action.payload,
-                    taskname: action.payload.taskname,
-                    dateadded: action.payload.dateadded,
-                    duedate: action.payload.duedate,
-                    prioritylevel: action.payload.prioritylevel,
-                    completionstatus: action.payload.completionstatus,
-                    notes: action.payload.notes,
-                },
-            ];
-            console.log("New userTasks after ADD_TASK/SAVE_TASKS:", newUserTasks);
+            console.log("Received ADD_TASK with payload:", action.payload);
             return {
                 ...state,
-                userTasks: newUserTasks,
+                userTasks: [
+                    ...state.userTasks,
+                    action.payload
+                ],
+            };
+            
+            
+        case "SAVE_TASKS":
+         
+            const newUserTasksForSave = [
+                ...state.userTasks,
+                action.payload,
+                 
+            ];
+            console.log("New userTasks after SAVE_TASKS:", newUserTasksForSave);
+            return {
+                ...state,
+                userTasks: newUserTasksForSave,
             };
 
         case "EDIT_TASK":
@@ -47,7 +51,6 @@ function taskReducer(state = initialState, action) {
             };
 
         case "GET_SAVED_TASKS_SUCCESS":
-            console.log("New savedTasks after GET_SAVED_TASKS_SUCCESS:", action.payload);
             return {
                 ...state,
                 savedTasks: action.payload,

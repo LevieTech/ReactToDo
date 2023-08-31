@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, TextField, Typography, Container, Grid } from '@mui/material';
+import { Select, MenuItem } from '@mui/material';
 
 
 function AddTask() {
     const history = useHistory();
     const dispatch = useDispatch();
     const { user } = useSelector((store) => store);
-
+    const [notification, setNotification] = useState(null);
     const [taskname, setTaskName] = useState('');
     const [dateadded, setDateAdded] = useState('');
     const [duedate, setDueDate] = useState('');
@@ -68,7 +69,7 @@ function AddTask() {
         type: 'ADD_TASK',
         payload: taskData,
       });
-  
+      setNotification("Task added successfully!");
       history.push('/my_tasks');
     };
   
@@ -180,68 +181,71 @@ function AddTask() {
             </Grid >
 
             <Grid item xs={6}>
-              <TextField
-              className="input-field date-input input border"
-                label="   Priority Level"
-                value={prioritylevel}
-                onChange={changePriorityLevel}
-                required
-                fullWidth
-                style={{ fontFamily: "Georgia" }}
-                InputProps={{
-                  shrink: true,
-                  style: {
-                    color: 'black',
-                    fontFamily: "Georgia",
-  
-                  },
-                }}
-                InputLabelProps={{
-                  shrink: true,
-                  style: {
-                    color: 'black',
-                    fontFamily: "Georgia",
-                    fontWeight: 'bolder',
-                    fontSize: '25px',
-                    textShadow: '1px 1px 2px rgba(0, 0, 0, 0.8)'
-                  },
-                }}
-                margin="normal"
-              />
-            </Grid >
+  <TextField
+    className="input-field date-input input-border"
+    label="Priority Level"
+    select
+    value={prioritylevel}
+    onChange={changePriorityLevel}
+    required
+    fullWidth
+    style={{ fontFamily: "Georgia" }}
+    InputProps={{
+      style: {
+        color: 'black',
+        fontFamily: "Georgia",
+      },
+    }}
+    InputLabelProps={{
+      style: {
+        color: 'black',
+        fontFamily: "Georgia",
+        fontWeight: 'bolder',
+        fontSize: '25px',
+        textShadow: '1px 1px 2px rgba(0, 0, 0, 0.8)'
+      },
+    }}
+    margin="normal"
+  >
+    <MenuItem value="high">High</MenuItem>
+    <MenuItem value="medium">Medium</MenuItem>
+    <MenuItem value="low">Low</MenuItem>
+  </TextField>
+</Grid>
+
+<Grid item xs={6}>
+  <TextField
+    className="input-field date-input input-border"
+    label="Completion Status"
+    select
+    value={completionstatus}
+    onChange={changecompletionStatus}
+    required
+    fullWidth
+    style={{ fontFamily: "Georgia" }}
+    InputProps={{
+      style: {
+        color: 'black',
+        fontFamily: "Georgia",
+      },
+    }}
+    InputLabelProps={{
+      style: {
+        color: 'black',
+        fontFamily: "Georgia",
+        fontWeight: 'bolder',
+        fontSize: '25px',
+        textShadow: '1px 1px 2px rgba(0, 0, 0, 0.8)'
+      },
+    }}
+    margin="normal"
+  >
+    <MenuItem value={true}>True</MenuItem>
+    <MenuItem value={false}>False</MenuItem>
+  </TextField>
+</Grid>
 
 
-            <Grid item xs={6}>
-              <TextField
-              className="input-field date-input input border"
-                label="   Completion Status"
-                type="completionStatus"
-                value={completionstatus}
-                onChange={changecompletionStatus}
-                required
-                fullWidth
-                style={{ fontFamily: "Georgia" }}
-                InputProps={{
-                  shrink: true,
-                  style: {
-                    color: 'black',
-                    fontFamily: "Georgia",
-  
-                  },
-                }}
-                InputLabelProps={{
-                  shrink: true,
-                  style: {
-                    color: 'black',
-                    fontFamily: "Georgia",
-                    fontWeight: 'bolder',
-                    fontSize: '25px',
-                    textShadow: '1px 1px 2px rgba(0, 0, 0, 0.8)'
-                  },
-                }}
-                margin="normal"
-              />
-            </Grid >
 
             <Grid item xs={6}>
               <TextField
@@ -291,7 +295,8 @@ function AddTask() {
               fontFamily: "Georgia"
             }}>
           
-          
+          {notification && <div className="notification">{notification}
+          </div>}
             Save
           </Button>
         </form>

@@ -1,8 +1,8 @@
 const initialState = {
     currentTaskId: null,
-    userTasks: [],  
-    savedTasks: [], 
-    task: [],       
+    error: null,
+    task: [],
+    savedTasks: [],
 };
 
 function taskReducer(state = initialState, action) {
@@ -10,32 +10,39 @@ function taskReducer(state = initialState, action) {
 
     switch (action.type) {
         case "ADD_TASK":
+            if (!action.payload) {
+                console.error("ADD_TASK action was dispatched without a payload");
+                return state;
+            }
             console.log("Received ADD_TASK with payload:", action.payload);
             return {
                 ...state,
-                userTasks: [
-                    ...state.userTasks,
+                task: [
+                    ...state.task,
                     action.payload
                 ],
             };
-            
-            
+
         case "SAVE_TASKS":
-         
-            const newUserTasksForSave = [
-                ...state.userTasks,
-                action.payload,
-                 
-            ];
-            console.log("New userTasks after SAVE_TASKS:", newUserTasksForSave);
+            if (!action.payload || !Array.isArray(action.payload)) {
+                console.error("SAVE_TASKS action was dispatched with incorrect payload");
+                return state;
+            }
             return {
                 ...state,
-                userTasks: newUserTasksForSave,
+
+                task: [
+                    ...state.task,
+                    action.payload
+                ],
             };
 
-        case "EDIT_TASK":
+        case "EDIT_TASK": if (!action.payload || !('task' in action.payload) || !('index' in action.payload)) {
+            console.error("EDIT_TASK action dispatched with incorrect payload");
+            return state;
+        }
             const { task, index } = action.payload;
-            const updatedUserTasks = state.userTasks.map((t, i) => {
+            const updatedUserTasks = state.task.map((t, i) => {
                 if (i === index) {
                     return {
                         ...t,
@@ -47,7 +54,7 @@ function taskReducer(state = initialState, action) {
             console.log("Updated userTasks after EDIT_TASK:", updatedUserTasks);
             return {
                 ...state,
-                userTasks: updatedUserTasks,
+                task: updatedUserTasks,
             };
 
         case "GET_SAVED_TASKS_SUCCESS":
@@ -57,21 +64,31 @@ function taskReducer(state = initialState, action) {
             };
 
         case "UPDATE_TASK_SUCCESS":
-            const updatedTasks = state.userTasks.map((task) =>
+            const updatedTasks = state.task.map((task) =>
                 task.id === action.payload.id
                     ? {
                         ...task,
-                        ...action.payload,
-                        startDate: action.payload.startDate,
-                        endDate: action.payload.endDate,
+                        ...action.payload
                     }
                     : task
             );
-            console.log("Updated userTasks after UPDATE_TASK_SUCCESS:", updatedTasks);
             return {
                 ...state,
                 userTasks: updatedTasks,
             };
+
+        case "DELETE_TASK":
+            return {
+                ...state,
+                userTasks: state.task.filter(task => task.id !== action.payload.taskID)
+            };
+
+        case "ADD_TASK_ERROR":
+            return {
+                ...state,
+                error: "Error while adding a task",
+            };
+
 
         default:
             return state;
@@ -79,3 +96,4 @@ function taskReducer(state = initialState, action) {
 }
 
 export default taskReducer;
+

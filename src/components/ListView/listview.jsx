@@ -8,11 +8,38 @@ function ListView() {
     const history = useHistory();
     const tasks = useSelector(store => store.taskList)
 
+    console.log(tasks);
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_TASKS'});
+    }, []);
 
     return (
-        <>
-        <h1>TEST!!</h1>
-        </>
+        <main>
+            {tasks.length === 0 ? (
+                <>
+                <div>
+                <h1>No new tasks!</h1>
+                </div>
+                </>
+            ) : (
+                <div key={tasks.id}>
+                    {tasks.map(task => {
+                        return (
+                            <div>
+                                <h2>{task.taskname}</h2>
+                                <h3>{task.dateadded}</h3>
+                                <h3>{task.duedate}</h3>
+                                <h5>{task.prioritylevel}</h5>
+                                <h5>{task.completionstatus}</h5>
+                                <p>{task.notes}</p>
+                            </div>
+                        )
+                    })}
+                </div>
+            )}
+        
+        </main>
     )
 }
 

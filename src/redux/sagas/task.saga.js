@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function* fetchTasks() {
     try {
-        const tasks = yield axios.get('/api/tasklist');
+        const tasks = yield axios.get('/api/taskList');
         yield put ({ type: 'SET_TASKS', payload: tasks.data });
     } catch (error) {
         console.log(`Error in fetchTasks: ${error}`);

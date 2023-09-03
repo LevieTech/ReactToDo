@@ -14,6 +14,35 @@ function ListView() {
         dispatch({ type: 'FETCH_TASKS'});
     }, []);
 
+    // TODO FILTER STUFF BELOW
+    const [taskFilter, setTaskFilter] = useState('');
+    const [taskArray, setTaskArray] = useState([]);
+    const [filferedTaskArray, setFilteredTaskArray] = useState([]);
+
+    useEffect(() => {
+        if (tasks.length > 0) {
+            setTaskArray(tasks)
+            setFilteredTaskArray(tasks)
+        }
+        console.log(tasks)
+    }, [])
+
+    useEffect(() => {
+        if(taskFilter !== '') {
+            console.log('filled taskFilter', taskFilter)
+            setFilteredTaskArray(taskArray.filter(task => task.prioritylevel === taskFilter))
+            console.log('filtered task array', filferedTaskArray)
+        } else {
+            setTaskArray(tasks)
+        }
+        if (taskFilter === '') {
+            setFilteredTaskArray(taskArray)
+            console.log('taskFilter', taskFilter)
+        } else {
+            setTaskArray(tasks)
+        }
+    }, [taskFilter])
+
     return (
         <main>
             {tasks.length === 0 ? (

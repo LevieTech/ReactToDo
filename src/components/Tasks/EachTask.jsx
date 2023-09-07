@@ -14,6 +14,7 @@ function EachTask({ task, handleEditTask, handleDeleteTask }) {
       <p>Due Date: {task.duedate}</p>
       <p>Priority: {task.prioritylevel}</p>
       <p>Status: {task.completionstatus}</p>
+      <p>Notes: {task.notes}</p>
       <div style={{ display: "flex" }}>
         <Button
           onClick={() => handleDeleteTask(task.id)}

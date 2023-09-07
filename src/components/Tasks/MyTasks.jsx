@@ -86,8 +86,10 @@ function MyTasks() {
                             id: task.id,
                             taskname: task.taskname,
                             dateadded: task.dateadded,
+                            duedate: task.duedate,
                             prioritylevel: task.prioritylevel,
                             completionstatus: task.completionstatus,
+                            notes: task.notes,
                         }}
                         handleEditTask={handleEditTask}
                         handleDeleteTask={() => handleDeleteTask(null, task.id)}

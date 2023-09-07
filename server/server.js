@@ -9,6 +9,8 @@ const passport = require('./strategies/user.strategy');
 // Route includes
 const userRouter = require('./routes/user.router');
 const petRouter = require('./routes/pets.router');
+const taskRouter = require('./routes/task.router');
+
 
 // Body parser middleware
 app.use(express.json());
@@ -28,7 +30,7 @@ app.use('/api/pets', petRouter);
 app.use(express.static('build'));
 
 // App Set //
-const PORT = process.env.PORT || 5042;
+const PORT = process.env.PORT || 5999;
 
 /** Listen * */
 app.listen(PORT, () => {

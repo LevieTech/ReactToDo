@@ -19,9 +19,15 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import ListView from '../ListView/listview';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import './App.css';
+
+
+import MyTasks from '../Tasks/MyTasks.jsx';
+import AddTask from '../Tasks/AddTask.jsx';
+
 
 //! Theme for MUI styling
 // blue #27a1b4 purp #4e3055 green #8ac34e and black
@@ -83,6 +89,32 @@ function App() {
           >
             <InfoPage />
           </ProtectedRoute>
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/taskList"
+          >
+            <ListView />
+          </ProtectedRoute>
+
+          <Route
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/my_tasks"
+          >
+            <MyTasks />
+          </Route>
+
+          <Route
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/add_task"
+          >
+            <AddTask />
+          </Route>
+
+
+
 
           <Route
             exact

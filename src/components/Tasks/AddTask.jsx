@@ -249,8 +249,8 @@ const changeNotes = (event) => {
                 }}
                 margin="normal"
               >
-                <MenuItem value={true}>True</MenuItem>
-                <MenuItem value={false}>False</MenuItem>
+                <MenuItem value="true">True</MenuItem>
+                <MenuItem value="false">False</MenuItem>
               </TextField>
             </Grid>
 

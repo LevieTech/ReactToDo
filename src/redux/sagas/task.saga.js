@@ -2,15 +2,18 @@ import {all, call, put, takeLatest, takeEvery, select } from "redux-saga/effects
 import axios from "axios";
 
 function* addTask(action) {
-  try {
-    console.log("Attempting to add task with payload:", action.payload);
-    const response = yield call(axios.post, "/api/task", action.payload);
-    console.log("Server Response:", response.data);  // Log the server response
-    console.log("Task added successfully");
-} catch (error) {
-    console.log("Error adding task:", error);
-    yield put({ type: "ADD_TASK_ERROR" });
-}
+    try {
+        console.log("Attempting to add task with payload:", action.payload);
+        const response = yield call(axios.post, "/api/task", action.payload);
+        console.log("Server Response:", response.data); // Log the server response
+        console.log("Task added successfully");
+        console.log("Dispatching action: ADD_TASK_SUCCESS with payload:", response.data);
+        yield put({ type: "ADD_TASK_SUCCESS", payload: response.data }); // Dispatch success action
+
+    } catch (error) {
+        console.log("Error adding task:", error);
+        yield put({ type: "ADD_TASK_ERROR" });
+    }
 }
 
 function* saveTasks(action) {

@@ -7,6 +7,7 @@ const initialState = {
 
 function taskReducer(state = initialState, action) {
     console.log("Action received:", action.type, "with payload:", action.payload); // log for every action received
+    console.log("Previous State:", state, "Action:", action);// Log for the initial state and action
 
     switch (action.type) {
         case "ADD_TASK":

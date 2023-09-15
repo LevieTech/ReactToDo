@@ -13,3 +13,6 @@ A react to-do app, where users can register and track their tasks.
 
 ## Other things to keep in mind
 - GOTTA MAKE IT POP
+- npm install axios
+- npm install @mui/icons-material
+- npm install @mui/material @emotion/react @emotion/styled

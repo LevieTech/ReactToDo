@@ -3,7 +3,7 @@
 .nav {
   /* flex box layout */
   display: flex;
-  justify-content: space-between;
+  justify-content:left;
   align-items: center;
 
   margin: 0 0 30px;
@@ -23,16 +23,21 @@
   margin: 0;
 }
 
+.navImg {
+  padding: 10px;
+}
+
 .navLink {
   display: inline-block;
   color: #f2f2f2;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  background-image: linear-gradient( #8ac34e,#27a1b4, #4e3055, black);
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
-  font-size: 15px;
-
+  font-size: 22px;
+  background-image: linear-gradient( #8ac34e,#27a1b4, #4e3055, black);
+  border: #4e3055;
+  border-width: 8px ;
   /* these last two make the logout button in
   the nav bar look like another link */
   border: none;

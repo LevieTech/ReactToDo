@@ -11,13 +11,13 @@ function ListView() {
     console.log(tasks);
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_TASKS'});
+        dispatch({ type: 'FETCH_TASKS' });
     }, []);
 
     // TODO FILTER STUFF BELOW
     const [taskFilter, setTaskFilter] = useState('');
     const [taskArray, setTaskArray] = useState([]);
-    const [filferedTaskArray, setFilteredTaskArray] = useState([]);
+    const [filteredTaskArray, setFilteredTaskArray] = useState([]);
 
     useEffect(() => {
         if (tasks.length > 0) {
@@ -28,10 +28,10 @@ function ListView() {
     }, [])
 
     useEffect(() => {
-        if(taskFilter !== '') {
+        if (taskFilter !== '') {
             console.log('filled taskFilter', taskFilter)
             setFilteredTaskArray(taskArray.filter(task => task.prioritylevel === taskFilter))
-            console.log('filtered task array', filferedTaskArray)
+            console.log('filtered task array', filteredTaskArray)
         } else {
             setTaskArray(tasks)
         }
@@ -43,19 +43,31 @@ function ListView() {
         }
     }, [taskFilter])
 
+    const checkFilter = (task) => {
+        setTaskFilter(task.prioritylevel)
+    }
+
     return (
         <main>
             {tasks.length === 0 ? (
                 <>
-                <div>
-                <h1>No new tasks!</h1>
-                </div>
+                    <div>
+                        <h1>No new tasks!</h1>
+                    </div>
                 </>
             ) : (
                 <div key={tasks.id}>
                     {tasks.map(task => {
                         return (
                             <div>
+                                <button onClick={() => checkFilter(task)}>Sort By Priority</button>
+                            </div>
+                        )
+                    })}
+                    {filteredTaskArray.map(task => {
+                        return (
+                            <div>
+                                <button onClick={() => checkFilter(task)}>Sort By Priority</button>
                                 <h2>{task.taskname}</h2>
                                 <h3>{task.dateadded}</h3>
                                 <h3>{task.duedate}</h3>
@@ -67,7 +79,7 @@ function ListView() {
                     })}
                 </div>
             )}
-        
+
         </main>
     )
 }

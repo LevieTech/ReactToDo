@@ -24,6 +24,11 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import './App.css';
 
+
+import MyTasks from '../Tasks/MyTasks.jsx';
+import AddTask from '../Tasks/AddTask.jsx';
+
+
 //! Theme for MUI styling
 // blue #27a1b4 purp #4e3055 green #8ac34e and black
 const theme = createTheme({
@@ -91,6 +96,25 @@ function App() {
           >
             <ListView />
           </ProtectedRoute>
+
+          <Route
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/my_tasks"
+          >
+            <MyTasks />
+          </Route>
+
+          <Route
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/add_task"
+          >
+            <AddTask />
+          </Route>
+
+
+
 
           <Route
             exact

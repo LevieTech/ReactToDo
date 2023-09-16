@@ -5,10 +5,10 @@ import { Button, TextField, Typography, Container, Grid } from '@mui/material';
 import { Select, MenuItem } from '@mui/material';
 
 function AddTask() {
-  const tasks = useSelector(state => state.task.userTasks) || [];
+  const tasks = useSelector(store => store.task) || [];
   const history = useHistory();
   const dispatch = useDispatch();
-  const { user } = useSelector(store => store);
+  const  user  = useSelector(store => store.user);
   const [notification, setNotification] = useState(null);
   const [taskname, setTaskName] = useState('');
   const [dateadded, setDateAdded] = useState('');
@@ -16,6 +16,10 @@ function AddTask() {
   const [prioritylevel, setPriorityLevel] = useState('');
   const [completionstatus, setCompletionStatus] = useState('');
   const [notes, setNotes] = useState('');
+
+  console.log('Checking for User', user)
+  console.log('Checking Tasks', tasks)
+
 // stores input values into the held states
 const changeTaskName = (event) => {
   console.log('changeTaskName called with value:', event.target.value);

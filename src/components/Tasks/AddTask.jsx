@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, TextField, Typography, Container, Grid } from '@mui/material';
-import { Select, MenuItem } from '@mui/material';
+import {  MenuItem } from '@mui/material';
 
 function AddTask() {
   const tasks = useSelector(state => state.task.userTasks) || [];

@@ -4,6 +4,8 @@ import { Link, Route } from 'react-router-dom';
 import { Button } from "@mui/material";
 import EachTask from "../Tasks/EachTask";
 import AddTask from "./AddTask";
+import EditTask from "./EditTask";
+
 
 function MyTasks() {
     const dispatch = useDispatch();
@@ -20,11 +22,12 @@ function MyTasks() {
     };
 
     const handleEditTask = (event, editedTask, index) => {
-        event.preventDefault();
-        dispatch({ type: "EDIT_TASK", payload: { task: editedTask, index } });
+        // event.preventDefault();
+        // dispatch({ type: "EDIT_TASK", payload: { task: editedTask, index } });
     };
 
     if (!task) {
+
         return (
             <div>
                 <Button
@@ -82,6 +85,7 @@ function MyTasks() {
                 task.map((task, i) => (
                     <EachTask
                         key={i}
+                        taskId={task.id}
                         task={{
                             id: task.id,
                             taskname: task.taskname,
@@ -100,10 +104,13 @@ function MyTasks() {
                             textShadow: '4px 1px 2px rgba(0, 0, 0, 0.8)',
                             fontSize: '30px',
                         }}
+
                     />
                 ))
             )}
-
+            <Route path="/task/:taskId/edit">
+                <EditTask />
+            </Route>
             <Route path="/add_task/:taskId" component={AddTask} />
         </div>
     );

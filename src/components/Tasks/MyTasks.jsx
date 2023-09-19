@@ -7,12 +7,12 @@ import AddTask from "./AddTask";
 
 function MyTasks() {
     const dispatch = useDispatch();
-    const { myTasks } = useSelector(store => store.tasks.savedTasks);
+    const myTasks = useSelector(store => store.savedTasks);
     const user = useSelector(store => store.user);
 
     useEffect(() => {
-        dispatch({ type: "GET_SAVED_TASKS" });
-    }, [user.id]);
+        dispatch({ type: "FETCH_SAVED_TASKS" });
+    }, []);
 
     console.log('Check for tasks', myTasks);
 

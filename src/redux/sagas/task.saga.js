@@ -35,7 +35,7 @@ function* getSavedTasks() {
         console.log("Attempting to fetch saved tasks");
         const tasks = yield call(axios.get, "/api/task");
         console.log("Fetched tasks successfully:", tasks.data);
-        yield put({ type: "GET_SAVED_TASKS_SUCCESS", payload: tasks.data }); 
+        yield put({ type: "MY_SAVED_TASKS", payload: tasks.data }); 
     } catch (error) {
         console.log("Error fetching saved tasks:", error);
         yield put({ type: "GET_SAVED_TASKS_ERROR" });
@@ -45,7 +45,7 @@ function* getSavedTasks() {
 
 function* taskSaga() {
     yield takeLatest("SAVE_TASKS", saveTasks);
-    yield takeLatest("GET_SAVED_TASKS", getSavedTasks);
+    yield takeLatest("FETCH_SAVED_TASKS", getSavedTasks);
     yield takeLatest("ADD_TASK", addTask);
 }
 export default taskSaga;

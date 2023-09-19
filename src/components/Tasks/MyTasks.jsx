@@ -7,12 +7,14 @@ import AddTask from "./AddTask";
 
 function MyTasks() {
     const dispatch = useDispatch();
-    const { task } = useSelector(store => store.task);
+    const { myTasks } = useSelector(store => store.tasks.savedTasks);
     const user = useSelector(store => store.user);
 
     useEffect(() => {
-        dispatch({ type: "FETCH_TASK" });
-    }, [dispatch, user.id]);
+        dispatch({ type: "GET_SAVED_TASKS" });
+    }, [user.id]);
+
+    console.log('Check for tasks', myTasks);
 
     const handleDeleteTask = (event, taskID) => {
         event.preventDefault();
@@ -24,26 +26,27 @@ function MyTasks() {
         dispatch({ type: "EDIT_TASK", payload: { task: editedTask, index } });
     };
 
-    if (!task) {
+    if (!myTasks) {
         return (
             <div>
-                <Button
-                    component={Link} to="/add_task"
-                    className="addtaskbutton"
-                    variant="contained"
-                    style={{
-                        backgroundColor: 'hsl(94, 82%, 60%)',
-                        color: 'white',
-                        fontFamily: "Georgia",
-                        textShadow: '4px 1px 2px rgba(0, 0, 0, 0.8)',
-                        fontSize: '23px',
-                        fontWeight: 'bold',
-                    }}
-                >Add a Task
-                </Button>
-                <h2 className="welcome">Welcome, {user.username} lets start!</h2>
-                <p>My Tasks:</p>
-                <p>No tasks to show...yet!</p>
+                <center>
+                    <Button
+                        component={Link} to="/add_task"
+                        className="addtaskbutton"
+                        variant="contained"
+                        style={{
+                            backgroundColor: 'hsl(94, 82%, 60%)',
+                            color: 'white',
+                            fontFamily: "Georgia",
+                            textShadow: '4px 1px 2px rgba(0, 0, 0, 0.8)',
+                            fontSize: '23px',
+                            fontWeight: 'bold',
+                        }}
+                    >Add a Task
+                    </Button>
+                    <h2 className="welcome">Welcome, {user.username} lets start!</h2>
+                    <p>My Tasks:</p>
+                </center>
             </div>
         );
     }
@@ -76,10 +79,10 @@ function MyTasks() {
                     }}
                 >Saved Tasks:</h2>
 
-                {task.length === 0 ? (
+                {myTasks.length === 0 ? (
                     <p>No saved tasks to show...yet!</p>
                 ) : (
-                    task.map((task, i) => (
+                    myTasks.map((task, i) => (
                         <EachTask
                             key={i}
                             task={{

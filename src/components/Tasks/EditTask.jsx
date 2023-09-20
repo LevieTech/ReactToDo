@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 function EditTask() {
     const history = useHistory();
-    const { taskId } = useParams();
+    const { id } = useParams();
     const dispatch = useDispatch();
 
     const [editedTask, setEditedTask] = useState({
@@ -33,12 +33,16 @@ function EditTask() {
         }
     };
 
+    const goBack = () => {
+        history.goBack();
+    }
+
     const handleEditSubmit = (event) => {
         event.preventDefault();
         dispatch({
             type: 'EDIT_TASK',
             payload: editedTask,
-            taskId: taskId
+            taskId: id
         });
         history.push('/my_tasks');
     };
@@ -230,15 +234,30 @@ function EditTask() {
                             type="submit"
                             variant="contained"
                             style={{
-                                backgroundColor: 'hsl(94, 82%, 60%)',
+                                backgroundColor: '#8bc34ec9',
                                 color: 'white',
                                 textShadow: '1px 10px 20px rgba(5, 5, 5, 5)',
                                 boxShadow: '10px 10px 10px rgba(3, 3, 3, 1)',
-                                fontFamily: "Georgia"
+                                fontFamily: "Georgia",
+                                float: "left"
                             }}
                         >
                             Save
                         </Button>
+                        {/* <br/>
+                        <br/> */}
+                        <Button
+                            onClick={goBack}
+                            variant="contained" 
+                            style={{ 
+                                backgroundColor: '#8bc34ec9',
+                                color: 'white',
+                                textShadow: '1px 10px 20px rgba(5, 5, 5, 5)',
+                                boxShadow: '10px 10px 10px rgba(3, 3, 3, 1)',
+                                fontFamily: "Georgia",
+                                float: "right",
+
+                        }} >Back</Button>
                     </Grid>
 
                 </Grid>

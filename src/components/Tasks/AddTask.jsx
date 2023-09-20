@@ -5,7 +5,7 @@ import { Button, TextField, Typography, Container, Grid } from '@mui/material';
 import { Select, MenuItem } from '@mui/material';
 
 function AddTask() {
-  const tasks = useSelector(store => store.task) || [];
+  const tasks = useSelector(store => store.tasks) || [];
   const history = useHistory();
   const dispatch = useDispatch();
   const  user  = useSelector(store => store.user);

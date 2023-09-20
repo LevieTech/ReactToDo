@@ -82,8 +82,9 @@ function MyTasks() {
                 {myTasks.length === 0 ? (
                     <p>No saved tasks to show...yet!</p>
                 ) : (
-                    myTasks.map((task, i) => (
-                        <EachTask
+                    myTasks.map((task, i) => {
+                        return (
+                             <EachTask
                             key={i}
                             task={{
                                 id: task.id,
@@ -104,7 +105,9 @@ function MyTasks() {
                                 fontSize: '30px',
                             }}
                         />
-                    ))
+                        )
+                       
+                        })
                 )}
 
                 <Route path="/add_task/:taskId" component={AddTask} />

@@ -5,7 +5,7 @@ const router = express.Router();
 
 //  */GET /: Retrieves the user's tasks from the database based on the user ID. It returns an array of tasks ordered by their IDs in descending order.
 router.get("/", (req, res) => {
-  const userID = req.user?.id;
+  const userID = req.user.id;
    // Check if the userID exists
    if (!userID) {
     return res.status(400).send('User ID not provided');
@@ -15,14 +15,15 @@ router.get("/", (req, res) => {
   WHERE t."user_id" = $1
   ORDER BY t."id" DESC;
 `;
-  
-  const queryParams = [userID]; 
+  // ! Don't need to set the query params to the userID
+  //! const queryParams = [userID]; 
 
   pool
-    .query(queryText, queryParams)
+    .query(queryText, [userID])
     .then((result) => {
     
-     res.send (result.rows);
+     res.send(result.rows);
+     console.log("Tasks route check for tasks", result.rows)
     })
     .catch((error) => {
       console.log("Error getting tasks in taskrouter:", error);

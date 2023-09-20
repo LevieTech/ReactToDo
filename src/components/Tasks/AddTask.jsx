@@ -47,12 +47,13 @@ const changeNotes = (event) => {
   console.log('changeNotes called with value:', event.target.value);
   setNotes(event.target.value);
 };
+
   useEffect(() => {
     console.log('useEffect called');
     dispatch({ type: 'GET_SAVED_TASKS' });
   }, []);
 
-  const handleSave = event => {
+  const handleSave = (event) => {
     event.preventDefault();
     if (!user || !user.id) {
       console.error("User is not defined or does not have an ID!");
@@ -101,7 +102,7 @@ const changeNotes = (event) => {
           >Create A New Task
           </Typography>
         </div>
-        <form onSubmit={handleSave}>
+        <form>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -300,6 +301,7 @@ const changeNotes = (event) => {
           {notification && <div className="notification">{notification}</div>}
 
           <Button
+            onClick={handleSave}
             type="submit"
             variant="contained"
             style={{

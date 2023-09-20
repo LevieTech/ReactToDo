@@ -28,9 +28,9 @@ function EachTask({ task, handleEditTask, handleDeleteTask }) {
         >
           <DeleteIcon style={{ color: "purple" }} />
         </Button>
-        <Link to={`/task/${task.id}/edit`}>
+        <Link to={`/task/${task.id}/edit_task`}>
           <Button
-            onClick={() => handleEditTask(task)}
+            onClick={(event) => handleEditTask(event,task)}
             style={{
               fontFamily: "Georgia",
               color: "black",

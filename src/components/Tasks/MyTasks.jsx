@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Route } from 'react-router-dom';
 import { Button } from "@mui/material";
@@ -9,6 +9,7 @@ function MyTasks() {
     const dispatch = useDispatch();
     const { task } = useSelector(store => store.task);
     const user = useSelector(store => store.user);
+    const [ search, setSearch] = useState('');
 
     useEffect(() => {
         dispatch({ type: "FETCH_TASK" });
@@ -67,6 +68,19 @@ function MyTasks() {
             >Add a Task
             </Button>
 
+            <form>
+                <div style={{ textAlign: "center" }}>
+                    Search:
+                    <input
+                        type="text"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        placeholder="Search Tasks"
+                    />
+                    {/* <button type="submit" onClick={() => handleSearch()}>Search</button> */}
+                </div>
+            </form>
+
             <h2 className="saved"
                 style={{
                     fontFamily: "Georgia",
@@ -79,7 +93,12 @@ function MyTasks() {
             {task.length === 0 ? (
                 <p>No saved tasks to show...yet!</p>
             ) : (
-                task.map((task, i) => (
+                task.filter((task) => {
+                    return search.toLowerCase() === ''
+                    ? task
+                    : task.taskname.includes(search.toLowerCase());
+                    // return task.taskname.includes(search.toLowerCase());
+                }).map((task, i) => (
                     <EachTask
                         key={i}
                         task={{

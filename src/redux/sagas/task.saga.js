@@ -42,10 +42,21 @@ function* getSavedTasks() {
     }
 }
 
+function* deleteTask(action) {
+    try {
+        console.log("Delete Task");
+        yield axios.delete(`/api/task/${action.payload}`);
+        yield put({ type: 'MY_SAVED_TASKS' })
+    } catch (error) {
+        console.log(`Error in deleteing Task`, error);
+    }
+}
+
 
 function* taskSaga() {
     yield takeLatest("SAVE_TASKS", saveTasks);
     yield takeEvery("FETCH_SAVED_TASKS", getSavedTasks);
     yield takeLatest("ADD_TASK", addTask);
+    yield takeEvery('DELETE_TASK', deleteTask)
 }
 export default taskSaga;

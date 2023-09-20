@@ -1,12 +1,33 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams, useHistory } from 'react-router-dom';
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
 
-function EachTask({ task, handleEditTask, handleDeleteTask }) {
+function EachTask({ task }) {
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const refreshPage = () => {
+    setTimeout(() => {
+      window.location.reload(false);
+    }, 200);
+  }
+
+  const handleDeleteTask = (id) => {
+    dispatch({ type: "DELETE_TASK", payload: id });
+    refreshPage();
+  };
+
+  const handleEditTask = (event, editedTask, index) => {
+    event.preventDefault();
+    dispatch({ type: "EDIT_TASK", payload: { task: editedTask, index } });
+  };
+
   return (
     <div>
       <h2>{task.taskname}</h2>

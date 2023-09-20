@@ -77,11 +77,11 @@ const taskReducer = (state = initialState, action) => {
                 userTasks: updatedTasks,
             };
 
-        case "DELETE_TASK":
-            return {
-                ...state,
-                userTasks: state.task.filter(task => task.id !== action.payload.taskID)
-            };
+        // case "DELETE_TASK":
+        //     return {
+        //         ...state,
+        //         userTasks: state.task.filter(task => task.id !== action.payload.taskID)
+        //     };
 
         case "ADD_TASK_ERROR":
             return {

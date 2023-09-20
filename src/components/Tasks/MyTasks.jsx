@@ -16,15 +16,6 @@ function MyTasks() {
 
     console.log('Check for tasks', myTasks);
 
-    const handleDeleteTask = (event, taskID) => {
-        event.preventDefault();
-        dispatch({ type: "DELETE_TASK", payload: { user, taskID } });
-    };
-
-    const handleEditTask = (event, editedTask, index) => {
-        event.preventDefault();
-        dispatch({ type: "EDIT_TASK", payload: { task: editedTask, index } });
-    };
 
     if (!myTasks) {
         return (
@@ -95,9 +86,9 @@ function MyTasks() {
                                 completionstatus: task.completionstatus,
                                 notes: task.notes,
                             }}
-                            handleEditTask={handleEditTask}
-                            handleDeleteTask={() => handleDeleteTask(null, task.id)}
-                            savedTasks={task}
+                            // handleEditTask={handleEditTask}
+                            // handleDeleteTask={(event) => handleDeleteTask(task.id)}
+                            // savedTasks={task}
                             style={{
                                 fontFamily: "Georgia",
                                 fontWeight: "bolder",

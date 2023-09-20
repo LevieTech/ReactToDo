@@ -165,8 +165,8 @@ router.put('/edit/:id', (req, res) => {
     const queryText = `DELETE FROM "tasklist" WHERE "id" = $1;`;
     
     pool.query(queryText, [deleteId])
-    .then((results) => {
-      console.log("Task deleted successfully",results.rowCount);
+    .then((result) => {
+      console.log("Task deleted successfully",result.rowCount);
       res.sendStatus(200);
     })
     .catch((error) => {

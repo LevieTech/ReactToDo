@@ -54,11 +54,9 @@ const changeNotes = (event) => {
   }, []);
 
   const handleSave = (event) => {
-    event.preventDefault();
     if (!user || !user.id) {
       console.error("User is not defined or does not have an ID!");
       return;
-      history.push('/my_tasks');
   }
 
   if (!user || !user.id) {
@@ -71,7 +69,6 @@ const changeNotes = (event) => {
       dateadded,
       duedate,
       prioritylevel,
-      completionstatus,
       notes,
     };
 
@@ -221,13 +218,15 @@ const changeNotes = (event) => {
 
                 
               >
-                <MenuItem value="high">High</MenuItem>
-                <MenuItem value="medium">Medium</MenuItem>
-                <MenuItem value="low">Low</MenuItem>
+                <MenuItem value="High">High</MenuItem>
+                <MenuItem value="Medium">Medium</MenuItem>
+                <MenuItem value="Low">Low</MenuItem>
               </TextField>
             </Grid>
 
-            <Grid item xs={6}>
+            {/* Are we going to need to set this when adding a task if it's already set to False when submitted to the DB? */}
+
+            {/* <Grid item xs={6}>
               <TextField
                 className="input-field date-input input-border"
                 label="Completion Status"
@@ -257,14 +256,14 @@ const changeNotes = (event) => {
                 <MenuItem value="true">True</MenuItem>
                 <MenuItem value="false">False</MenuItem>
               </TextField>
-            </Grid>
+            </Grid> */}
 
 
 
             <Grid item xs={6}>
               <TextField
                 className="input-field date-input input border"
-                label="   Notes"
+                label="Notes"
                 type="notes"
                 value={notes}
                 onChange={changeNotes}
@@ -301,14 +300,14 @@ const changeNotes = (event) => {
           {notification && <div className="notification">{notification}</div>}
 
           <Button
-            onClick={handleSave}
+            onClick= {handleSave}
             type="submit"
             variant="contained"
             style={{
-              backgroundColor: 'hsl(94, 82%, 60%)',
+              backgroundColor: '#8bc34ec9',
               color: 'white',
               textShadow: '1px 10px 20px rgba(5, 5, 5, 5)',
-              boxShadow: '10px 10px 10px rgba(3, 3, 3, 1)',
+              boxShadow: '4px 4px 4px rgba(3, 3, 3, 1)',
               fontFamily: "Georgia"
             }}>
             Save

@@ -73,9 +73,8 @@ router.post('/', async (req, res) => {
       "dateadded",
       "duedate",
       "prioritylevel",
-      "completionstatus",
       "notes") 
-  VALUES ($1, $2, $3, $4, $5,$6, $7);`
+  VALUES ($1, $2, $3, $4, $5, $6);`
       
       await pool.query(insertTaskQuery,[
         req.user.id, // the logged in user
@@ -83,7 +82,6 @@ router.post('/', async (req, res) => {
         task.dateadded,
         task.duedate,
         task.prioritylevel,
-        task.completionstatus,
         task.notes,
       ]);
   

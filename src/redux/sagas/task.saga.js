@@ -56,7 +56,7 @@ function* deleteTask(action) {
 function* taskSaga() {
     yield takeLatest("SAVE_TASKS", saveTasks);
     yield takeEvery("FETCH_SAVED_TASKS", getSavedTasks);
-    yield takeLatest("ADD_TASK", addTask);
+    yield takeEvery("ADD_TASK", addTask);
     yield takeEvery('DELETE_TASK', deleteTask)
 }
 export default taskSaga;

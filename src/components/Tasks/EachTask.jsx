@@ -33,6 +33,14 @@ function EachTask({ task }) {
     return `${date}`
   }
 
+  const statusConversion = () => {
+    if (task.completionstatus === false) {
+      return 'Incomplete'
+    } else if (task.completionstatus === true) {
+      return 'Complete'
+    }
+  }
+
   return (
     <div>
       <Card sx={{maxWidth: '300px'}}>
@@ -40,7 +48,7 @@ function EachTask({ task }) {
         <p>Date Added: {dateConversion(task.dateadded)}</p>
         <p>Due Date: {dateConversion(task.duedate)}</p>
         <p>Priority: {task.prioritylevel}</p>
-        <p>Status: {task.completionstatus}</p>
+        <p>Status: {statusConversion(task.completionstatus)}</p>
         <p>Notes: {task.notes}</p>
         <div className="buttons" style={{ display: "flex", justifyContent: "center" }}>
           <Button

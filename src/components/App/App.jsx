@@ -27,6 +27,7 @@ import './App.css';
 
 import MyTasks from '../Tasks/MyTasks.jsx';
 import AddTask from '../Tasks/AddTask.jsx';
+import EditTask from '../Tasks/EditTask.jsx';
 
 
 //! Theme for MUI styling
@@ -114,6 +115,13 @@ function App() {
           </Route>
 
 
+          <Route
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/task/:taskId/edit_task"
+          >
+            <EditTask />
+          </Route>
 
 
           <Route

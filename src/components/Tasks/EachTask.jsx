@@ -28,11 +28,16 @@ function EachTask({ task }) {
     dispatch({ type: "EDIT_TASK", payload: { task: editedTask, index } });
   };
 
+  const dateConversion = (oldDate) => {
+    const date = new Date(oldDate).toLocaleDateString('en-EN')
+    return `${date}`
+}
+
   return (
     <div>
       <h2>{task.taskname}</h2>
-      <p>Date Added: {task.dateadded}</p>
-      <p>Due Date: {task.duedate}</p>
+      <p>Date Added: {dateConversion(task.dateadded)}</p>
+      <p>Due Date: {dateConversion(task.duedate)}</p>
       <p>Priority: {task.prioritylevel}</p>
       <p>Status: {task.completionstatus}</p>
       <p>Notes: {task.notes}</p>

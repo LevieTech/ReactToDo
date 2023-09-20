@@ -10,9 +10,9 @@ function Nav() {
   return (
     <div className="nav">
       <Link to="/home">
-        <img src="./react-to-do.png" className="navImg" alt="React To-Do" width="100" height="100"/>
+        <img src="./react-to-do.png" className="navImg" alt="React To-Do" width="100" height="100" />
       </Link>
-     
+
       <div>
         {/* If no user is logged in, show these links */}
         {user.id === null &&
@@ -32,15 +32,15 @@ function Nav() {
             <Link className="navLink" to="/info">
               Info Page
             </Link>
-
+            <Link className="navLink" to="/my_tasks">
+              My Tasks
+            </Link>
             <LogOutButton className="navLink" />
           </>
         )}
 
 
-        <Link className="navLink" to="/my_tasks">
-          My Tasks
-        </Link>
+
 
 
 

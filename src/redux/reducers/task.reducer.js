@@ -5,7 +5,10 @@ const initialState = {
     savedTasks: [],
 };
 
-function taskReducer(state = initialState, action) {
+const taskReducer = (state = initialState, action) => {
+    console.log("Action received:", action.type, "with payload:", action.payload); // log for every action received
+    console.log("Previous State:", state, "Action:", action);// Log for the initial state and action
+
     switch (action.type) {
         case "ADD_TASK":
             return {
@@ -43,15 +46,28 @@ function taskReducer(state = initialState, action) {
 
         case "GET_SAVED_TASKS_SUCCESS":
             return {
-                ...state,
                 savedTasks: action.payload,
             };
 
-        case "DELETE_TASK":
+        case "UPDATE_TASK_SUCCESS":
+            const updatedTasks = state.task.map((task) =>
+                task.id === action.payload.id
+                    ? {
+                        ...task,
+                        ...action.payload
+                    }
+                    : task
+            );
             return {
                 ...state,
-                task: state.task.filter(t => t.id !== action.payload.taskID)
+                userTasks: updatedTasks,
             };
+
+        // case "DELETE_TASK":
+        //     return {
+        //         ...state,
+        //         userTasks: state.task.filter(task => task.id !== action.payload.taskID)
+        //     };
 
         case "ADD_TASK_ERROR":
             return {

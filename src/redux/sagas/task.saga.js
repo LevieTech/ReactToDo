@@ -33,19 +33,30 @@ function* saveTasks(action) {
 function* getSavedTasks() {
     try {
         console.log("Attempting to fetch saved tasks");
-        const tasks = yield call(axios.get, "/api/task");
+        const tasks = yield axios.get("/api/task");
         console.log("Fetched tasks successfully:", tasks.data);
-        yield put({ type: "GET_SAVED_TASKS_SUCCESS", payload: tasks.data }); 
+        yield put({ type: "MY_SAVED_TASKS", payload: tasks.data }); 
     } catch (error) {
         console.log("Error fetching saved tasks:", error);
         yield put({ type: "GET_SAVED_TASKS_ERROR" });
     }
 }
 
+function* deleteTask(action) {
+    try {
+        console.log("Delete Task");
+        yield axios.delete(`/api/task/${action.payload}`);
+        yield put({ type: 'MY_SAVED_TASKS' })
+    } catch (error) {
+        console.log(`Error in deleteing Task`, error);
+    }
+}
+
 
 function* taskSaga() {
     yield takeLatest("SAVE_TASKS", saveTasks);
-    yield takeLatest("GET_SAVED_TASKS", getSavedTasks);
+    yield takeEvery("FETCH_SAVED_TASKS", getSavedTasks);
     yield takeLatest("ADD_TASK", addTask);
+    yield takeEvery('DELETE_TASK', deleteTask)
 }
 export default taskSaga;

@@ -9,28 +9,46 @@ import EditTask from "./EditTask";
 
 function MyTasks() {
     const dispatch = useDispatch();
-    const { task } = useSelector(store => store.task);
+    const myTasks = useSelector(store => store.savedTasks);
     const user = useSelector(store => store.user);
     const [ search, setSearch] = useState('');
 
     useEffect(() => {
-        dispatch({ type: "FETCH_TASK" });
-    }, [dispatch, user.id]);
+        dispatch({ type: "FETCH_SAVED_TASKS" });
+    }, []);
 
-    const handleDeleteTask = (event, taskID) => {
-        event.preventDefault();
-        dispatch({ type: "DELETE_TASK", payload: { user, taskID } });
-    };
+    console.log('Check for tasks', myTasks);
 
-    const handleEditTask = (event, editedTask, index) => {
-        // event.preventDefault();
-        // dispatch({ type: "EDIT_TASK", payload: { task: editedTask, index } });
-    };
 
-    if (!task) {
-
+    if (!myTasks) {
         return (
             <div>
+                <center>
+                    <Button
+                        component={Link} to="/add_task"
+                        className="addtaskbutton"
+                        variant="contained"
+                        style={{
+                            backgroundColor: 'hsl(94, 82%, 60%)',
+                            color: 'white',
+                            fontFamily: "Georgia",
+                            textShadow: '4px 1px 2px rgba(0, 0, 0, 0.8)',
+                            fontSize: '23px',
+                            fontWeight: 'bold',
+                        }}
+                    >Add a Task
+                    </Button>
+                    <h2 className="welcome">Welcome, {user.username} lets start!</h2>
+                    <p>My Tasks:</p>
+                </center>
+            </div>
+        );
+    }
+
+    return (
+        <center>
+            <div className="my-tasks-container">
+                <h2 className="solid">Hey {user.username}! Lets Get Started!</h2>
                 <Button
                     component={Link} to="/add_task"
                     className="addtaskbutton"
@@ -45,93 +63,50 @@ function MyTasks() {
                     }}
                 >Add a Task
                 </Button>
-                <h2 className="welcome">Welcome, {user.username} lets start!</h2>
-                <p>My Tasks:</p>
-                <p>No tasks to show...yet!</p>
+
+                <h2 className="saved"
+                    style={{
+                        fontFamily: "Georgia",
+                        textShadow: '1px 1px 2px rgba(0, 0, 0, 0.8) 2px 2px 3px white',
+                        fontSize: '40px',
+                        fontWeight: 'bold',
+                    }}
+                >Saved Tasks:</h2>
+
+                {myTasks.length === 0 ? (
+                    <p>No saved tasks to show...yet!</p>
+                ) : (
+                    myTasks.map((task, i) => {
+                        return (
+                             <EachTask
+                            key={i}
+                            task={{
+                                id: task.id,
+                                taskname: task.taskname,
+                                dateadded: task.dateadded,
+                                duedate: task.duedate,
+                                prioritylevel: task.prioritylevel,
+                                completionstatus: task.completionstatus,
+                                notes: task.notes,
+                            }}
+                            // handleEditTask={handleEditTask}
+                            // handleDeleteTask={(event) => handleDeleteTask(task.id)}
+                            // savedTasks={task}
+                            style={{
+                                fontFamily: "Georgia",
+                                fontWeight: "bolder",
+                                textShadow: '4px 1px 2px rgba(0, 0, 0, 0.8)',
+                                fontSize: '30px',
+                            }}
+                        />
+                        )
+                       
+                        })
+                )}
+
+                <Route path="/add_task/:taskId" component={AddTask} />
             </div>
-        );
-    }
-
-    return (
-        <div className="my-tasks-container">
-            <h2 className="solid">Hey {user.username}! Lets Get Started!</h2>
-
-            <Button
-                component={Link} to="/add_task"
-                className="addtaskbutton"
-                variant="contained"
-                style={{
-                    backgroundColor: 'hsl(94, 82%, 60%)',
-                    color: 'white',
-                    fontFamily: "Georgia",
-                    textShadow: '4px 1px 2px rgba(0, 0, 0, 0.8)',
-                    fontSize: '23px',
-                    fontWeight: 'bold',
-                }}
-            >Add a Task
-            </Button>
-
-            <form>
-                <div style={{ textAlign: "center" }}>
-                    Search:
-                    <input
-                        type="text"
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                        placeholder="Search Tasks"
-                    />
-                    {/* <button type="submit" onClick={() => handleSearch()}>Search</button> */}
-                </div>
-            </form>
-
-            <h2 className="saved"
-                style={{
-                    fontFamily: "Georgia",
-                    textShadow: '1px 1px 2px rgba(0, 0, 0, 0.8) 2px 2px 3px white',
-                    fontSize: '40px',
-                    fontWeight: 'bold',
-                }}
-            >Saved Tasks:</h2>
-
-            {task.length === 0 ? (
-                <p>No saved tasks to show...yet!</p>
-            ) : (
-                task.filter((task) => {
-                    return search.toLowerCase() === ''
-                    ? task
-                    : task.taskname.includes(search.toLowerCase());
-                    // return task.taskname.includes(search.toLowerCase());
-                }).map((task, i) => (
-                    <EachTask
-                        key={i}
-                        taskId={task.id}
-                        task={{
-                            id: task.id,
-                            taskname: task.taskname,
-                            dateadded: task.dateadded,
-                            duedate: task.duedate,
-                            prioritylevel: task.prioritylevel,
-                            completionstatus: task.completionstatus,
-                            notes: task.notes,
-                        }}
-                        handleEditTask={handleEditTask}
-                        handleDeleteTask={() => handleDeleteTask(null, task.id)}
-                        savedTasks={task}
-                        style={{
-                            fontFamily: "Georgia",
-                            fontWeight: "bolder",
-                            textShadow: '4px 1px 2px rgba(0, 0, 0, 0.8)',
-                            fontSize: '30px',
-                        }}
-
-                    />
-                ))
-            )}
-            <Route path="/task/:taskId/edit">
-                <EditTask />
-            </Route>
-            <Route path="/add_task/:taskId" component={AddTask} />
-        </div>
+        </center>
     );
 }
 

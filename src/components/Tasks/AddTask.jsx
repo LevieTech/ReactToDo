@@ -5,10 +5,10 @@ import { Button, TextField, Typography, Container, Grid } from '@mui/material';
 import {  MenuItem } from '@mui/material';
 
 function AddTask() {
-  const tasks = useSelector(state => state.task.userTasks) || [];
+  const tasks = useSelector(store => store.tasks) || [];
   const history = useHistory();
   const dispatch = useDispatch();
-  const { user } = useSelector(store => store);
+  const  user  = useSelector(store => store.user);
   const [notification, setNotification] = useState(null);
   const [taskname, setTaskName] = useState('');
   const [dateadded, setDateAdded] = useState('');
@@ -16,6 +16,10 @@ function AddTask() {
   const [prioritylevel, setPriorityLevel] = useState('');
   const [completionstatus, setCompletionStatus] = useState('');
   const [notes, setNotes] = useState('');
+
+  console.log('Checking for User', user)
+  console.log('Checking Tasks', tasks)
+
 // stores input values into the held states
 const changeTaskName = (event) => {
   console.log('changeTaskName called with value:', event.target.value);
@@ -43,12 +47,13 @@ const changeNotes = (event) => {
   console.log('changeNotes called with value:', event.target.value);
   setNotes(event.target.value);
 };
+
   useEffect(() => {
     console.log('useEffect called');
     dispatch({ type: 'GET_SAVED_TASKS' });
   }, []);
 
-  const handleSave = event => {
+  const handleSave = (event) => {
     event.preventDefault();
     if (!user || !user.id) {
       console.error("User is not defined or does not have an ID!");
@@ -97,7 +102,7 @@ const changeNotes = (event) => {
           >Create A New Task
           </Typography>
         </div>
-        <form onSubmit={handleSave}>
+        <form>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -296,6 +301,7 @@ const changeNotes = (event) => {
           {notification && <div className="notification">{notification}</div>}
 
           <Button
+            onClick={handleSave}
             type="submit"
             variant="contained"
             style={{

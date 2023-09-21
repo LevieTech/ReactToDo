@@ -11,7 +11,7 @@ function taskReducer(state = initialState, action) {
             return {
                 ...state,
                 task: [...state.task, action.payload]
-            };
+           };
             case 'FETCH_TASK': {
                 
                 return {

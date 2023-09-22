@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+import { Card } from '@mui/material';
 
 
 function ListView() {
     const dispatch = useDispatch();
     const history = useHistory();
-    const tasks = useSelector(store => store.taskList)
+    const tasks = useSelector(store => store.savedTasks)
 
     console.log(tasks);
 
@@ -47,38 +48,56 @@ function ListView() {
         setTaskFilter(task.prioritylevel)
     }
 
+    const dateConversion = (oldDate) => {
+        const date = new Date(oldDate).toLocaleDateString('en-EN')
+        return `${date}`
+    }
+
+    const statusConversion = () => {
+        if (tasks.completionstatus === false) {
+            return 'Incomplete'
+        } else if (tasks.completionstatus === true) {
+            return 'Complete'
+        }
+    }
+
     return (
         <main>
-            {tasks.length === 0 ? (
-                <>
-                    <div>
-                        <h1>No new tasks!</h1>
+            <center>
+                {tasks.length === 0 ? (
+                    <>
+                        <div>
+                            <h1>No new tasks!</h1>
+                        </div>
+                    </>
+                ) : (
+                    <div key={tasks.id}>
+                        {tasks.map(task => {
+                            return (
+                                <div>
+                                    <button onClick={() => checkFilter(task)}>Sort By Priority</button>
+                                </div>
+                            )
+                        })}
+                        {filteredTaskArray.map(task => {
+                            return (
+                                <div>
+                                    <br />
+                                    <Card sx={{ maxWidth: '300px' }}>
+                                        <h2>{task.taskname}</h2>
+                                        <h3>{dateConversion(task.dateadded)}</h3>
+                                        <h3>{dateConversion(task.duedate)}</h3>
+                                        <h4>{task.prioritylevel}</h4>
+                                        <h4>{statusConversion(task.completionstatus)}</h4>
+                                        <p>{task.notes}</p>
+                                    </Card>
+                                </div>
+                            )
+                        })}
                     </div>
-                </>
-            ) : (
-                <div key={tasks.id}>
-                    {tasks.map(task => {
-                        return (
-                            <div>
-                                <button onClick={() => checkFilter(task)}>Sort By Priority</button>
-                            </div>
-                        )
-                    })}
-                    {filteredTaskArray.map(task => {
-                        return (
-                            <div>
-                                <button onClick={() => checkFilter(task)}>Sort By Priority</button>
-                                <h2>{task.taskname}</h2>
-                                <h3>{task.dateadded}</h3>
-                                <h3>{task.duedate}</h3>
-                                <h5>{task.prioritylevel}</h5>
-                                <h5>{task.completionstatus}</h5>
-                                <p>{task.notes}</p>
-                            </div>
-                        )
-                    })}
-                </div>
-            )}
+                )}
+            </center>
+
 
         </main>
     )

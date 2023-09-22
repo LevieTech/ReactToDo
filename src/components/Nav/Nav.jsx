@@ -35,6 +35,8 @@ function Nav() {
             <Link className="navLink" to="/my_tasks">
               My Tasks
             </Link>
+            <Link className="navLink" to="/taskList">
+              List View</Link>
             <LogOutButton className="navLink" />
           </>
         )}

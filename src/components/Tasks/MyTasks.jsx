@@ -72,7 +72,7 @@ function MyTasks() {
                         fontWeight: 'bold',
                     }}
                 >Saved Tasks:</h2>
-
+                
                 {myTasks.length === 0 ? (
                     <p>No saved tasks to show...yet!</p>
                 ) : (

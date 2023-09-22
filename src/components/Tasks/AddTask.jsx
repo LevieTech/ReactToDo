@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, TextField, Typography, Container, Grid } from '@mui/material';
-import {  MenuItem } from '@mui/material';
+import { MenuItem } from '@mui/material';
 
 function AddTask() {
   const tasks = useSelector(store => store.tasks) || [];
   const history = useHistory();
   const dispatch = useDispatch();
-  const  user  = useSelector(store => store.user);
+  const user = useSelector(store => store.user);
   const [notification, setNotification] = useState(null);
   const [taskname, setTaskName] = useState('');
   const [dateadded, setDateAdded] = useState('');
@@ -20,33 +20,33 @@ function AddTask() {
   console.log('Checking for User', user)
   console.log('Checking Tasks', tasks)
 
-// stores input values into the held states
-const changeTaskName = (event) => {
-  console.log('changeTaskName called with value:', event.target.value);
-  setTaskName(event.target.value);
-};
-const changeDateAdded = (event) => {
-  console.log('changeDateAdded called with value:', event.target.value);
-  setDateAdded(event.target.value);
-};
-const changeDueDate = (event) => {
-  console.log('changeDueDate called with value:', event.target.value);
+  // stores input values into the held states
+  const changeTaskName = (event) => {
+    console.log('changeTaskName called with value:', event.target.value);
+    setTaskName(event.target.value);
+  };
+  const changeDateAdded = (event) => {
+    console.log('changeDateAdded called with value:', event.target.value);
+    setDateAdded(event.target.value);
+  };
+  const changeDueDate = (event) => {
+    console.log('changeDueDate called with value:', event.target.value);
 
-  setDueDate(event.target.value);
-};
-const changePriorityLevel = (event) => {
-  console.log('changePriorityLevel called with value:', event.target.value);
+    setDueDate(event.target.value);
+  };
+  const changePriorityLevel = (event) => {
+    console.log('changePriorityLevel called with value:', event.target.value);
 
-  setPriorityLevel(event.target.value);
-};
-const changecompletionStatus = (event) => {
-  console.log('changecompletionStatus called with value:', event.target.value);
-  setCompletionStatus(event.target.value);
-};
-const changeNotes = (event) => {
-  console.log('changeNotes called with value:', event.target.value);
-  setNotes(event.target.value);
-};
+    setPriorityLevel(event.target.value);
+  };
+  const changecompletionStatus = (event) => {
+    console.log('changecompletionStatus called with value:', event.target.value);
+    setCompletionStatus(event.target.value);
+  };
+  const changeNotes = (event) => {
+    console.log('changeNotes called with value:', event.target.value);
+    setNotes(event.target.value);
+  };
 
   useEffect(() => {
     console.log('useEffect called');
@@ -59,12 +59,12 @@ const changeNotes = (event) => {
       console.error("User is not defined or does not have an ID!");
       return;
       history.push('/my_tasks');
-  }
-
-  if (!user || !user.id) {
-    setNotification("User information is missing. Please log in again or contact support.");
-    return;
-}
+    }
+  
+    if (!user || !user.id) {
+      setNotification("User information is missing. Please log in again or contact support.");
+      return;
+    }
     const taskData = {
       userId: user.id,
       taskname,
@@ -85,17 +85,20 @@ const changeNotes = (event) => {
     history.push('/my_tasks');
   };
 
+  const goBack = () => { history.goBack() };
+
+
   return (
     <div className="addtask">
       <Container maxWidth="sm">
         <div className="header">
           <Typography
-            variant="h2"
+            variant="h3"
             style={{
               fontFamily: "Georgia",
-              fontWeight: "bolder",
-              fontSize: '70px',
-              textShadow: '3px 1px 2px rgba(0, 0, 0, 0.8)',
+              fontStyle: "oblique",
+              textDecoration: "underline",
+              textShadow: '3px 1px 2px rgba(0, 0, 0, 0.3)',
 
               marginBottom: '20px', // Increased margin bottom for spacing
             }}
@@ -163,7 +166,7 @@ const changeNotes = (event) => {
             <Grid item xs={6}>
               <TextField
                 className="input-field date-input input border"
-                label="   Due Date"
+                label="Due Date"
                 type="date"
                 value={duedate}
                 onChange={changeDueDate}
@@ -209,6 +212,7 @@ const changeNotes = (event) => {
                   },
                 }}
                 InputLabelProps={{
+                  shrink: true,
                   style: {
                     color: 'black',
                     fontFamily: "Georgia",
@@ -219,46 +223,13 @@ const changeNotes = (event) => {
                 }}
                 margin="normal"
 
-                
+
               >
                 <MenuItem value="high">High</MenuItem>
                 <MenuItem value="medium">Medium</MenuItem>
                 <MenuItem value="low">Low</MenuItem>
               </TextField>
             </Grid>
-
-            <Grid item xs={6}>
-              <TextField
-                className="input-field date-input input-border"
-                label="Completion Status"
-                select
-                value={completionstatus}
-                onChange={changecompletionStatus}
-                required
-                fullWidth
-                style={{ fontFamily: "Georgia" }}
-                InputProps={{
-                  style: {
-                    color: 'black',
-                    fontFamily: "Georgia",
-                  },
-                }}
-                InputLabelProps={{
-                  style: {
-                    color: 'black',
-                    fontFamily: "Georgia",
-                    fontWeight: 'bolder',
-                    fontSize: '25px',
-                    textShadow: '1px 1px 2px rgba(0, 0, 0, 0.8)'
-                  },
-                }}
-                margin="normal"
-              >
-                <MenuItem value="true">True</MenuItem>
-                <MenuItem value="false">False</MenuItem>
-              </TextField>
-            </Grid>
-
 
 
             <Grid item xs={6}>
@@ -300,28 +271,46 @@ const changeNotes = (event) => {
           <br></br>
           {notification && <div className="notification">{notification}</div>}
 
-          <Button
-            onClick={handleSave}
-            type="submit"
-            variant="contained"
-            style={{
-              backgroundColor: 'hsl(94, 82%, 60%)',
-              color: 'white',
-              textShadow: '1px 10px 20px rgba(5, 5, 5, 5)',
-              boxShadow: '10px 10px 10px rgba(3, 3, 3, 1)',
-              fontFamily: "Georgia"
-            }}>
-            Save
-          </Button>
+          <div className='bottomButtons'>
+            <Button
+              onClick={handleSave}
+              type="submit"
+              variant="contained"
+              style={{
+                backgroundColor: '#8ac34e',
+                fontSize: 20,
+                color: 'white',
+                textShadow: '5px 5px 7px rgba(5, 5, 5, 5)',
+                boxShadow: '5px 5px 10px rgba(3, 3, 3, 1)',
+                fontFamily: "Georgia"
+              }}>
+              Save
+            </Button>
+
+            <Button
+              onClick={goBack}
+              variant="contained"
+              style={{
+                backgroundColor: 'red',
+                fontSize: 20,
+                color: 'white',
+                marginLeft: 50,
+                textShadow: '5px 5px 7px rgba(5, 5, 5, 5)',
+                boxShadow: '5px 5px 10px rgba(3, 3, 3, 1)',
+                fontFamily: "Georgia"
+              }}>
+              Back
+            </Button>
+          </div>
         </form>
       </Container>
       <div>
-    {Array.isArray(tasks) && tasks.map(task => (
-        <div key={task.id}>
+        {Array.isArray(tasks) && tasks.map(task => (
+          <div key={task.id}>
             <p>{task.taskname}</p>
-        </div>
-    ))}
-</div>
+          </div>
+        ))}
+      </div>
 
     </div>
   );

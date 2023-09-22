@@ -48,7 +48,7 @@ function MyTasks() {
     return (
         <center>
             <div className="my-tasks-container">
-                <h2 className="solid">Hey {user.username}, let's get started!</h2>
+                <h2 className="solid">Welcome {user.username}, let's get started!</h2>
                 <Button
                     component={Link} to="/add_task"
                     className="addtaskbutton"
@@ -64,12 +64,12 @@ function MyTasks() {
                 >Add a Task
                 </Button>
 
-                <br /> <br/>
+                <br /> <br />
                 <hr style={{
                     width: 800,
                     height: 3,
                     backgroundColor: "#4e3055"
-}} />
+                }} />
 
                 <h2 className="saved"
                     style={{

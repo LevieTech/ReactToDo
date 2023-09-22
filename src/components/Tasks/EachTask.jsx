@@ -47,6 +47,8 @@ function EachTask({ task }) {
         boxShadow: 9,
         maxWidth: '310px',
         fontSize: 18,
+        outlineStyle: "groove",
+        outlineWidth: 3,
       }}>
         <h2 style={{textDecoration: "underline"}}> {task.taskname} </h2>
         <p>Date Added: {dateConversion(task.dateadded)}</p>

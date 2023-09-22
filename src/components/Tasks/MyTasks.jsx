@@ -11,7 +11,7 @@ function MyTasks() {
     const dispatch = useDispatch();
     const myTasks = useSelector(store => store.savedTasks);
     const user = useSelector(store => store.user);
-    const [ search, setSearch] = useState('');
+    const [search, setSearch] = useState('');
 
     useEffect(() => {
         dispatch({ type: "FETCH_SAVED_TASKS" });
@@ -26,16 +26,16 @@ function MyTasks() {
                 <center>
                     <Button
                         component={Link} to="/add_task"
-                        className="btn" 
-                        // variant="contained"
-                        // style={{
-                        //     backgroundColor: 'hsl(94, 82%, 60%)',
-                        //     color: 'white',
-                        //     fontFamily: "Georgia",
-                        //     textShadow: '4px 1px 2px rgba(0, 0, 0, 0.8)',
-                        //     fontSize: '23px',
-                        //     fontWeight: 'bold',
-                        // }}
+                        className="btn"
+                    // variant="contained"
+                    // style={{
+                    //     backgroundColor: 'hsl(94, 82%, 60%)',
+                    //     color: 'white',
+                    //     fontFamily: "Georgia",
+                    //     textShadow: '4px 1px 2px rgba(0, 0, 0, 0.8)',
+                    //     fontSize: '23px',
+                    //     fontWeight: 'bold',
+                    // }}
                     >Add a Task
                     </Button>
                     <h2 className="welcome">Welcome, {user.username} lets start!</h2>
@@ -48,13 +48,13 @@ function MyTasks() {
     return (
         <center>
             <div className="my-tasks-container">
-                <h2 className="solid">Hey {user.username}! Lets Get Started!</h2>
+                <h2 className="solid">Hey {user.username}, let's get started!</h2>
                 <Button
                     component={Link} to="/add_task"
                     className="addtaskbutton"
                     variant="contained"
                     style={{
-                        backgroundColor: '#8bc34ec9',
+                        backgroundColor: '#8ac34e',
                         color: 'white',
                         fontFamily: "Georgia",
                         textShadow: '4px 1px 2px rgba(0, 0, 0, 0.8)',
@@ -64,6 +64,13 @@ function MyTasks() {
                 >Add a Task
                 </Button>
 
+                <br /> <br/>
+                <hr style={{
+                    width: 800,
+                    height: 3,
+                    backgroundColor: "#4e3055"
+}} />
+
                 <h2 className="saved"
                     style={{
                         fontFamily: "Georgia",
@@ -71,37 +78,37 @@ function MyTasks() {
                         fontSize: '40px',
                         fontWeight: 'bold',
                     }}
-                >Saved Tasks:</h2>
-                
+                >Current Tasks:</h2>
+
                 {myTasks.length === 0 ? (
-                    <p>No saved tasks to show...yet!</p>
+                    <p>No tasks to show...yet!</p>
                 ) : (
                     myTasks.map((task, i) => {
                         return (
-                             <EachTask
-                            key={i}
-                            task={{
-                                id: task.id,
-                                taskname: task.taskname,
-                                dateadded: task.dateadded,
-                                duedate: task.duedate,
-                                prioritylevel: task.prioritylevel,
-                                completionstatus: task.completionstatus,
-                                notes: task.notes,
-                            }}
-                            // handleEditTask={handleEditTask}
-                            // handleDeleteTask={(event) => handleDeleteTask(task.id)}
-                            // savedTasks={task}
-                            style={{
-                                fontFamily: "Georgia",
-                                fontWeight: "bolder",
-                                textShadow: '4px 1px 2px rgba(0, 0, 0, 0.8)',
-                                fontSize: '30px',
-                            }}
-                        />
+                            <EachTask
+                                key={i}
+                                task={{
+                                    id: task.id,
+                                    taskname: task.taskname,
+                                    dateadded: task.dateadded,
+                                    duedate: task.duedate,
+                                    prioritylevel: task.prioritylevel,
+                                    completionstatus: task.completionstatus,
+                                    notes: task.notes,
+                                }}
+                                // handleEditTask={handleEditTask}
+                                // handleDeleteTask={(event) => handleDeleteTask(task.id)}
+                                // savedTasks={task}
+                                style={{
+                                    fontFamily: "Georgia",
+                                    fontWeight: "bolder",
+                                    textShadow: '4px 1px 2px rgba(0, 0, 0, 0.8)',
+                                    fontSize: '30px',
+                                }}
+                            />
                         )
-                       
-                        })
+
+                    })
                 )}
 
                 <Route path="/add_task/:taskId" component={AddTask} />

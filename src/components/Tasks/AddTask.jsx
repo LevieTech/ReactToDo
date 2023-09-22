@@ -87,7 +87,7 @@ function AddTask() {
 
   return (
     <div className="addtask">
-      <Container maxWidth="sm">
+      <Container maxWidth="md">
         <div className="header">
           <Typography
             variant="h3"
@@ -227,42 +227,6 @@ function AddTask() {
                 <MenuItem value="Low">Low</MenuItem>
               </TextField>
             </Grid>
-
-            {/* Are we going to need to set this when adding a task if it's already set to False when submitted to the DB? */}
-
-            {/* <Grid item xs={6}>
-              <TextField
-                className="input-field date-input input-border"
-                label="Completion Status"
-                select
-                value={completionstatus}
-                onChange={changecompletionStatus}
-                required
-                fullWidth
-                style={{ fontFamily: "Georgia" }}
-                InputProps={{
-                  style: {
-                    color: 'black',
-                    fontFamily: "Georgia",
-                  },
-                }}
-                InputLabelProps={{
-                  style: {
-                    color: 'black',
-                    fontFamily: "Georgia",
-                    fontWeight: 'bolder',
-                    fontSize: '25px',
-                    textShadow: '1px 1px 2px rgba(0, 0, 0, 0.8)'
-                  },
-                }}
-                margin="normal"
-              >
-                <MenuItem value="true">True</MenuItem>
-                <MenuItem value="false">False</MenuItem>
-              </TextField>
-            </Grid> */}
-
-
 
             <Grid item xs={6}>
               <TextField

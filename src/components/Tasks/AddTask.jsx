@@ -126,9 +126,9 @@ function AddTask() {
                   style: {
                     color: 'black',
                     fontFamily: "Georgia",
-                    fontWeight: 'bolder',
+                    fontWeight: 'bold',
                     fontSize: '25px',
-                    textShadow: '1px 1px 2px rgba(0, 0, 0, 0.8)'
+                    textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)'
                   },
                 }}
               />
@@ -235,7 +235,7 @@ function AddTask() {
             <Grid item xs={6}>
               <TextField
                 className="input-field date-input input border"
-                label="   Notes"
+                label="Notes"
                 type="notes"
                 value={notes}
                 onChange={changeNotes}

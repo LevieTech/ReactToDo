@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 function EditTask() {
     const history = useHistory();
-    const { id } = useParams();
+    const  id  = useParams();
     const dispatch = useDispatch();
 
     const [editedTask, setEditedTask] = useState({
@@ -15,7 +15,8 @@ function EditTask() {
         duedate: '',
         prioritylevel: '',
         completionstatus: false,
-        notes: ''
+        notes: '',
+        taskId: id,
     });
 
     const handleInputChange = (event) => {

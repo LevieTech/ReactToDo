@@ -26,16 +26,16 @@ function MyTasks() {
                 <center>
                     <Button
                         component={Link} to="/add_task"
-                        className="addtaskbutton"
-                        variant="contained"
-                        style={{
-                            backgroundColor: 'hsl(94, 82%, 60%)',
-                            color: 'white',
-                            fontFamily: "Georgia",
-                            textShadow: '4px 1px 2px rgba(0, 0, 0, 0.8)',
-                            fontSize: '23px',
-                            fontWeight: 'bold',
-                        }}
+                        className="btn" 
+                        // variant="contained"
+                        // style={{
+                        //     backgroundColor: 'hsl(94, 82%, 60%)',
+                        //     color: 'white',
+                        //     fontFamily: "Georgia",
+                        //     textShadow: '4px 1px 2px rgba(0, 0, 0, 0.8)',
+                        //     fontSize: '23px',
+                        //     fontWeight: 'bold',
+                        // }}
                     >Add a Task
                     </Button>
                     <h2 className="welcome">Welcome, {user.username} lets start!</h2>
@@ -54,7 +54,7 @@ function MyTasks() {
                     className="addtaskbutton"
                     variant="contained"
                     style={{
-                        backgroundColor: 'hsl(94, 82%, 60%)',
+                        backgroundColor: '#8bc34ec9',
                         color: 'white',
                         fontFamily: "Georgia",
                         textShadow: '4px 1px 2px rgba(0, 0, 0, 0.8)',
@@ -72,7 +72,7 @@ function MyTasks() {
                         fontWeight: 'bold',
                     }}
                 >Saved Tasks:</h2>
-
+                
                 {myTasks.length === 0 ? (
                     <p>No saved tasks to show...yet!</p>
                 ) : (

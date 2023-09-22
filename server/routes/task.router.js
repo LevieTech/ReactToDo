@@ -69,13 +69,13 @@ router.post('/', async (req, res) => {
   try {
       const insertTaskQuery = 
       `INSERT INTO "tasklist" 
-      ("user_id",   "taskname",
+      ("user_id",   
+      "taskname",
       "dateadded",
       "duedate",
       "prioritylevel",
-      "completionstatus",
       "notes") 
-  VALUES ($1, $2, $3, $4, $5,$6, $7);`
+  VALUES ($1, $2, $3, $4, $5, $6);`
       
       await pool.query(insertTaskQuery,[
         req.user.id, // the logged in user
@@ -83,7 +83,6 @@ router.post('/', async (req, res) => {
         task.dateadded,
         task.duedate,
         task.prioritylevel,
-        task.completionstatus,
         task.notes,
       ]);
   

@@ -7,6 +7,7 @@ import AddTask from "./AddTask";
 import EditTask from "./EditTask";
 
 
+
 function MyTasks() {
     const dispatch = useDispatch();
     const myTasks = useSelector(store => store.savedTasks);
@@ -24,9 +25,10 @@ function MyTasks() {
         return (
             <div>
                 <center>
+                    <div className="newTaskBtn">
                     <Button
                         component={Link} to="/add_task"
-                        className="btn"
+                        className="newTaskBtn"
                     // variant="contained"
                     // style={{
                     //     backgroundColor: 'hsl(94, 82%, 60%)',
@@ -38,7 +40,10 @@ function MyTasks() {
                     // }}
                     >Add a Task
                     </Button>
+                    </div>
+                    <div>
                     <h2 className="welcome">Welcome, {user.username} lets start!</h2>
+                    </div>
                     <p>My Tasks:</p>
                 </center>
             </div>
@@ -48,10 +53,13 @@ function MyTasks() {
     return (
         <center>
             <div className="my-tasks-container">
-                <h2 className="solid">Welcome {user.username}, let's get started!</h2>
+                <br/>
+                <h2 className="solid">Welcome, {user.username}! </h2>
+               <br/>
+               <div className="newTaskBtn">
                 <Button
                     component={Link} to="/add_task"
-                    className="addtaskbutton"
+                    className="newTaskBtn"
                     variant="contained"
                     style={{
                         backgroundColor: '#8ac34e',
@@ -60,9 +68,11 @@ function MyTasks() {
                         textShadow: '4px 1px 2px rgba(0, 0, 0, 0.8)',
                         fontSize: '23px',
                         fontWeight: 'bold',
+                        
                     }}
-                >Add a Task
+                >Add New Task
                 </Button>
+                </div>
 
                 <br /> <br />
                 <hr style={{

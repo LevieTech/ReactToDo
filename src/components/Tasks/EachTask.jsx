@@ -42,15 +42,27 @@ function EachTask({ task }) {
   }
 
   return (
-    <div>
-      <Card sx={{maxWidth: '300px'}}>
-        <h2>{task.taskname}</h2>
+    <div style={{ width: '100%', }}>
+      <Card sx={{
+        boxShadow: 9,
+        maxWidth: '310px',
+        fontSize: 18,
+        outlineStyle: "groove",
+        outlineWidth: 3,
+      }}>
+        <h2 style={{textDecoration: "underline"}}> {task.taskname} </h2>
         <p>Date Added: {dateConversion(task.dateadded)}</p>
         <p>Due Date: {dateConversion(task.duedate)}</p>
         <p>Priority: {task.prioritylevel}</p>
         <p>Status: {statusConversion(task.completionstatus)}</p>
         <p>Notes: {task.notes}</p>
-        <div className="buttons" style={{ display: "flex", justifyContent: "center" }}>
+
+        <div className="buttons" style={{
+          display: "flex",
+          justifyContent: "center",
+          backgroundColor: "#e8eaed",
+          outlineStyle: "groove",
+        }}>
           <Button
             onClick={() => handleDeleteTask(task.id)}
             style={{
@@ -61,7 +73,7 @@ function EachTask({ task }) {
               textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)",
             }}
           >
-            <DeleteIcon style={{ color: "purple" }} />
+            <DeleteIcon style={{ color: "#4e3055" }} />
           </Button>
           <Link to={`/task/${task.id}/edit_task`}>
             <Button
@@ -74,12 +86,12 @@ function EachTask({ task }) {
                 textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)",
               }}
             >
-              <EditIcon sx={{ color: "purple" }} />
+              <EditIcon sx={{ color: "#4e3055" }} />
             </Button>
           </Link>
         </div>
       </Card>
-      <br/>
+      <br />
     </div>
   );
 }

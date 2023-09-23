@@ -8,12 +8,17 @@ function Nav() {
   const user = useSelector((store) => store.user);
 
   return (
+    <>
     <div className="nav">
+      <center>
       <Link to="/home">
-        <img src="./react-to-do.png" className="navImg" alt="React To-Do" width="100" height="100" />
+        <img src="./react-to-do-banner.png" className="navImg" alt="React To-Do" width="50%" height="50%" style={{maxWidth: 1100,}}  />
       </Link>
+      </center>
+    </div>
 
-      <div>
+<center>
+    <div className="linkDiv">
         {/* If no user is logged in, show these links */}
         {user.id === null &&
           // If there's no user, show login/registration links
@@ -25,29 +30,26 @@ function Nav() {
         {/* If a user is logged in, show these links */}
         {user.id && (
           <>
-            <Link className="navLink" to="/user">
-              Home
-            </Link>
-
-            <Link className="navLink" to="/info">
-              Info Page
-            </Link>
-            <Link className="navLink" to="/my_tasks">
-              My Tasks
+           <Link className="navLink" to="/my_tasks">
+              Tasks
             </Link>
             <Link className="navLink" to="/taskList">
               List View</Link>
+            <Link className="navLink" to="/info">
+              Info 
+            </Link>
             <LogOutButton className="navLink" />
+
+          
           </>
         )}
 
-
-
-
-
-
       </div>
-    </div>
+      </center>
+
+    </>
+    
+
   );
 }
 

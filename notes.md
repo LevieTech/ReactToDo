@@ -16,3 +16,10 @@ A react to-do app, where users can register and track their tasks.
 - npm install axios
 - npm install @mui/icons-material
 - npm install @mui/material @emotion/react @emotion/styled
+
+## Some of Leigh's Notes
+-Can we make a button to mark complete on the card? w/o having to go into the edit form?
+-Do conditional rendering based on priority level 
+-Add content to info page
+-Work on readme
+-Don't forget to remove all excess code in each component and any excess files

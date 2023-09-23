@@ -53,8 +53,16 @@ function EditTask() {
     };
 
     return (
-        <Container>
-            <Typography variant="h3">Edit Task</Typography>
+        <Container maxWidth="md">
+            <Typography variant="h3"
+               style={{
+                fontFamily: "Georgia",
+                fontStyle: "oblique",
+                textDecoration: "underline",
+                textShadow: '3px 1px 2px rgba(0, 0, 0, 0.3)',
+  
+                marginBottom: '20px', // Increased margin bottom for spacing
+              }}> Edit Task </Typography>
             <form onSubmit={handleEditSubmit}>
                 <Grid container spacing={2}>
 
@@ -176,7 +184,7 @@ function EditTask() {
 
                     <Grid item xs={6}>
                         <TextField
-                            label="Completion Status"
+                            label="Completed"
                             select
                             name="completionstatus"
                             value={editedTask.completionstatus.toString()}
@@ -238,15 +246,13 @@ function EditTask() {
                             type="submit"
                             variant="contained"
                             style={{
-                                backgroundColor: '#8bc34ec9',
+                                backgroundColor: '#8ac34e',
+                                fontSize: 20,
                                 color: 'white',
-                                textShadow: '1px 10px 20px rgba(5, 5, 5, 5)',
-                                boxShadow: '10px 10px 10px rgba(3, 3, 3, 1)',
+                                textShadow: '5px 5px 7px rgba(5, 5, 5, 5)',
+                                boxShadow: '5px 5px 10px rgba(3, 3, 3, 1)',
                                 fontFamily: "Georgia",
-                                float: "left"
-                            }}
-                        >
-                            Save
+                            }}> Save
                         </Button>
                         {/* <br/>
                         <br/> */}
@@ -254,14 +260,17 @@ function EditTask() {
                             onClick={goBack}
                             variant="contained" 
                             style={{ 
-                                backgroundColor: '#8bc34ec9',
+                                backgroundColor: 'red',
+                                fontSize: 20,
                                 color: 'white',
-                                textShadow: '1px 10px 20px rgba(5, 5, 5, 5)',
-                                boxShadow: '10px 10px 10px rgba(3, 3, 3, 1)',
+                                textShadow: '5px 5px 7px rgba(5, 5, 5, 5)',
+                                boxShadow: '5px 5px 10px rgba(3, 3, 3, 1)',
                                 fontFamily: "Georgia",
-                                float: "right",
+                                marginLeft: 50,
 
-                        }} >Back</Button>
+
+                        }}> Back
+                        </Button>
                     </Grid>
 
                 </Grid>

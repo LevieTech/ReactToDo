@@ -38,12 +38,16 @@ function EditTask() {
         history.goBack();
     }
 
-    const handleEditSubmit = (event) => {
-        event.preventDefault();
+
+  const handleEditTask = (id) => {
+    event.preventDefault();
+    dispatch({ type: "EDITED_TASKS", payload: id });
+  };
+
+    const handleEditSubmit = () => {
         dispatch({
-            type: 'EDIT_TASK',
+            type: 'EDIT_THIS_TASK',
             payload: editedTask,
-            taskId: id
         });
         history.push('/my_tasks');
     };
@@ -91,14 +95,12 @@ function EditTask() {
                             required
                             fullWidth
                             InputProps={{
-                                shrink: true,
                                 style: {
                                     color: 'black',
                                     fontFamily: "Georgia"
                                 },
                             }}
                             InputLabelProps={{
-                                shrink: true,
                                 style: {
                                     color: 'black',
                                     fontFamily: "Georgia",
@@ -232,6 +234,7 @@ function EditTask() {
 
                     <Grid item xs={12}>
                         <Button
+                        onClick={() => handleEditSubmit()}
                             type="submit"
                             variant="contained"
                             style={{

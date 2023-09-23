@@ -23,11 +23,6 @@ function EachTask({ task }) {
     refreshPage();
   };
 
-  const handleEditTask = (id) => {
-    event.preventDefault();
-    dispatch({ type: "EDIT_TASK", payload: id });
-  };
-
   const dateConversion = (oldDate) => {
     const date = new Date(oldDate).toLocaleDateString('en-EN')
     return `${date}`
@@ -65,7 +60,6 @@ function EachTask({ task }) {
           </Button>
           <Link to={`/task/${task.id}/edit_task`}>
             <Button
-              onClick={(event) => handleEditTask(task.id)}
               style={{
                 fontFamily: "Georgia",
                 color: "black",

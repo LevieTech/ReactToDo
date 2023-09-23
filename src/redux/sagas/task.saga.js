@@ -56,7 +56,7 @@ function* editTask(action) {
     try {
         console.log("Editing Task");
         yield axios.put(`/api/task/${action.payload}`);
-        yield put({ type: 'MY_SAVED_TASKS'});
+        yield put({ type: 'EDITED_TASKS'});
     } catch (error) {
         console.log(`Error in completing Edit Task! ${error}`);
     }
@@ -68,6 +68,6 @@ function* taskSaga() {
     yield takeEvery("FETCH_SAVED_TASKS", getSavedTasks);
     yield takeEvery("ADD_TASK", addTask);
     yield takeEvery('DELETE_TASK', deleteTask);
-    yield takeEvery('EDIT_TASK', editTask);
+    yield takeEvery('EDIT_THIS_TASK', editTask);
 }
 export default taskSaga;

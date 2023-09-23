@@ -158,6 +158,18 @@ router.put('/edit/:id', (req, res) => {
     });
 });
 
+// PUT ROUTE to update completion status of specific tasks
+router.put('/:id', (req, res) => {
+  const queryText = `UPDATE tasklist SET completionstatus = $1 WHERE id= $2`
+  pool.query(queryText, [req.params.id]).then((result) => {
+    console.log(`Completion Status updated successfully!`)
+    res.sendStatus(200);
+  }).catch((error) => {
+    console.log(`Error in updating Completion Status! ${error}`)
+    res.sendStatus(500);
+  })
+})
+
 // DELETE /:id: Deletes a task from the database based on the trip ID provided in the URL parameter.
   router.delete('/:id', (req, res) => {
     const deleteId = req.params.id;

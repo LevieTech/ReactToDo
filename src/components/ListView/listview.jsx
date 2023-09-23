@@ -25,7 +25,7 @@ function ListView() {
             setTaskArray(tasks)
             setFilteredTaskArray(tasks)
         }
-        console.log(tasks)
+        console.log('First UseEffect', tasks)
     }, [])
 
     useEffect(() => {

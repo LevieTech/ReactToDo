@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from 'react-router-dom';
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import CheckIcon from '@mui/icons-material/Check';
 import { Button, Card } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -34,6 +35,11 @@ function EachTask({ task }) {
     } else if (task.completionstatus === true) {
       return 'Complete'
     }
+  }
+
+  const updateCompletion = (id) => {
+    dispatch({ type: 'UPDATE_COMP_STATUS', payload: id });
+    refreshPage();
   }
 
   return (
@@ -83,6 +89,7 @@ function EachTask({ task }) {
               <EditIcon sx={{ color: "#4e3055" }} />
             </Button>
           </Link>
+          <Button onClick={() => updateCompletion(task.id)} style={{ color: 'black' }}><CheckIcon/></Button>
         </div>
       </Card>
       <br />

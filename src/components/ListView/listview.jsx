@@ -12,7 +12,7 @@ function ListView() {
     console.log(tasks);
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_TASKS' });
+        dispatch({ type: 'FETCH_SAVED_TASKS' });
     }, []);
 
     // TODO FILTER STUFF BELOW
@@ -71,10 +71,10 @@ function ListView() {
                         </div>
                     </>
                 ) : (
-                    <div key={tasks.id}>
+                    <div>
                         {tasks.map(task => {
                             return (
-                                <div>
+                                <div key={task.id} className="Priority Check">
                                     <button onClick={() => checkFilter(task)}>Sort By Priority</button>
                                 </div>
                             )

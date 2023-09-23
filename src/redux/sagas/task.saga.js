@@ -62,6 +62,16 @@ function* editTask(action) {
     }
 }
 
+function* updateCompStatus(action) {
+    try {
+        console.log(`Updating Completion Status`);
+        yield axios.put((`/api/task/${action.payload}`));
+    } catch (error) {
+        console.log(`Error in updating Completion Status ${error}`)
+        alert('Something went wrong!');
+    }
+}
+
 
 function* taskSaga() {
     yield takeLatest("SAVE_TASKS", saveTasks);
@@ -69,5 +79,6 @@ function* taskSaga() {
     yield takeEvery("ADD_TASK", addTask);
     yield takeEvery('DELETE_TASK', deleteTask);
     yield takeEvery('EDIT_THIS_TASK', editTask);
+    yield takeEvery('UPDATE_COMP_STATUS', updateCompStatus)
 }
 export default taskSaga;

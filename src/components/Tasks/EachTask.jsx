@@ -38,7 +38,11 @@ function EachTask({ task }) {
   }
 
   const updateCompletion = (id) => {
-    dispatch({ type: 'UPDATE_COMP_STATUS', payload: id });
+    if (task.completionstatus === false) {
+      dispatch({ type: 'SET_COMP_STATUS', payload: id });
+    } else if (task.completionstatus === true) {
+      dispatch({ type: 'SET_INCOMP_STATUS', payload: id });
+    }
     refreshPage();
   }
 
@@ -51,7 +55,7 @@ function EachTask({ task }) {
         outlineStyle: "groove",
         outlineWidth: 3,
       }}>
-        <h2 style={{textDecoration: "underline"}}> {task.taskname} </h2>
+        <h2 style={{ textDecoration: "underline" }}> {task.taskname} </h2>
         <p>Date Added: {dateConversion(task.dateadded)}</p>
         <p>Due Date: {dateConversion(task.duedate)}</p>
         <p>Priority: {task.prioritylevel}</p>
@@ -89,7 +93,7 @@ function EachTask({ task }) {
               <EditIcon sx={{ color: "#4e3055" }} />
             </Button>
           </Link>
-          <Button onClick={() => updateCompletion(task.id)} style={{ color: 'black' }}><CheckIcon/></Button>
+          <Button onClick={() => updateCompletion(task.id)} style={{ color: 'black' }}><CheckIcon /></Button>
         </div>
       </Card>
       <br />

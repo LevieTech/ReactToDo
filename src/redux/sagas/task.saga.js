@@ -62,13 +62,23 @@ function* editTask(action) {
     }
 }
 
-function* updateCompStatus(action) {
+function* setCompStatus(action) {
     try {
         console.log(`Updating Completion Status`);
-        yield axios.put((`/api/task/${action.payload}`));
+        yield axios.put((`/api/task/complete/${action.payload}`));
     } catch (error) {
-        console.log(`Error in updating Completion Status ${error}`)
+        console.log(`Error in setting status to Complete ${error}`)
         alert('Something went wrong!');
+    }
+}
+
+function* setIncompStatus(action) {
+    try {
+        console.log('Setting Completion Status to Incomplete');
+        yield axios.put((`/api/task/incomplete/${action.payload}`));
+    } catch (error) {
+        console.log(`Error in setting status to Incomplete ${error}`);
+        alert('Something went wrong!')
     }
 }
 
@@ -79,6 +89,7 @@ function* taskSaga() {
     yield takeEvery("ADD_TASK", addTask);
     yield takeEvery('DELETE_TASK', deleteTask);
     yield takeEvery('EDIT_THIS_TASK', editTask);
-    yield takeEvery('UPDATE_COMP_STATUS', updateCompStatus)
+    yield takeEvery('SET_COMP_STATUS', setCompStatus);
+    yield takeEvery('SET_INCOMP_STATUS', setIncompStatus);
 }
 export default taskSaga;

@@ -161,8 +161,19 @@ router.put('/edit/:id', (req, res) => {
 });
 
 // PUT ROUTE to update completion status of specific tasks
-router.put('/:id', (req, res) => {
+router.put('/complete/:id', (req, res) => {
   const queryText = `UPDATE tasklist SET completionstatus = TRUE WHERE id= $1;`;
+  pool.query(queryText, [req.params.id]).then((result) => {
+    console.log(`Completion Status updated successfully!`)
+    res.sendStatus(200);
+  }).catch((error) => {
+    console.log(`Error in updating Completion Status! ${error}`)
+    res.sendStatus(500);
+  })
+})
+
+router.put('/incomplete/:id', (req, res) => {
+  const queryText = `UPDATE tasklist SET completionstatus = FALSE WHERE id= $1;`;
   pool.query(queryText, [req.params.id]).then((result) => {
     console.log(`Completion Status updated successfully!`)
     res.sendStatus(200);

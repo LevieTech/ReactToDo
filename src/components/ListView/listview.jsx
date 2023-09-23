@@ -83,7 +83,13 @@ function ListView() {
                             return (
                                 <div>
                                     <br />
-                                    <Card sx={{ maxWidth: '300px' }}>
+                                    <Card sx={{
+                                        boxShadow: 9,
+                                        maxWidth: '310px',
+                                        fontSize: 18,
+                                        outlineStyle: "groove",
+                                        outlineWidth: 3,
+                                    }}>
                                         <h2>{task.taskname}</h2>
                                         <h3>{dateConversion(task.dateadded)}</h3>
                                         <h3>{dateConversion(task.duedate)}</h3>

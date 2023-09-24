@@ -19,7 +19,10 @@ A react to-do app, where users can register and track their tasks.
 
 ## Some of Leigh's Notes
 -Can we make a button to mark complete on the card? w/o having to go into the edit form?
--Do conditional rendering based on priority level 
+-Do conditional rendering based on priority level and completion status
 -Add content to info page
 -Work on readme
 -Don't forget to remove all excess code in each component and any excess files
+-remove bold text on task name on edit task form 
+-add some spacing between the header and nav on edit/add task forms
+-Struggling to figure out the hover effect on MUI buttons and icons.. there is a super subtle effect currently but I need to figure out how and where to override that. 

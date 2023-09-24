@@ -1,13 +1,6 @@
 
-# Prime Project Starter
+# LevieTech's React To-Do App
 This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
-
-We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
-
-## Use the Template for This Repository (Don't Clone)
-
-- Don't Fork or Clone. Instead, click the `Use this Template` button, and make a copy to your personal account.
-
 
 ## Prerequisites
 
@@ -19,7 +12,7 @@ Before you get started, make sure you have the following software installed on y
 
 ## Create database and table
 
-Create a new database called `first-look` and create a `user` table:
+Create a new database called `react-to-do` and create a `user` table:
 
 ```SQL
 CREATE TABLE "user" (
@@ -29,7 +22,22 @@ CREATE TABLE "user" (
 );
 ```
 
-If you would like to name your database something else, you will need to change `first-look` to the name of your new database name in `server/modules/pool.js`
+If you would like to name your database something else, you will need to change `re` to the name of your new database name in `server/modules/pool.js`
+
+You will need to register a use before you can create the next table. After registering a user, create a `tasklist` table:
+
+```SQL
+CREATE TABLE tasklist (
+    "id" serial PRIMARY KEY,
+    "user_id" INT REFERENCES users,
+    "taskname" VARCHAR (400) NOT NULL,
+    "dateadded" VARCHAR (50),
+    "duedate" VARCHAR (50),
+	  "prioritylevel" VARCHAR (10),
+    "completionstatus" BOOLEAN DEFAULT FALSE,
+    "notes" VARCHAR (2000)
+);
+```
 
 ## Development Setup Instructions
 

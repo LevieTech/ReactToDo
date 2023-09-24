@@ -4,6 +4,7 @@ import errors from './errors.reducer';
 import user from './user.reducer';
 import tasks from './task.reducer';
 import savedTasks from './savedTasks.reducer';
+import editedTasks from './tasks.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   // tasks,
   savedTasks,
+  editedTasks,
 
 });
 

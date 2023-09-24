@@ -12,7 +12,7 @@ function ListView() {
     console.log(tasks);
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_TASKS' });
+        dispatch({ type: 'FETCH_SAVED_TASKS' });
     }, []);
 
     // TODO FILTER STUFF BELOW
@@ -25,7 +25,7 @@ function ListView() {
             setTaskArray(tasks)
             setFilteredTaskArray(tasks)
         }
-        console.log(tasks)
+        console.log('First UseEffect', tasks)
     }, [])
 
     useEffect(() => {
@@ -71,10 +71,10 @@ function ListView() {
                         </div>
                     </>
                 ) : (
-                    <div key={tasks.id}>
+                    <div>
                         {tasks.map(task => {
                             return (
-                                <div>
+                                <div key={task.id} className="Priority Check">
                                     <button onClick={() => checkFilter(task)}>Sort By Priority</button>
                                 </div>
                             )
@@ -83,7 +83,13 @@ function ListView() {
                             return (
                                 <div>
                                     <br />
-                                    <Card sx={{ maxWidth: '300px' }}>
+                                    <Card sx={{
+                                        boxShadow: 9,
+                                        maxWidth: '310px',
+                                        fontSize: 18,
+                                        outlineStyle: "groove",
+                                        outlineWidth: 3,
+                                    }}>
                                         <h2>{task.taskname}</h2>
                                         <h3>{dateConversion(task.dateadded)}</h3>
                                         <h3>{dateConversion(task.duedate)}</h3>

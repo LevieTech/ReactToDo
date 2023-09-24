@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from 'react-router-dom';
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import CheckIcon from '@mui/icons-material/Check';
 import { Button, Card } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -23,11 +24,6 @@ function EachTask({ task }) {
     refreshPage();
   };
 
-  const handleEditTask = (id) => {
-    event.preventDefault();
-    dispatch({ type: "EDIT_TASK", payload: id });
-  };
-
   const dateConversion = (oldDate) => {
     const date = new Date(oldDate).toLocaleDateString('en-EN')
     return `${date}`
@@ -41,6 +37,15 @@ function EachTask({ task }) {
     }
   }
 
+  const updateCompletion = (id) => {
+    if (task.completionstatus === false) {
+      dispatch({ type: 'SET_COMP_STATUS', payload: id });
+    } else if (task.completionstatus === true) {
+      dispatch({ type: 'SET_INCOMP_STATUS', payload: id });
+    }
+    refreshPage();
+  }
+
   return (
     <div style={{ width: '100%', }}>
       <Card sx={{
@@ -50,7 +55,7 @@ function EachTask({ task }) {
         outlineStyle: "groove",
         outlineWidth: 3,
       }}>
-        <h2 style={{textDecoration: "underline"}}> {task.taskname} </h2>
+        <h2 style={{ textDecoration: "underline" }}> {task.taskname} </h2>
         <p>Date Added: {dateConversion(task.dateadded)}</p>
         <p>Due Date: {dateConversion(task.duedate)}</p>
         <p>Priority: {task.prioritylevel}</p>
@@ -77,7 +82,6 @@ function EachTask({ task }) {
           </Button>
           <Link to={`/task/${task.id}/edit_task`}>
             <Button
-              onClick={(event) => handleEditTask(task.id)}
               style={{
                 fontFamily: "Georgia",
                 color: "black",
@@ -89,6 +93,7 @@ function EachTask({ task }) {
               <EditIcon sx={{ color: "#4e3055" }} />
             </Button>
           </Link>
+          <Button onClick={() => updateCompletion(task.id)} style={{ color: 'black' }}><CheckIcon /></Button>
         </div>
       </Card>
       <br />

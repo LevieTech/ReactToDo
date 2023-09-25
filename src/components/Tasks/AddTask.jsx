@@ -53,16 +53,22 @@ function AddTask() {
     dispatch({ type: 'GET_SAVED_TASKS' });
   }, []);
 
+  const refreshPage = () => {
+    setTimeout(() => {
+      window.location.reload(false);
+    }, 10);
+  }
+
   const handleSave = (event) => {
     if (!user || !user.id) {
       console.error("User is not defined or does not have an ID!");
       return;
-  }
+    }
 
-  if (!user || !user.id) {
-    setNotification("User information is missing. Please log in again or contact support.");
-    return;
-}
+    if (!user || !user.id) {
+      setNotification("User information is missing. Please log in again or contact support.");
+      return;
+    }
     const taskData = {
       userId: user.id,
       taskname,
@@ -80,7 +86,9 @@ function AddTask() {
     });
     setNotification("Task added successfully!");
     history.push('/my_tasks');
+    refreshPage();
   };
+
 
   const goBack = () => { history.goBack() };
 

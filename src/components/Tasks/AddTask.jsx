@@ -96,6 +96,7 @@ function AddTask() {
   return (
     <div className="addtask">
       <Container maxWidth="md">
+        <br/> <br/>
         <div className="header">
           <Typography
             variant="h3"
@@ -109,6 +110,7 @@ function AddTask() {
             }}
           >Create A New Task
           </Typography>
+          <br/>
         </div>
         <form>
           <Grid container spacing={2}>

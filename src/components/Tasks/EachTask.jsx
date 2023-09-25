@@ -46,10 +46,29 @@ function EachTask({ task }) {
     refreshPage();
   }
 
+  const changeColor = () => {
+    if (task.completionstatus === true) {
+      return '#d8ffb0'
+    } else {
+      return 'white'
+    }
+  } 
+
+  const colorizePriority = () => {
+    if (task.prioritylevel === 'High') {
+      return '#c71212'
+    } else if (task.prioritylevel === 'Medium') {
+      return '#eb7c1c'
+    } else if (task.prioritylevel === 'Low'){
+      return '#72ab16'
+    }
+  } 
+
   return (
     <div style={{ width: '100%', }}>
       <Card sx={{
         boxShadow: 9,
+        backgroundColor: changeColor(),
         maxWidth: '310px',
         fontSize: 18,
         outlineStyle: "groove",
@@ -58,7 +77,7 @@ function EachTask({ task }) {
         <h2 style={{ textDecoration: "underline" }}> {task.taskname} </h2>
         <p>Date Added: {dateConversion(task.dateadded)}</p>
         <p>Due Date: {dateConversion(task.duedate)}</p>
-        <p>Priority: {task.prioritylevel}</p>
+        <p style={{ color: colorizePriority() }}>Priority: {task.prioritylevel}</p>
         <p>Status: {statusConversion(task.completionstatus)}</p>
         <p>Notes: {task.notes}</p>
 

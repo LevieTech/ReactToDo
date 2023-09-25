@@ -46,16 +46,14 @@ function EachTask({ task }) {
     refreshPage();
   }
 
-  //! This will change the background color of the card depending on completion status
   const changeColor = () => {
     if (task.completionstatus === true) {
       return '#d8ffb0'
     } else {
       return 'white'
     }
-  } //end changeColor()
+  } 
 
-  //! This will change the background color of the card depending on completion status
   const colorizePriority = () => {
     if (task.prioritylevel === 'High') {
       return '#c71212'
@@ -64,7 +62,7 @@ function EachTask({ task }) {
     } else if (task.prioritylevel === 'Low'){
       return '#72ab16'
     }
-  } //end changeColor()
+  } 
 
   return (
     <div style={{ width: '100%', }}>

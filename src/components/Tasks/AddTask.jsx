@@ -17,9 +17,6 @@ function AddTask() {
   const [completionstatus, setCompletionStatus] = useState('');
   const [notes, setNotes] = useState('');
 
-  console.log('Checking for User', user)
-  console.log('Checking Tasks', tasks)
-
   // stores input values into the held states
   const changeTaskName = (event) => {
     console.log('changeTaskName called with value:', event.target.value);
@@ -50,7 +47,7 @@ function AddTask() {
 
   useEffect(() => {
     console.log('useEffect called');
-    dispatch({ type: 'GET_SAVED_TASKS' });
+    dispatch({ type: 'FETCH_PRIORITIES'});
   }, []);
 
   const refreshPage = () => {

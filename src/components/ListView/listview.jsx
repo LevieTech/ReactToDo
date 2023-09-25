@@ -23,7 +23,6 @@ function ListView() {
     useEffect(() => {
         if (tasks.length > 0) {
             setTaskArray(tasks)
-            setFilteredTaskArray(tasks)
         }
         console.log('First UseEffect', tasks)
     }, [])
@@ -61,6 +60,8 @@ function ListView() {
         }
     }
 
+    console.log('Checking for priority levels', tasks.prioritylevel)
+
     return (
         <main>
             <center>
@@ -72,16 +73,23 @@ function ListView() {
                     </>
                 ) : (
                     <div>
+
+                        {/* This needs to have some refinement added. I think this will loop through all tasks in the DB and create a Sort button for each task
+                        Not each priority level */}
                         {tasks.map(task => {
                             return (
                                 <div key={task.id} className="Priority Check">
-                                    <button onClick={() => checkFilter(task)}>Sort By Priority</button>
+                                    <button onClick={() => checkFilter(task)}>Sort By Priority: {task.prioritylevel}</button>
                                 </div>
                             )
                         })}
+
+                        <div className="priorityButtons">
+                            <button>Sort by priority: {tasks.prioritylevel}</button>
+                        </div>
                         {filteredTaskArray.map(task => {
                             return (
-                                <div>
+                                <div key={task.id}>
                                     <br />
                                     <Card sx={{
                                         boxShadow: 9,

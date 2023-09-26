@@ -90,13 +90,10 @@ function MyTasks() {
                                     taskname: task.taskname,
                                     dateadded: task.dateadded,
                                     duedate: task.duedate,
-                                    prioritylevel: task.prioritylevel,
+                                    prioritylvl: task.prioritylvl,
                                     completionstatus: task.completionstatus,
                                     notes: task.notes,
                                 }}
-                                // handleEditTask={handleEditTask}
-                                // handleDeleteTask={(event) => handleDeleteTask(task.id)}
-                                // savedTasks={task}
                                 style={{
                                     fontFamily: "Georgia",
                                     fontWeight: "bolder",

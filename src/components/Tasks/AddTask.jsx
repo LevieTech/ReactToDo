@@ -14,8 +14,10 @@ function AddTask() {
   const [dateadded, setDateAdded] = useState('');
   const [duedate, setDueDate] = useState('');
   const [prioritylevel, setPriorityLevel] = useState('');
-  const [completionstatus, setCompletionStatus] = useState('');
   const [notes, setNotes] = useState('');
+  const priorities = useSelector(store => store.priorities);
+
+  console.log('Check priorities AddTask', priorities)
 
   // stores input values into the held states
   const changeTaskName = (event) => {
@@ -31,15 +33,13 @@ function AddTask() {
 
     setDueDate(event.target.value);
   };
+
   const changePriorityLevel = (event) => {
     console.log('changePriorityLevel called with value:', event.target.value);
 
     setPriorityLevel(event.target.value);
   };
-  const changecompletionStatus = (event) => {
-    console.log('changecompletionStatus called with value:', event.target.value);
-    setCompletionStatus(event.target.value);
-  };
+
   const changeNotes = (event) => {
     console.log('changeNotes called with value:', event.target.value);
     setNotes(event.target.value);
@@ -47,7 +47,7 @@ function AddTask() {
 
   useEffect(() => {
     console.log('useEffect called');
-    dispatch({ type: 'FETCH_PRIORITIES'});
+    dispatch({ type: 'FETCH_PRIORITIES' });
   }, []);
 
   const refreshPage = () => {
@@ -93,7 +93,7 @@ function AddTask() {
   return (
     <div className="addtask">
       <Container maxWidth="md">
-        <br/> <br/>
+        <br /> <br />
         <div className="header">
           <Typography
             variant="h3"
@@ -107,7 +107,7 @@ function AddTask() {
             }}
           >Create A New Task
           </Typography>
-          <br/>
+          <br />
         </div>
         <form>
           <Grid container spacing={2}>
@@ -156,7 +156,7 @@ function AddTask() {
                   },
                 }}
                 InputLabelProps={{
-                  shrink: true,
+                  shrink: "true",
                   style: {
                     color: 'black',
                     fontFamily: "Georgia",
@@ -186,7 +186,7 @@ function AddTask() {
                   },
                 }}
                 InputLabelProps={{
-                  shrink: true,
+                  shrink: "true",
                   style: {
                     color: 'black',
                     fontFamily: "Georgia",
@@ -216,7 +216,7 @@ function AddTask() {
                   },
                 }}
                 InputLabelProps={{
-                  shrink: true,
+                  shrink: "true",
                   style: {
                     color: 'black',
                     fontFamily: "Georgia",
@@ -226,13 +226,16 @@ function AddTask() {
                   },
                 }}
                 margin="normal"
-
-
               >
-                <MenuItem value="High">High</MenuItem>
-                <MenuItem value="Medium">Medium</MenuItem>
-                <MenuItem value="Low">Low</MenuItem>
+                {priorities.map(priority => {
+                  return (
+                    <MenuItem value={priority.id}>{priority.level}</MenuItem>
+                  )
+                })}
               </TextField>
+
+
+
             </Grid>
 
             <Grid item xs={6}>
@@ -254,7 +257,7 @@ function AddTask() {
                   },
                 }}
                 InputLabelProps={{
-                  shrink: true,
+                  shrink: "true",
                   style: {
                     color: 'black',
                     fontFamily: "Georgia",

@@ -7,46 +7,16 @@ import { Card } from '@mui/material';
 function ListView() {
     const dispatch = useDispatch();
     const history = useHistory();
-    const tasks = useSelector(store => store.savedTasks)
+    const tasks = useSelector(store => store.sortedTasks);
     const priorities = useSelector(store => store.priorities);
 
-    console.log(priorities);
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_SAVED_TASKS' });
         dispatch({ type: 'FETCH_PRIORITIES' });
     }, []);
 
-    // TODO FILTER STUFF BELOW
-    const [taskFilter, setTaskFilter] = useState('');
-    const [taskArray, setTaskArray] = useState([]);
-    const [filteredTaskArray, setFilteredTaskArray] = useState([]);
-
-    useEffect(() => {
-        if (tasks.length > 0) {
-            setTaskArray(tasks)
-        }
-        console.log('First UseEffect', tasks)
-    }, [])
-
-    useEffect(() => {
-        if (taskFilter !== '') {
-            console.log('filled taskFilter', taskFilter)
-            setFilteredTaskArray(taskArray.filter(task => task.prioritylvl === taskFilter))
-            console.log('filtered task array', filteredTaskArray)
-        } else {
-            setTaskArray(tasks)
-        }
-        if (taskFilter === '') {
-            setFilteredTaskArray(taskArray)
-            console.log('taskFilter', taskFilter)
-        } else {
-            setTaskArray(tasks)
-        }
-    }, [taskFilter])
-
-    const checkFilter = (task) => {
-        setTaskFilter(task.prioritylvl)
+    const sortTasks = (id) => {
+        dispatch({ type: 'FETCH_SORTED_TASKS', payload: id });
     }
 
     const dateConversion = (oldDate) => {
@@ -54,63 +24,73 @@ function ListView() {
         return `${date}`
     }
 
-    const statusConversion = () => {
-        if (tasks.completionstatus === false) {
+    const statusConversion = (task) => {
+        if (task.completionstatus === false) {
             return 'Incomplete'
-        } else if (tasks.completionstatus === true) {
+        } else if (task.completionstatus === true) {
             return 'Complete'
         }
     }
 
-    console.log('Checking for priority levels', priorities)
+    const colorizePriority = (task) => {
+        if (task.level === 'High') {
+          return '#c71212'
+        } else if (task.level === 'Medium') {
+          return '#eb7c1c'
+        } else if (task.level === 'Low'){
+          return '#72ab16'
+        }
+      } 
+
+      const changeColor = (task) => {
+        if (task.completionstatus === true) {
+          return '#d8ffb0'
+        } else {
+          return 'white'
+        }
+      } 
 
     return (
         <main>
             <center>
-                {tasks.length === 0 ? (
-                    <>
-                        <div>
-                            <h1>No new tasks!</h1>
-                        </div>
-                    </>
-                ) : (
-                    <div>
-
-                        {/* This needs to have some refinement added. I think this will loop through all tasks in the DB and create a Sort button for each task
+                <div>
+                    {/* This needs to have some refinement added. I think this will loop through all tasks in the DB and create a Sort button for each task
                         Not each priority level */}
-                        {priorities.map(priority => {
-                            return (
-                                <div key={priority.id} className="Priority Check">
-                                    <button onClick={() => checkFilter()}>Sort By Priority: {priority.level}</button>
-                                </div>
-                            )
-                        })}
-                        {filteredTaskArray.map(task => {
-                            return (
-                                <div key={task.id}>
-                                    <br />
-                                    <Card sx={{
-                                        boxShadow: 9,
-                                        maxWidth: '310px',
-                                        fontSize: 18,
-                                        outlineStyle: "groove",
-                                        outlineWidth: 3,
-                                    }}>
-                                        <h2>{task.taskname}</h2>
-                                        <h3>{dateConversion(task.dateadded)}</h3>
-                                        <h3>{dateConversion(task.duedate)}</h3>
-                                        <h4>{task.prioritylvl}</h4>
-                                        <h4>{statusConversion(task.completionstatus)}</h4>
-                                        <p>{task.notes}</p>
-                                    </Card>
-                                </div>
-                            )
-                        })}
-                    </div>
-                )}
+                    {priorities.map(priority => {
+                        return (
+                            <div key={priority.id} className="Priority Check">
+                                <button onClick={() => sortTasks(priority.id)}>Sort By Priority: {priority.level}</button>
+                            </div>
+                        )
+                    })}
+                    {tasks.map(task => {
+                        return (
+                            <div key={task.id}>
+                                <br />
+                                <Card sx={{
+                                    boxShadow: 9,
+                                    maxWidth: '310px',
+                                    maxHeight: 'fit-content',
+                                    backgroundColor: changeColor(task),
+                                    outlineStyle: "groove",
+                                    outlineWidth: 3,
+                                }}>
+                                    <h2>{task.taskname}</h2>
+                                    Date Added:<h3>{dateConversion(task.dateadded)}</h3>
+                                    
+                                    Date Due:<h3>{dateConversion(task.duedate)}</h3>
+                                    
+                                    <h4 style={{ color: colorizePriority(task) }}>{task.level}</h4>
+                                    Status:<h4>{statusConversion(task)}</h4>
+                                    
+                                    Notes:
+                                    <p>{task.notes}</p>
+                                </Card>
+                            </div>
+                        )
+                    })}
+                </div>
             </center>
-
-
         </main>
     )
 }

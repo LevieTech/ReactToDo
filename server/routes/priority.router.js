@@ -14,4 +14,15 @@ router.get('/', (req, res) => {
     })
 });
 
+router.get('/:id', (req, res) => {
+    const queryText = `SELECT * FROM priority
+                       JOIN tasklist ON tasklist.prioritylvl = priority.id;`;
+    pool.query(queryText, [req.params.id]).then((result => {
+        res.send(result.rows);
+    })).catch((error) => {
+        console.log(`Error in GET for tasks based on Priority Level ${error}`);
+        res.sendStatus(500);
+    })
+})
+
 module.exports = router;

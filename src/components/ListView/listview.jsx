@@ -8,11 +8,13 @@ function ListView() {
     const dispatch = useDispatch();
     const history = useHistory();
     const tasks = useSelector(store => store.savedTasks)
+    const priorities = useSelector(store => store.priorities);
 
-    console.log(tasks);
+    console.log(priorities);
 
     useEffect(() => {
         dispatch({ type: 'FETCH_SAVED_TASKS' });
+        dispatch({ type: 'FETCH_PRIORITIES' });
     }, []);
 
     // TODO FILTER STUFF BELOW
@@ -30,7 +32,7 @@ function ListView() {
     useEffect(() => {
         if (taskFilter !== '') {
             console.log('filled taskFilter', taskFilter)
-            setFilteredTaskArray(taskArray.filter(task => task.prioritylevel === taskFilter))
+            setFilteredTaskArray(taskArray.filter(task => task.prioritylvl === taskFilter))
             console.log('filtered task array', filteredTaskArray)
         } else {
             setTaskArray(tasks)
@@ -44,7 +46,7 @@ function ListView() {
     }, [taskFilter])
 
     const checkFilter = (task) => {
-        setTaskFilter(task.prioritylevel)
+        setTaskFilter(task.prioritylvl)
     }
 
     const dateConversion = (oldDate) => {
@@ -60,7 +62,7 @@ function ListView() {
         }
     }
 
-    console.log('Checking for priority levels', tasks.prioritylevel)
+    console.log('Checking for priority levels', priorities)
 
     return (
         <main>
@@ -76,17 +78,13 @@ function ListView() {
 
                         {/* This needs to have some refinement added. I think this will loop through all tasks in the DB and create a Sort button for each task
                         Not each priority level */}
-                        {tasks.map(task => {
+                        {priorities.map(priority => {
                             return (
-                                <div key={task.id} className="Priority Check">
-                                    <button onClick={() => checkFilter(task)}>Sort By Priority: {task.prioritylevel}</button>
+                                <div key={priority.id} className="Priority Check">
+                                    <button onClick={() => checkFilter()}>Sort By Priority: {priority.level}</button>
                                 </div>
                             )
                         })}
-
-                        <div className="priorityButtons">
-                            <button>Sort by priority: {tasks.prioritylevel}</button>
-                        </div>
                         {filteredTaskArray.map(task => {
                             return (
                                 <div key={task.id}>
@@ -101,7 +99,7 @@ function ListView() {
                                         <h2>{task.taskname}</h2>
                                         <h3>{dateConversion(task.dateadded)}</h3>
                                         <h3>{dateConversion(task.duedate)}</h3>
-                                        <h4>{task.prioritylevel}</h4>
+                                        <h4>{task.prioritylvl}</h4>
                                         <h4>{statusConversion(task.completionstatus)}</h4>
                                         <p>{task.notes}</p>
                                     </Card>

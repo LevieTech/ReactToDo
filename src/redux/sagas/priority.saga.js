@@ -11,6 +11,8 @@ function* getPriorities() {
     }
 }
 
+
+
 function* prioritySaga() {
     yield takeEvery('FETCH_PRIORITIES', getPriorities);
 }

@@ -73,7 +73,7 @@ router.post('/', async (req, res) => {
       "taskname",
       "dateadded",
       "duedate",
-      "prioritylevel",
+      "prioritylvl",
       "notes") 
   VALUES ($1, $2, $3, $4, $5, $6);`
       

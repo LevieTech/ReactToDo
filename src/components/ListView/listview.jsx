@@ -34,21 +34,21 @@ function ListView() {
 
     const colorizePriority = (task) => {
         if (task.level === 'High') {
-          return '#c71212'
+            return '#c71212'
         } else if (task.level === 'Medium') {
-          return '#eb7c1c'
-        } else if (task.level === 'Low'){
-          return '#72ab16'
+            return '#eb7c1c'
+        } else if (task.level === 'Low') {
+            return '#72ab16'
         }
-      } 
+    }
 
-      const changeColor = (task) => {
+    const changeColor = (task) => {
         if (task.completionstatus === true) {
-          return '#d8ffb0'
+            return '#d8ffb0'
         } else {
-          return 'white'
+            return 'white'
         }
-      } 
+    }
 
     return (
         <main>
@@ -59,32 +59,29 @@ function ListView() {
                     {priorities.map(priority => {
                         return (
                             <div key={priority.id} className="Priority Check">
-                                <button onClick={() => sortTasks(priority.id)}>Sort By Priority: {priority.level}</button>
+                                <br />
+                                <button className="btn" onClick={() => sortTasks(priority.id)}>Sort By Priority: {priority.level}</button>
                             </div>
                         )
                     })}
                     {tasks.map(task => {
                         return (
-                            <div key={task.id}>
+                            <div key={task.id} style={{ width: '100%' }}>
                                 <br />
                                 <Card sx={{
                                     boxShadow: 9,
                                     maxWidth: '310px',
-                                    maxHeight: 'fit-content',
+                                    fontSize: 18,
                                     backgroundColor: changeColor(task),
                                     outlineStyle: "groove",
                                     outlineWidth: 3,
                                 }}>
-                                    <h2>{task.taskname}</h2>
-                                    Date Added:<h3>{dateConversion(task.dateadded)}</h3>
-                                    
-                                    Date Due:<h3>{dateConversion(task.duedate)}</h3>
-                                    
-                                    <h4 style={{ color: colorizePriority(task) }}>{task.level}</h4>
-                                    Status:<h4>{statusConversion(task)}</h4>
-                                    
-                                    Notes:
-                                    <p>{task.notes}</p>
+                                    <h2 style={{ textDecoration: "underline" }}> {task.taskname} </h2>
+                                    <p>Date Added: {dateConversion(task.dateadded)}</p>
+                                    <p>Due Date: {dateConversion(task.duedate)}</p>
+                                    <p style={{ color: colorizePriority(task) }}>Priority: {task.level}</p>
+                                    <p>Status: {statusConversion(task)}</p>
+                                    <p>Notes: {task.notes}</p>
                                 </Card>
                             </div>
                         )

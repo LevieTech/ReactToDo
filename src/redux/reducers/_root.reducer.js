@@ -5,6 +5,8 @@ import user from './user.reducer';
 import tasks from './task.reducer';
 import savedTasks from './savedTasks.reducer';
 import editedTasks from './tasks.reducer';
+import priorities from './priority.reducer';
+import sortedTasks from './sortedTasks.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -18,7 +20,8 @@ const rootReducer = combineReducers({
   // tasks,
   savedTasks,
   editedTasks,
-
+  priorities,
+  sortedTasks,
 });
 
 export default rootReducer;

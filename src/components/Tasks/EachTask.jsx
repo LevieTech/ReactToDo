@@ -46,6 +46,16 @@ function EachTask({ task }) {
     refreshPage();
   }
 
+  const priorityConversion = () => {
+    if (task.prioritylvl === 1) {
+      return "Low"
+    } else if (task.prioritylvl === 2) {
+      return 'Medium'
+    } else if (task.prioritylvl === 3) {
+      return 'High'
+    }
+  }
+
   const changeColor = () => {
     if (task.completionstatus === true) {
       return '#d8ffb0'
@@ -55,11 +65,11 @@ function EachTask({ task }) {
   } 
 
   const colorizePriority = () => {
-    if (task.prioritylevel === 'High') {
+    if (task.prioritylvl === 3) {
       return '#c71212'
-    } else if (task.prioritylevel === 'Medium') {
+    } else if (task.prioritylvl === 2) {
       return '#eb7c1c'
-    } else if (task.prioritylevel === 'Low'){
+    } else if (task.prioritylvl === 1){
       return '#72ab16'
     }
   } 
@@ -77,7 +87,7 @@ function EachTask({ task }) {
         <h2 style={{ textDecoration: "underline" }}> {task.taskname} </h2>
         <p>Date Added: {dateConversion(task.dateadded)}</p>
         <p>Due Date: {dateConversion(task.duedate)}</p>
-        <p style={{ color: colorizePriority() }}>Priority: {task.prioritylevel}</p>
+        <p style={{ color: colorizePriority() }}>Priority: {priorityConversion(task.prioritylvl)}</p>
         <p>Status: {statusConversion(task.completionstatus)}</p>
         <p>Notes: {task.notes}</p>
 

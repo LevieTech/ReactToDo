@@ -13,8 +13,16 @@ const taskReducer = (state = initialState, action) => {
         case "ADD_TASK":
             return {
                 ...state,
-                task: [...state.task, action.payload]
+                task: [...state.task, action.payload],
+                error: null  // clear any previous error
            };
+
+           case "SAVE_TASK_ERROR":
+            case "GET_SAVED_TASKS_ERROR":
+                return {
+                    ...state,
+                    error: "An error occurred while processing your request"
+                };
             case 'FETCH_TASK': {
                 
                 return {
@@ -22,51 +30,38 @@ const taskReducer = (state = initialState, action) => {
                   tasks: action.payload 
                 };
               }    
-            case 'EDIT_TASK': {
-                const { taskId, ...updatedData } = action.payload;
+              case 'EDIT_THIS_TASK': {
+                const updatedTasks = state.tasks.map(task => 
+                    task.id === action.payload.id 
+                        ? { ...task, ...action.payload }
+                        : task
+                );
+            
                 return {
                   ...state,
-                  task: state.task.map(task => 
-                    task.id === taskId ? { ...task, ...updatedData } : task
-                  )
+                  tasks: updatedTasks,
                 };
-              }
-             
-        // case "EDIT_TASK":
-        //     const updatedTasks = state.task.map(t => 
-        //         t.id === action.payload.id 
-        //             ? { ...t, ...action.payload }
-        //             : t
-        //     );
-        //     return {
-        //         ...state,
-        //         task: updatedTasks
-        //     };
-
+            }
+            case 'EDIT_TASK_SUCCESS': {
+                const updatedTasks = state.tasks.map(task => 
+                    task.id === action.payload.id 
+                        ? { ...task, ...action.payload }
+                        : task
+                );
+                
+                return {
+                    ...state,
+                    tasks: updatedTasks,
+                };
+            }
+              
         case "GET_SAVED_TASKS_SUCCESS":
             return {
+                ...state,
                 savedTasks: action.payload,
             };
-
-        case "UPDATE_TASK_SUCCESS":
-            const updatedTasks = state.task.map((task) =>
-                task.id === action.payload.id
-                    ? {
-                        ...task,
-                        ...action.payload
-                    }
-                    : task
-            );
-            return {
-                ...state,
-                userTasks: updatedTasks,
-            };
-
-        // case "DELETE_TASK":
-        //     return {
-        //         ...state,
-        //         userTasks: state.task.filter(task => task.id !== action.payload.taskID)
-        //     };
+           
+       
 
         case "ADD_TASK_ERROR":
             return {

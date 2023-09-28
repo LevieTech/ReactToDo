@@ -15,6 +15,29 @@ function* addTask(action) {
         yield put({ type: "ADD_TASK_ERROR" });
     }
 }
+function* fetchTask(action) {
+    try {
+        console.log("Attempting to fetch tasks");
+        const response = yield call(axios.get, "/api/tasks", action.payload); // assuming action.payload contains any required parameters
+        console.log("Tasks fetched successfully:", response.data);
+        yield put({ type: "FETCH_TASK_SUCCESS", payload: response.data });  // dispatch success action with fetched tasks
+    } catch (error) {
+        console.log("Error fetching tasks:", error);
+        yield put({ type: "FETCH_TASK_ERROR", error });  // dispatch an error action
+    }
+}
+
+function* updateTaskSuccess(action) {
+    try {
+        console.log("Task updated successfully, refetching all tasks.");
+        const response = yield call(axios.get, "/api/tasks"); // refetch all tasks
+        console.log("Tasks refetched successfully:", response.data);
+        yield put({ type: "FETCH_TASK_SUCCESS", payload: response.data });  // dispatch success action with fetched tasks
+    } catch (error) {
+        console.log("Error refetching tasks after update:", error);
+        yield put({ type: "FETCH_TASK_ERROR", error });  // dispatch an error action
+    }
+}
 
 function* saveTasks(action) {
     try {
@@ -51,16 +74,35 @@ function* deleteTask(action) {
         console.log(`Error in deleteing Task`, error);
     }
 }
+// ... (other code remains the same)
 
 function* editTask(action) {
     try {
         console.log("Editing Task");
-        yield axios.put(`/api/task/${action.payload}`);
-        yield put({ type: 'EDITED_TASKS'});
+        const { id, ...updateData } = action.payload;
+        if (typeof id === 'undefined') {  
+            console.error('Task ID is undefined');
+            return;
+        }
+
+        // Corrected the URL and data to be sent in the PUT request
+        const response = yield axios.put(`/api/task/${id}`, updateData);
+
+        console.log("Task edited successfully:", response.data);
+        console.log('Task ID:', id);  
+        console.log('Update Data:', updateData); 
+
+        yield put({ type: 'EDIT_TASK_SUCCESS', payload: { id, ...updateData }});  
     } catch (error) {
         console.log(`Error in completing Edit Task! ${error}`);
+        yield put({ type: 'EDIT_TASK_ERROR', error: error.message });  // Added specific error message
     }
 }
+
+
+
+
+
 
 function* setCompStatus(action) {
     try {
@@ -91,5 +133,7 @@ function* taskSaga() {
     yield takeEvery('EDIT_THIS_TASK', editTask);
     yield takeEvery('SET_COMP_STATUS', setCompStatus);
     yield takeEvery('SET_INCOMP_STATUS', setIncompStatus);
+    yield takeEvery("FETCH_TASK", fetchTask);
+    yield takeEvery("UPDATE_TASK_SUCCESS", updateTaskSuccess);
 }
 export default taskSaga;

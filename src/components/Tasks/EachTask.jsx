@@ -23,9 +23,10 @@ function EachTask({ task }) {
     refreshPage();
   };
 
-  const handleEditTask = (id) => {
+  const handleEditTask = (event, id) => {
     event.preventDefault();
-    dispatch({ type: "EDIT_TASK", payload: id });
+    // dispatch({ type: "EDIT_TASK", payload: id });
+    history.push(`/task/${id}/edit_task`);
   };
 
   const dateConversion = (oldDate) => {
@@ -77,7 +78,7 @@ function EachTask({ task }) {
           </Button>
           <Link to={`/task/${task.id}/edit_task`}>
             <Button
-              onClick={(event) => handleEditTask(task.id)}
+              onClick={(event) => handleEditTask(event, task.id)}
               style={{
                 fontFamily: "Georgia",
                 color: "black",

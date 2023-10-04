@@ -54,13 +54,16 @@ function* deleteTask(action) {
 
 function* editTask(action) {
     try {
-        console.log("Editing Task");
-        yield axios.put(`/api/task/${action.payload}`);
-        yield put({ type: 'MY_SAVED_TASKS'});
+        const { id, ...updatedData } = action.payload; 
+        console.log("ID and Updated Data:", id, updatedData);
+        yield axios.put(`/api/task/${id}`, updatedData);
+        yield put({ type: 'MY_SAVED_TASKS' });
     } catch (error) {
-        console.log(`Error in completing Edit Task! ${error}`);
+        console.log("Error in completing Edit Task! ", error);
+       
     }
 }
+
 
 
 function* taskSaga() {

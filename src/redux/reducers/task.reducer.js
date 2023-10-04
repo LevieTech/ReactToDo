@@ -22,26 +22,18 @@ const taskReducer = (state = initialState, action) => {
                   tasks: action.payload 
                 };
               }    
-            case 'EDIT_TASK': {
-                const { taskId, ...updatedData } = action.payload;
+           
+              case 'EDIT_TASK': {
+                const { id, ...updatedData } = action.payload;
                 return {
-                  ...state,
-                  task: state.task.map(task => 
-                    task.id === taskId ? { ...task, ...updatedData } : task
-                  )
+                    ...state,
+                    task: state.task.map(task => 
+                        task.id === id ? { ...task, ...updatedData } : task
+                    )
                 };
-              }
-             
-        // case "EDIT_TASK":
-        //     const updatedTasks = state.task.map(t => 
-        //         t.id === action.payload.id 
-        //             ? { ...t, ...action.payload }
-        //             : t
-        //     );
-        //     return {
-        //         ...state,
-        //         task: updatedTasks
-        //     };
+            }
+            
+    
 
         case "GET_SAVED_TASKS_SUCCESS":
             return {

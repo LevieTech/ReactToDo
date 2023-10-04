@@ -22,16 +22,34 @@ const taskReducer = (state = initialState, action) => {
                   tasks: action.payload 
                 };
               }    
-           
               case 'EDIT_TASK': {
-                const { id, ...updatedData } = action.payload;
+                console.log("Before Update:", state.savedTasks); 
+                const updatedTasks = state.savedTasks.map(task => 
+                    task.id === action.payload.id ? action.payload : task
+                );
+                console.log('Updated Tasks:', updatedTasks);
+                console.log("After Update:", updatedTasks);
                 return {
                     ...state,
-                    task: state.task.map(task => 
-                        task.id === id ? { ...task, ...updatedData } : task
-                    )
+                    savedTasks: updatedTasks  
                 };
             }
+            
+            
+            //   case 'EDIT_TASK': {
+            //     console.log("Before Update:", state.tasks);
+            //     const { id, ...updatedData } = action.payload;
+            //     return {
+            //         ...state,
+            //         task: state.task.map(task => 
+            //             task.id === id ? { ...task, ...updatedData } : task
+            //         )
+            //     };
+            // }
+            case 'EDIT_TASK_SUCCESS':
+    return state.map(task =>
+        task.id === action.payload.id ? action.payload : task
+    );
             
     
 

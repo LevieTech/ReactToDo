@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 function EditTask() {
     const history = useHistory();
-    const{ id } = useParams();
+    const id  = useParams();
     console.log("Received ID:", id);
     const dispatch = useDispatch();
 
@@ -20,31 +20,27 @@ function EditTask() {
        
     });
    
-
     const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        if (name === "completionstatus") {
-            setEditedTask(prevState => ({
-                ...prevState,
-                [name]: value === "true" // convert the string to boolean
-            }));
-        } else {
-            setEditedTask(prevState => ({
-                ...prevState,
-                [name]: value
-            }));
-        }
-    };
-
-    const handleSave = (event) => {
-      event.preventDefault();
-      console.log('Edited Task Payload:', editedTask);
-      dispatch({
-          type: 'EDIT_TASK',
-          payload: editedTask, 
+      const { name, value } = event.target;
+      setEditedTask(prevState => {
+          const updatedTask = name === "completionstatus" ? { ...prevState, [name]: value === "true" } : { ...prevState, [name]: value };
+          console.log("Updated Task After Input Change:", updatedTask);
+          return updatedTask;
       });
-      history.push('/my_tasks');
-  }
+  };
+  const handleSave = (event) => {
+    event.preventDefault();
+    console.log('Attempting to Save Edited Task Payload:', editedTask);
+    if (!editedTask.taskname || !editedTask.dateadded || !editedTask.prioritylevel) {
+        console.log("Missing required fields, not dispatching the edit task action.");
+        return;
+    }
+    dispatch({ type: 'EDIT_TASK', payload: editedTask });
+    console.log('Dispatched EDIT_TASK with Payload:', editedTask);
+    history.push('/my_tasks');
+}
+
+   
   
 
     const goBack = () => {
@@ -55,7 +51,7 @@ function EditTask() {
         dispatch({
             type: 'EDIT_TASK',
             payload: editedTask,
-            taskId: editedTask.taskId 
+            
         });
         history.push('/my_tasks');
     };

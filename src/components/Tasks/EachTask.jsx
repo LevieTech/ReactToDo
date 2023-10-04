@@ -77,6 +77,8 @@ function EachTask({ task }) {
             <DeleteIcon style={{ color: "#4e3055" }} />
           </Button>
           <Link to={`/task/${task.id}/edit_task`}>
+          
+
             <Button
               onClick={(event) => handleEditTask(event, task.id)}
               style={{

@@ -18,31 +18,19 @@ function MyTasks() {
         dispatch({ type: "FETCH_SAVED_TASKS" });
     }, []);
 
-    console.log('Check for tasks', myTasks);
-
-
     if (!myTasks) {
         return (
             <div>
                 <center>
                     <div className="newTaskBtn">
-                    <Button
-                        component={Link} to="/add_task"
-                        className="newTaskBtn"
-                    // variant="contained"
-                    // style={{
-                    //     backgroundColor: 'hsl(94, 82%, 60%)',
-                    //     color: 'white',
-                    //     fontFamily: "Georgia",
-                    //     textShadow: '4px 1px 2px rgba(0, 0, 0, 0.8)',
-                    //     fontSize: '23px',
-                    //     fontWeight: 'bold',
-                    // }}
-                    >Add a Task
-                    </Button>
+                        <Button
+                            component={Link} to="/add_task"
+                            className="newTaskBtn"
+                        >Add a Task
+                        </Button>
                     </div>
                     <div>
-                    <h2 className="welcome">Welcome, {user.username} lets start!</h2>
+                        <h2 className="welcome">Welcome, {user.username} lets start!</h2>
                     </div>
                     <p>My Tasks:</p>
                 </center>
@@ -53,25 +41,25 @@ function MyTasks() {
     return (
         <center>
             <div className="my-tasks-container">
-                <br/>
+                <br />
                 <h2 className="solid">Welcome, {user.username}! </h2>
-               <br/>
-               <div className="newTaskBtn">
-                <Button
-                    component={Link} to="/add_task"
-                    className="newTaskBtn"
-                    variant="contained"
-                    style={{
-                        backgroundColor: '#8ac34e',
-                        color: 'white',
-                        fontFamily: "Georgia",
-                        textShadow: '4px 1px 2px rgba(0, 0, 0, 0.8)',
-                        fontSize: '23px',
-                        fontWeight: 'bold',
-                        
-                    }}
-                >Add New Task
-                </Button>
+                <br />
+                <div className="newTaskBtn">
+                    <Button
+                        component={Link} to="/add_task"
+                        className="newTaskBtn"
+                        variant="contained"
+                        style={{
+                            backgroundColor: '#8ac34e',
+                            color: 'white',
+                            fontFamily: "Georgia",
+                            textShadow: '4px 1px 2px rgba(0, 0, 0, 0.8)',
+                            fontSize: '23px',
+                            fontWeight: 'bold',
+
+                        }}
+                    >Add New Task
+                    </Button>
                 </div>
 
                 <br /> <br />
@@ -102,13 +90,10 @@ function MyTasks() {
                                     taskname: task.taskname,
                                     dateadded: task.dateadded,
                                     duedate: task.duedate,
-                                    prioritylevel: task.prioritylevel,
+                                    prioritylvl: task.prioritylvl,
                                     completionstatus: task.completionstatus,
                                     notes: task.notes,
                                 }}
-                                // handleEditTask={handleEditTask}
-                                // handleDeleteTask={(event) => handleDeleteTask(task.id)}
-                                // savedTasks={task}
                                 style={{
                                     fontFamily: "Georgia",
                                     fontWeight: "bolder",

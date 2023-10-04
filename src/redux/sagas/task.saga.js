@@ -51,18 +51,29 @@ function* deleteTask(action) {
         console.log(`Error in deleteing Task`, error);
     }
 }
-
 function* editTask(action) {
     try {
+        console.log("Entire EDIT_TASK Action:", action); // New log
         const { id, ...updatedData } = action.payload; 
-        console.log("ID and Updated Data:", id, updatedData);
-        yield axios.put(`/api/task/${id}`, updatedData);
+        if (!id) {
+            console.log("Task ID is missing in the action payload. Cannot proceed with the edit task.");
+            return;
+        }
+        const response = yield axios.put(`/api/task/${id}`, updatedData);
+        console.log("Axios PUT Request Response:", response); // New log
+
+        if (response.status !== 200) {
+            console.log("Failed to update the task on the server. Status Code:", response.status);
+            return;
+        }
+
         yield put({ type: 'MY_SAVED_TASKS' });
+        console.log('Dispatched MY_SAVED_TASKS After Editing Task');
     } catch (error) {
-        console.log("Error in completing Edit Task! ", error);
-       
+        console.log("Error Occurred During Editing Task:", error);
     }
 }
+
 
 
 

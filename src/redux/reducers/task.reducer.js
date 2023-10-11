@@ -15,8 +15,6 @@ const taskReducer = (state = initialState, action) => {
                 ...state,
                 task: [...state.task, action.payload]
            };
-           
-        
             case 'FETCH_TASK': {
                 
                 return {
@@ -24,50 +22,52 @@ const taskReducer = (state = initialState, action) => {
                   tasks: action.payload 
                 };
               }    
-              case 'EDIT_TASK': 
-            console.log("Before Update:", state.savedTasks);
-            console.log("Action Payload:", action.payload);
-            const updatedTasks = state.savedTasks.map(task => {
-                console.log("Matching ID:", task.id, action.payload.id);
-                return task.id === action.payload.id ? action.payload : task;
-            });
-            console.log('Updated Tasks:', updatedTasks);
-            return {
-                ...state,
-                savedTasks: updatedTasks,
-            };
-            
-        case 'EDIT_TASK_SUCCESS':
-            return state.map(task =>
-                task.id === action.payload.id ? action.payload : task
-            );
-            
-
-        case "GET_SAVED_TASKS_SUCCESS":
-            return {
-                savedTasks: action.payload,
-            };
-            case 'EDIT_TASK_ERROR':
+            case 'EDIT_TASK': {
+                const { taskId, ...updatedData } = action.payload;
                 return {
-                    ...state,
-                    error: action.payload,
+                  ...state,
+                  task: state.task.map(task => 
+                    task.id === taskId ? { ...task, ...updatedData } : task
+                  )
                 };
-                
-        // case "UPDATE_TASK_SUCCESS":
-        //     const updatedTasks = state.task.map((task) =>
-        //         task.id === action.payload.id
-        //             ? {
-        //                 ...task,
-        //                 ...action.payload
-        //             }
-        //             : task
+              }
+             
+        // case "EDIT_TASK":
+        //     const updatedTasks = state.task.map(t => 
+        //         t.id === action.payload.id 
+        //             ? { ...t, ...action.payload }
+        //             : t
         //     );
         //     return {
         //         ...state,
-        //         userTasks: updatedTasks,
+        //         task: updatedTasks
         //     };
 
-        
+        case "GET_SAVED_TASKS_SUCCESS":
+            return {
+                ...state,
+                savedTasks: action.payload,
+            };
+
+        case "UPDATE_TASK_SUCCESS":
+            const updatedTasks = state.task.map((task) =>
+                task.id === action.payload.id
+                    ? {
+                        ...task,
+                        ...action.payload
+                    }
+                    : task
+            );
+            return {
+                ...state,
+                userTasks: updatedTasks,
+            };
+
+        // case "DELETE_TASK":
+        //     return {
+        //         ...state,
+        //         userTasks: state.task.filter(task => task.id !== action.payload.taskID)
+        //     };
 
         case "ADD_TASK_ERROR":
             return {

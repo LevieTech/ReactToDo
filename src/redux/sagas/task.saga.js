@@ -15,6 +15,29 @@ function* addTask(action) {
         yield put({ type: "ADD_TASK_ERROR" });
     }
 }
+function* fetchTask(action) {
+    try {
+        console.log("Attempting to fetch tasks");
+        const response = yield call(axios.get, "/api/tasks", action.payload); // assuming action.payload contains any required parameters
+        console.log("Tasks fetched successfully:", response.data);
+        yield put({ type: "FETCH_TASK_SUCCESS", payload: response.data });  // dispatch success action with fetched tasks
+    } catch (error) {
+        console.log("Error fetching tasks:", error);
+        yield put({ type: "FETCH_TASK_ERROR", error });  // dispatch an error action
+    }
+}
+
+function* updateTaskSuccess(action) {
+    try {
+        console.log("Task updated successfully, refetching all tasks.");
+        const response = yield call(axios.get, "/api/tasks"); // refetch all tasks
+        console.log("Tasks refetched successfully:", response.data);
+        yield put({ type: "FETCH_TASK_SUCCESS", payload: response.data });  // dispatch success action with fetched tasks
+    } catch (error) {
+        console.log("Error refetching tasks after update:", error);
+        yield put({ type: "FETCH_TASK_ERROR", error });  // dispatch an error action
+    }
+}
 
 function* saveTasks(action) {
     try {
@@ -51,34 +74,14 @@ function* deleteTask(action) {
         console.log(`Error in deleteing Task`, error);
     }
 }
+
 function* editTask(action) {
     try {
-        console.log('Saga received action:', action);
-        console.log("Received EDIT_TASK Action in Saga with Payload:", action.payload);
-        console.log("Entire EDIT_TASK Action:", action); 
-        const { id, ...updatedData } = action.payload; 
-        if (!id) {
-            console.log("Task ID is missing in the action payload. Cannot proceed with the edit task.");
-            return;
-        }
-        const response = yield axios.put(`/api/task/${id}`, updatedData);
-        console.log("Axios PUT Request Response:", response); 
-        console.log("Axios PUT Request Response:", response.data); 
-
-        console.log("Server Response After PUT Request:", response); 
-        console.log("Axios PUT Request Response:", response.data); 
-        if (response.status !== 200) {
-            console.log("Failed to update the task on the server. Status Code:", response.status);
-            return;
-        }
-
-        yield put({ type: 'MY_SAVED_TASKS' });
-        console.log('Dispatched MY_SAVED_TASKS After Editing Task');
-        console.log('Server response:', response);
+        console.log("Editing Task");
+        yield axios.put(`/api/task/${action.payload}`);
+        yield put({ type: 'MY_SAVED_TASKS'});
     } catch (error) {
-        console.log("Error Occurred During Editing Task:", error);
-        console.log('Error in saga:', error);
-        yield put({ type: 'EDIT_TASK_ERROR', payload: error.message });
+        console.log(`Error in completing Edit Task! ${error}`);
     }
 }
 
@@ -90,6 +93,10 @@ function* taskSaga() {
     yield takeEvery("FETCH_SAVED_TASKS", getSavedTasks);
     yield takeEvery("ADD_TASK", addTask);
     yield takeEvery('DELETE_TASK', deleteTask);
-    yield takeEvery('EDIT_TASK', editTask);
+    yield takeEvery('EDIT_THIS_TASK', editTask);
+    yield takeEvery('SET_COMP_STATUS', setCompStatus);
+    yield takeEvery('SET_INCOMP_STATUS', setIncompStatus);
+    yield takeEvery("FETCH_TASK", fetchTask);
+    yield takeEvery("UPDATE_TASK_SUCCESS", updateTaskSuccess);
 }
 export default taskSaga;

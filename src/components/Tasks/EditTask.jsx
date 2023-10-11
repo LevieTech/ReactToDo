@@ -1,62 +1,55 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Button, TextField, MenuItem, Grid, Container, Typography } from '@mui/material';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button, TextField, Typography, Container, Grid } from '@mui/material';
+import { MenuItem } from '@mui/material';
 
 function EditTask() {
     const history = useHistory();
-    const id  = useParams();
-    console.log("Received ID:", id);
+    const  id  = useParams();
     const dispatch = useDispatch();
-    const { taskId } = useParams();
 
-    const [ editedTask, setEditedTask ] = useState({
-      id: taskId,  
-      taskname: '',
+    const [editedTask, setEditedTask] = useState({
+        taskname: '',
         dateadded: '',
         duedate: '',
         prioritylevel: '',
+        completionstatus: false,
         notes: '',
-       
-    });    
-   
+        taskId: id,
+    });
+
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        setEditedTask(prevState => {
-            const updatedTasks = name === "completionstatus" ? 
-                                { ...prevState, [name]: value === "true" } : 
-                                { ...prevState, [name]: value };
-            console.log("Updated Task After Input Change:", updatedTasks);
-            return updatedTasks;
-        });
+        if (name === "completionstatus") {
+            setEditedTask(prevState => ({
+                ...prevState,
+                [name]: value === "true" // convert the string to boolean
+            }));
+        } else {
+            setEditedTask(prevState => ({
+                ...prevState,
+                [name]: value
+            }));
+        }
     };
-    
-  const handleSave = (event) => {
-    event.preventDefault();
-    console.log('Attempting to Save Edited Task Payload:', editedTask);
-    if (!editedTask.taskname || !editedTask.dateadded || !editedTask.prioritylevel) {
-        console.log("Missing required fields, not dispatching the edit task action.");
-        return;
-    }
-     console.log('Dispatched EDIT_TASK with Payload:', editedTask);
-    dispatch({ type: 'EDIT_TASK', payload: editedTask });
-   
-    history.push('/my_tasks');
-} 
 
     const goBack = () => {
         history.goBack();
     }
-    // const handleEditSubmit = (event) => {
-    //     event.preventDefault();
-    //     dispatch({
-    //         type: 'EDIT_TASK',
-    //         payload: editedTask,
-            
-    //     });
-    //     history.push('/my_tasks');
-    // };
+
+    const handleEditSubmit = (event) => {
+        event.preventDefault();
+        dispatch({
+            type: 'EDIT_TASK',
+            payload: editedTask,
+            taskId: id
+        });
+        history.push('/my_tasks');
+    };
 
     return (
         <Container maxWidth="md">
@@ -69,8 +62,7 @@ function EditTask() {
   
                 marginBottom: '20px', // Increased margin bottom for spacing
               }}> Edit Task </Typography>
-            {/* <form onSubmit={handleEditSubmit}> */}
-            <form>
+            <form onSubmit={handleEditSubmit}>
                 <Grid container spacing={2}>
 
                     <Grid item xs={12}>
@@ -191,6 +183,37 @@ function EditTask() {
                         </TextField>
                     </Grid>
 
+                    <Grid item xs={6}>
+                        <TextField
+                            label="Completed"
+                            select
+                            name="completionstatus"
+                            value={editedTask.completionstatus.toString()}
+                            onChange={handleInputChange}
+                            required
+                            fullWidth
+                            style={{ fontFamily: "Georgia" }}
+                            InputProps={{
+                                style: {
+                                    color: 'black',
+                                    fontFamily: "Georgia"
+                                },
+                            }}
+                            InputLabelProps={{
+                                style: {
+                                    color: 'black',
+                                    fontFamily: "Georgia",
+                                    fontWeight: 'bolder',
+                                    fontSize: '25px',
+                                    textShadow: '1px 1px 2px rgba(0, 0, 0, 0.8)'
+                                },
+                            }}
+                        >
+                            <MenuItem value="true">True</MenuItem>
+                            <MenuItem value="false">False</MenuItem>
+                        </TextField>
+                    </Grid>
+
                     <Grid item xs={12}>
                         <TextField
                             label="Notes"
@@ -220,8 +243,7 @@ function EditTask() {
 
                     <Grid item xs={12}>
                         <Button
-                            type="button"
-                            onClick={handleSave}
+                            type="submit"
                             variant="contained"
                             style={{
                                 backgroundColor: '#8ac34e',
@@ -259,3 +281,140 @@ function EditTask() {
 
 export default EditTask;
 
+
+
+
+// import React, { useState, useEffect } from 'react';
+// import { useDispatch } from 'react-redux';
+// import { useParams } from 'react-router-dom';
+
+
+// function EditTask() {
+  
+
+//   const { taskId } = useParams();
+//   const [editedTask, setEditedTask] = useState({
+//     taskname: '',
+//     dateadded: '',
+//     duedate: '',
+//     prioritylevel: '',
+//     completionlevel: false,
+//     notes: ''
+   
+//   });
+
+
+//   const dispatch = useDispatch();
+
+//   const handleInputChange = (event) => {
+//     const { name, value } = event.target;
+//     console.log(`Input ${name} changed to ${value}`);
+//     setEditedTask(prevState => ({
+//       ...prevState,
+//       [name]: value
+//     }));
+//   };
+
+//   const handleEditSubmit = (event) => {
+//     console.log("Received event in handleEditTask:", event);
+//     event.preventDefault();
+//     console.log("handleEditSubmit triggered"); // Added log
+//     console.log("Event type:", event.type); // Log the event type
+
+//     if (event && event.preventDefault) {
+//       event.preventDefault();
+//     }else {
+//       console.error("Event object or event.preventDefault missing!"); // Added error log
+//     }
+
+//     console.log('Submitting edited task:', editedTask);
+//     dispatch({
+//       type: 'EDIT_TASK',
+//       payload: editedTask
+//     });
+    
+//   };
+//   //   // Dispatch the edit task action
+//   //   console.log('Submitting edited task:', editedTask);
+//   //   dispatch({
+//   //     type: 'EDIT_TASK',
+//   //     payload: editedTask
+//   //   });
+//   //   // Close the edit form after submitting the edit
+//   //   onClose();
+//   // };
+
+//   return (
+//     <div>
+//       <h3>Edit Task</h3>
+//       <form id="myForm" onSubmit={handleEditSubmit}>
+//         <div>
+//           <label>Task Name:</label>
+//           <input
+//             name="taskname"
+//             value={editedTask.taskname}
+//             onChange={handleInputChange}
+//           />
+//         </div>
+//         <div>
+//           <label>Date Added:</label>
+//           <input
+//             type="date"
+//             name="dateadded"
+//             value={editedTask.dateadded}
+//             onChange={handleInputChange}
+//           />
+//         </div>
+//         <div>
+//           <label>Due Date:</label>
+//           <input
+//             type="date"
+//             name="duedate"
+//             value={editedTask.duedate}
+//             onChange={handleInputChange}
+//           />
+//         </div>
+//         <div>
+//           <label>Priority Level:</label>
+//           <select
+//             name="prioritylevel"
+//             value={editedTask.prioritylevel}
+//             onChange={handleInputChange}
+//           >
+//             <option value="low">Low</option>
+//             <option value="medium">Medium</option>
+//             <option value="high">High</option>
+//           </select>
+//         </div>
+//         <div>
+//           <label>Completion Status:</label>
+//           <select
+//             name="completionlevel"
+//             value={editedTask.completionlevel}
+//             onChange={handleInputChange}
+//           >
+//             <option value="true">True</option>
+//             <option value="false">False</option>
+           
+//           </select>
+//         </div>
+//         <div>
+//           <label>Notes:</label>
+//           <select
+//             name="notes"
+//             value={editedTask.notes}
+//             onChange={handleInputChange}
+//           >
+//             <option value=""></option>
+           
+//           </select>
+//         </div>
+//         {/* <button onClick={(event) => handleEditSubmit(event)}>Edit</button> */}
+
+//         <button type="submit">Submit Edits</button>
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default EditTask;

@@ -73,7 +73,7 @@ router.post('/', async (req, res) => {
       "taskname",
       "dateadded",
       "duedate",
-      "prioritylevel",
+      "prioritylvl",
       "notes") 
   VALUES ($1, $2, $3, $4, $5, $6);`
       
@@ -95,25 +95,27 @@ router.post('/', async (req, res) => {
       res.sendStatus(500);
   }
 });
-router.post('/allSave', (req, res) => {
-    // Access the tasks and user ID from the request body
-    const { tasks, userId } = req.body;
 
-    if (!Array.isArray(tasks)) {
-      return res.status(400).send('Expected an array of tasks');
-  }
+// ? Is this being used for anything right now?
+// router.post('/allSave', (req, res) => {
+//     // Access the tasks and user ID from the request body
+//     const { tasks, userId } = req.body;
 
-  try {
-      for (const task of tasks) {
-          // Logic to save each task in the database
-          // e.g., using pool.query to insert each task
-      }
-      res.sendStatus(200);
-  } catch (error) {
-      console.log('Error saving tasks:', error);
-      res.sendStatus(500);
-  }
-});
+//     if (!Array.isArray(tasks)) {
+//       return res.status(400).send('Expected an array of tasks');
+//   }
+
+//   try {
+//       for (const task of tasks) {
+//           // Logic to save each task in the database
+//           // e.g., using pool.query to insert each task
+//       }
+//       res.sendStatus(200);
+//   } catch (error) {
+//       console.log('Error saving tasks:', error);
+//       res.sendStatus(500);
+//   }
+// });
     
 
 //*PUT /edit: Updates a task in the database. It expects the updated task data in the request body and performs an update query on the "tasklist" table using the provided information.
@@ -133,7 +135,8 @@ router.put('/:id', (req, res) => {
       "dateadded" = $2,
       "duedate" =$3,
       "prioritylevel" = $4,
-      "notes" = $5
+      "completionstatus"= $5,
+      "notes" = $6,
   
    WHERE 
     "id" = $6;`;
@@ -158,6 +161,29 @@ router.put('/:id', (req, res) => {
     });
     console.log('SQL Query:', updateQuery);
 });
+
+// PUT ROUTE to update completion status of specific tasks
+router.put('/complete/:id', (req, res) => {
+  const queryText = `UPDATE tasklist SET completionstatus = TRUE WHERE id= $1;`;
+  pool.query(queryText, [req.params.id]).then((result) => {
+    console.log(`Completion Status updated successfully!`)
+    res.sendStatus(200);
+  }).catch((error) => {
+    console.log(`Error in updating Completion Status! ${error}`)
+    res.sendStatus(500);
+  })
+})
+
+router.put('/incomplete/:id', (req, res) => {
+  const queryText = `UPDATE tasklist SET completionstatus = FALSE WHERE id= $1;`;
+  pool.query(queryText, [req.params.id]).then((result) => {
+    console.log(`Completion Status updated successfully!`)
+    res.sendStatus(200);
+  }).catch((error) => {
+    console.log(`Error in updating Completion Status! ${error}`)
+    res.sendStatus(500);
+  })
+})
 
 // DELETE /:id: Deletes a task from the database based on the trip ID provided in the URL parameter.
   router.delete('/:id', (req, res) => {

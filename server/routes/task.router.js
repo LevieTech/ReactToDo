@@ -119,7 +119,9 @@ router.post('/', async (req, res) => {
     
 
 //*PUT /edit: Updates a task in the database. It expects the updated task data in the request body and performs an update query on the "tasklist" table using the provided information.
-router.put('/edit/:id', (req, res) => {
+router.put('/:id', (req, res) => {
+  console.log('PUT route hit, id:', req.params.id);
+  console.log('Received data:', req.body);
   console.log('In PUT request');
   const updatedTasks = req.body;
   console.log('Updated task:', updatedTasks);
@@ -127,17 +129,17 @@ router.put('/edit/:id', (req, res) => {
   // Query to update Trip
 
   let updateQuery = 
-  `UPDATE "taskList" 
+  `UPDATE taskList 
    SET 
      "taskname" = $1,
       "dateadded" = $2,
       "duedate" =$3,
       "prioritylevel" = $4,
       "completionstatus"= $5,
-      "notes" = $6
+      "notes" = $6,
   
    WHERE 
-    "id" = $7;`;
+    "id" = $6;`;
 
   pool.query(updateQuery,
     [
@@ -145,7 +147,6 @@ router.put('/edit/:id', (req, res) => {
     updatedTasks.dateadded,
     updatedTasks.duedate,
     updatedTasks.prioritylevel,
-    updatedTasks.completionstatus,
     updatedTasks.notes,
     req.params.id
 
@@ -158,6 +159,7 @@ router.put('/edit/:id', (req, res) => {
     console.log('Error in PUT on task.router', error);
     res.sendStatus(500);
     });
+    console.log('SQL Query:', updateQuery);
 });
 
 // PUT ROUTE to update completion status of specific tasks

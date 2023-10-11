@@ -26,6 +26,9 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/priority', priorityRouter);
 app.use('/api/task', taskRouter);
+//! added this put 
+
+
 // Serve static files
 app.use(express.static('build'));
 

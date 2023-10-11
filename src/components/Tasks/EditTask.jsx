@@ -3,6 +3,9 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Button, TextField, MenuItem, Grid, Container, Typography } from '@mui/material';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button, TextField, Typography, Container, Grid } from '@mui/material';
+import { MenuItem } from '@mui/material';
 
 function EditTask() {
     const history = useHistory();
@@ -38,16 +41,12 @@ function EditTask() {
         history.goBack();
     }
 
-
-  const handleEditTask = (id) => {
-    event.preventDefault();
-    dispatch({ type: "EDITED_TASKS", payload: id });
-  };
-
-    const handleEditSubmit = () => {
+    const handleEditSubmit = (event) => {
+        event.preventDefault();
         dispatch({
-            type: 'EDIT_THIS_TASK',
+            type: 'EDIT_TASK',
             payload: editedTask,
+            taskId: id
         });
         history.push('/my_tasks');
     };
@@ -103,12 +102,14 @@ function EditTask() {
                             required
                             fullWidth
                             InputProps={{
+                                shrink: true,
                                 style: {
                                     color: 'black',
                                     fontFamily: "Georgia"
                                 },
                             }}
                             InputLabelProps={{
+                                shrink: true,
                                 style: {
                                     color: 'black',
                                     fontFamily: "Georgia",
@@ -242,7 +243,6 @@ function EditTask() {
 
                     <Grid item xs={12}>
                         <Button
-                        onClick={() => handleEditSubmit()}
                             type="submit"
                             variant="contained"
                             style={{

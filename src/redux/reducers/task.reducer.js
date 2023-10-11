@@ -45,6 +45,7 @@ const taskReducer = (state = initialState, action) => {
 
         case "GET_SAVED_TASKS_SUCCESS":
             return {
+                ...state,
                 savedTasks: action.payload,
             };
 

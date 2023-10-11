@@ -27,10 +27,8 @@ app.use('/api/user', userRouter);
 app.use('/api/pets', petRouter);
 app.use('/api/task', taskRouter);
 //! added this put 
-app.put('/api/task/:id', (req, res) => {
-  const id = req.params.id;
-  // Logic to find and update task with ID
-});
+
+
 // Serve static files
 app.use(express.static('build'));
 

@@ -9,25 +9,29 @@ function EditTask() {
     const id  = useParams();
     console.log("Received ID:", id);
     const dispatch = useDispatch();
+    const { taskId } = useParams();
 
-    const [ editedTask, setEditedTask] = useState({
-      id: id,  
+    const [ editedTask, setEditedTask ] = useState({
+      id: taskId,  
       taskname: '',
         dateadded: '',
         duedate: '',
         prioritylevel: '',
         notes: '',
        
-    });
+    });    
    
     const handleInputChange = (event) => {
-      const { name, value } = event.target;
-      setEditedTask(prevState => {
-          const updatedTask = name === "completionstatus" ? { ...prevState, [name]: value === "true" } : { ...prevState, [name]: value };
-          console.log("Updated Task After Input Change:", updatedTask);
-          return updatedTask;
-      });
-  };
+        const { name, value } = event.target;
+        setEditedTask(prevState => {
+            const updatedTasks = name === "completionstatus" ? 
+                                { ...prevState, [name]: value === "true" } : 
+                                { ...prevState, [name]: value };
+            console.log("Updated Task After Input Change:", updatedTasks);
+            return updatedTasks;
+        });
+    };
+    
   const handleSave = (event) => {
     event.preventDefault();
     console.log('Attempting to Save Edited Task Payload:', editedTask);
@@ -35,26 +39,24 @@ function EditTask() {
         console.log("Missing required fields, not dispatching the edit task action.");
         return;
     }
+     console.log('Dispatched EDIT_TASK with Payload:', editedTask);
     dispatch({ type: 'EDIT_TASK', payload: editedTask });
-    console.log('Dispatched EDIT_TASK with Payload:', editedTask);
-    history.push('/my_tasks');
-}
-
    
-  
+    history.push('/my_tasks');
+} 
 
     const goBack = () => {
         history.goBack();
     }
-    const handleEditSubmit = (event) => {
-        event.preventDefault();
-        dispatch({
-            type: 'EDIT_TASK',
-            payload: editedTask,
+    // const handleEditSubmit = (event) => {
+    //     event.preventDefault();
+    //     dispatch({
+    //         type: 'EDIT_TASK',
+    //         payload: editedTask,
             
-        });
-        history.push('/my_tasks');
-    };
+    //     });
+    //     history.push('/my_tasks');
+    // };
 
     return (
         <Container maxWidth="md">
@@ -67,7 +69,8 @@ function EditTask() {
   
                 marginBottom: '20px', // Increased margin bottom for spacing
               }}> Edit Task </Typography>
-            <form onSubmit={handleEditSubmit}>
+            {/* <form onSubmit={handleEditSubmit}> */}
+            <form>
                 <Grid container spacing={2}>
 
                     <Grid item xs={12}>

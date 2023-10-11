@@ -53,15 +53,20 @@ function* deleteTask(action) {
 }
 function* editTask(action) {
     try {
-        console.log("Entire EDIT_TASK Action:", action); // New log
+        console.log('Saga received action:', action);
+        console.log("Received EDIT_TASK Action in Saga with Payload:", action.payload);
+        console.log("Entire EDIT_TASK Action:", action); 
         const { id, ...updatedData } = action.payload; 
         if (!id) {
             console.log("Task ID is missing in the action payload. Cannot proceed with the edit task.");
             return;
         }
         const response = yield axios.put(`/api/task/${id}`, updatedData);
-        console.log("Axios PUT Request Response:", response); // New log
+        console.log("Axios PUT Request Response:", response); 
+        console.log("Axios PUT Request Response:", response.data); 
 
+        console.log("Server Response After PUT Request:", response); 
+        console.log("Axios PUT Request Response:", response.data); 
         if (response.status !== 200) {
             console.log("Failed to update the task on the server. Status Code:", response.status);
             return;
@@ -69,8 +74,11 @@ function* editTask(action) {
 
         yield put({ type: 'MY_SAVED_TASKS' });
         console.log('Dispatched MY_SAVED_TASKS After Editing Task');
+        console.log('Server response:', response);
     } catch (error) {
         console.log("Error Occurred During Editing Task:", error);
+        console.log('Error in saga:', error);
+        yield put({ type: 'EDIT_TASK_ERROR', payload: error.message });
     }
 }
 

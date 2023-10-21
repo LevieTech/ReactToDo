@@ -23,7 +23,7 @@ router.get("/", (req, res) => {
     .then((result) => {
     
      res.send(result.rows);
-     console.log("Tasks route check for tasks", result.rows)
+    //  console.log("Tasks route check for tasks", result.rows)
     })
     .catch((error) => {
       console.log("Error getting tasks in taskrouter:", error);
@@ -133,8 +133,8 @@ router.put('/:id', (req, res) => {
    SET 
      "taskname" = $1,
       "dateadded" = $2,
-      "duedate" =$3,
-      "prioritylevel" = $4,
+      "duedate" = $3,
+      "prioritylvl" = $4,
       "notes" = $5,
   
    WHERE 

@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 
 function EditTask() {
     const history = useHistory();
-    const  id  = useParams();
+    const  {id}  = useParams();
     const dispatch = useDispatch();
 
     const [editedTask, setEditedTask] = useState({
@@ -50,7 +50,8 @@ function EditTask() {
 
     return (
         <Container maxWidth="md">
-            <Typography variant="h3"
+            <center>
+                <Typography variant="h3"
                style={{
                 fontFamily: "Georgia",
                 fontStyle: "oblique",
@@ -148,7 +149,7 @@ function EditTask() {
                         />
                     </Grid>
 
-                    <Grid item xs={6}>
+                    <Grid item xs={12}>
                         <TextField
                             label="Priority Level"
                             select
@@ -174,9 +175,9 @@ function EditTask() {
                                 },
                             }}
                         >
-                            <MenuItem value="high">High</MenuItem>
-                            <MenuItem value="medium">Medium</MenuItem>
-                            <MenuItem value="low">Low</MenuItem>
+                            <MenuItem value={3}>High</MenuItem>
+                            <MenuItem value={2}>Medium</MenuItem>
+                            <MenuItem value={1}>Low</MenuItem>
                         </TextField>
                     </Grid>
 
@@ -238,9 +239,9 @@ function EditTask() {
                         }}> Back
                         </Button>
                     </Grid>
-
                 </Grid>
             </form>
+            </center>
         </Container>
     );
 }

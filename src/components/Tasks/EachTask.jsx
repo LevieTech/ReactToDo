@@ -25,8 +25,7 @@ function EachTask({ task }) {
   };
 
   const handleEditTask = (id) => {
-    event.preventDefault();
-    dispatch({ type: "EDIT_TASK", payload: id });
+    history.push(`/edit_task/${id}`)
   };
 
   const dateConversion = (oldDate) => {
@@ -118,7 +117,7 @@ function EachTask({ task }) {
           
 
             <Button
-              onClick={(event) => handleEditTask(task.id)}
+              onClick={() => handleEditTask(task.id)}
               style={{
                 fontFamily: "Georgia",
                 color: "black",

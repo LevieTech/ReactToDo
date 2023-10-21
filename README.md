@@ -5,8 +5,12 @@ This version uses React, Redux, Express, Passport, and PostgreSQL (a full list o
 ## Description
 This is a full-stack web application that allows users to keep track of various tasks they need to do. Users are required to input the name of the task, the start and end date, the priority level, and any additional notes. After a task is added, it is stored in a database and displayed on the DOM. Users are able to mark an item as complete and delete or edit it. Both of these actions update the database. 
 
-## Image
-Will add image here after everything is finalized. 
+## Preview
+Task list preview:
+<img src="./public/tasklist-preview.png" alt="Task List Preview"/>
+
+Add new task preview:
+<img src="./public/create-new-task-preview.png" alt="Add New Task Preview"/>
 
 ## Prerequisites
 
@@ -28,7 +32,7 @@ CREATE TABLE "user" (
 );
 ```
 
-If you would like to name your database something else, you will need to change `re` to the name of your new database name in `server/modules/pool.js`
+If you would like to name your database something else, you will need to change `react-to-do` to the name of your new database name in `server/modules/pool.js`
 
 You will need to register a user before you can create the next table. After registering a user, create a `tasklist` table:
 
@@ -75,7 +79,10 @@ Thanks to the team of developers at LevieTech:
 -Leigh Stephenson
 -Julie Gonzalez-Kincaid
 -Sam Gossie
+
+Honorable Mention:
 -Everett Butler
+-Stephen Vertucci
 
 ## Support 
 If you have any suggestions or issues, pleasec contact any of the developers on LinkedIn or email Leigh at leighh.stephenson@gmail.com 

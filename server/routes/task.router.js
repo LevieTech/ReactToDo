@@ -95,29 +95,7 @@ router.post('/', async (req, res) => {
       res.sendStatus(500);
   }
 });
-
-// ? Is this being used for anything right now?
-// router.post('/allSave', (req, res) => {
-//     // Access the tasks and user ID from the request body
-//     const { tasks, userId } = req.body;
-
-//     if (!Array.isArray(tasks)) {
-//       return res.status(400).send('Expected an array of tasks');
-//   }
-
-//   try {
-//       for (const task of tasks) {
-//           // Logic to save each task in the database
-//           // e.g., using pool.query to insert each task
-//       }
-//       res.sendStatus(200);
-//   } catch (error) {
-//       console.log('Error saving tasks:', error);
-//       res.sendStatus(500);
-//   }
-// });
     
-
 //*PUT /edit: Updates a task in the database. It expects the updated task data in the request body and performs an update query on the "tasklist" table using the provided information.
 router.put('/:id', (req, res) => {
   console.log('PUT route hit, id:', req.params.id);

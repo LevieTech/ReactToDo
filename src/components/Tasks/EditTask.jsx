@@ -3,9 +3,6 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Button, TextField, MenuItem, Grid, Container, Typography } from '@mui/material';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { Button, TextField, Typography, Container, Grid } from '@mui/material';
-import { MenuItem } from '@mui/material';
 
 function EditTask() {
     const history = useHistory();

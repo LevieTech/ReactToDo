@@ -102,7 +102,7 @@ function AddTask() {
               fontStyle: "oblique",
               textDecoration: "underline",
               textShadow: '3px 1px 2px rgba(0, 0, 0, 0.3)',
-
+              // textAlign: "center",
               marginBottom: '20px', // Increased margin bottom for spacing
             }}
           >Create A New Task
@@ -276,38 +276,39 @@ function AddTask() {
           <br></br>
           <br></br>
           {notification && <div className="notification">{notification}</div>}
+          {/* <center> */}
+            <div className='bottomButtons'>
+              <Button
+                onClick={handleSave}
+                type="submit"
+                variant="contained"
+                style={{
+                  backgroundColor: '#8ac34e',
+                  fontSize: 20,
+                  color: 'white',
+                  textShadow: '5px 5px 7px rgba(5, 5, 5, 5)',
+                  boxShadow: '5px 5px 10px rgba(3, 3, 3, 1)',
+                  fontFamily: "Georgia"
+                }}>
+                Save
+              </Button>
 
-          <div className='bottomButtons'>
-            <Button
-              onClick={handleSave}
-              type="submit"
-              variant="contained"
-              style={{
-                backgroundColor: '#8ac34e',
-                fontSize: 20,
-                color: 'white',
-                textShadow: '5px 5px 7px rgba(5, 5, 5, 5)',
-                boxShadow: '5px 5px 10px rgba(3, 3, 3, 1)',
-                fontFamily: "Georgia"
-              }}>
-              Save
-            </Button>
-
-            <Button
-              onClick={goBack}
-              variant="contained"
-              style={{
-                backgroundColor: 'red',
-                fontSize: 20,
-                color: 'white',
-                marginLeft: 50,
-                textShadow: '5px 5px 7px rgba(5, 5, 5, 5)',
-                boxShadow: '5px 5px 10px rgba(3, 3, 3, 1)',
-                fontFamily: "Georgia"
-              }}>
-              Back
-            </Button>
-          </div>
+              <Button
+                onClick={goBack}
+                variant="contained"
+                style={{
+                  backgroundColor: 'red',
+                  fontSize: 20,
+                  color: 'white',
+                  marginLeft: 50,
+                  textShadow: '5px 5px 7px rgba(5, 5, 5, 5)',
+                  boxShadow: '5px 5px 10px rgba(3, 3, 3, 1)',
+                  fontFamily: "Georgia"
+                }}>
+                Back
+              </Button>
+            </div>
+          {/* </center> */}
         </form>
       </Container>
       <div>

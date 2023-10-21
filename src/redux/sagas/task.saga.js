@@ -3,11 +3,8 @@ import axios from "axios";
 
 function* addTask(action) {
     try {
-        console.log("Attempting to add task with payload:", action.payload);
         const response = yield call(axios.post, "/api/task", action.payload);
         console.log("Server Response:", response.data); // Log the server response
-        console.log("Task added successfully");
-        console.log("Dispatching action: ADD_TASK_SUCCESS with payload:", response.data);
         yield put({ type: "ADD_TASK_SUCCESS", payload: response.data }); // Dispatch success action
 
     } catch (error) {
@@ -29,7 +26,6 @@ function* fetchTask(action) {
 
 function* updateTaskSuccess(action) {
     try {
-        console.log("Task updated successfully, refetching all tasks.");
         const response = yield call(axios.get, "/api/tasks"); // refetch all tasks
         console.log("Tasks refetched successfully:", response.data);
         yield put({ type: "FETCH_TASK_SUCCESS", payload: response.data });  // dispatch success action with fetched tasks
@@ -94,8 +90,6 @@ function* taskSaga() {
     yield takeEvery("ADD_TASK", addTask);
     yield takeEvery('DELETE_TASK', deleteTask);
     yield takeEvery('EDIT_THIS_TASK', editTask);
-    yield takeEvery('SET_COMP_STATUS', setCompStatus);
-    yield takeEvery('SET_INCOMP_STATUS', setIncompStatus);
     yield takeEvery("FETCH_TASK", fetchTask);
     yield takeEvery("UPDATE_TASK_SUCCESS", updateTaskSuccess);
 }

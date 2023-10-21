@@ -135,8 +135,7 @@ router.put('/:id', (req, res) => {
       "dateadded" = $2,
       "duedate" =$3,
       "prioritylevel" = $4,
-      "completionstatus"= $5,
-      "notes" = $6,
+      "notes" = $5,
   
    WHERE 
     "id" = $6;`;

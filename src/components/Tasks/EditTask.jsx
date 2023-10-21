@@ -3,9 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Button, TextField, MenuItem, Grid, Container, Typography } from '@mui/material';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { Button, TextField, Typography, Container, Grid } from '@mui/material';
-import { MenuItem } from '@mui/material';
+
 
 function EditTask() {
     const history = useHistory();
@@ -17,7 +15,6 @@ function EditTask() {
         dateadded: '',
         duedate: '',
         prioritylevel: '',
-        completionstatus: false,
         notes: '',
         taskId: id,
     });
@@ -180,37 +177,6 @@ function EditTask() {
                             <MenuItem value="high">High</MenuItem>
                             <MenuItem value="medium">Medium</MenuItem>
                             <MenuItem value="low">Low</MenuItem>
-                        </TextField>
-                    </Grid>
-
-                    <Grid item xs={6}>
-                        <TextField
-                            label="Completed"
-                            select
-                            name="completionstatus"
-                            value={editedTask.completionstatus.toString()}
-                            onChange={handleInputChange}
-                            required
-                            fullWidth
-                            style={{ fontFamily: "Georgia" }}
-                            InputProps={{
-                                style: {
-                                    color: 'black',
-                                    fontFamily: "Georgia"
-                                },
-                            }}
-                            InputLabelProps={{
-                                style: {
-                                    color: 'black',
-                                    fontFamily: "Georgia",
-                                    fontWeight: 'bolder',
-                                    fontSize: '25px',
-                                    textShadow: '1px 1px 2px rgba(0, 0, 0, 0.8)'
-                                },
-                            }}
-                        >
-                            <MenuItem value="true">True</MenuItem>
-                            <MenuItem value="false">False</MenuItem>
                         </TextField>
                     </Grid>
 

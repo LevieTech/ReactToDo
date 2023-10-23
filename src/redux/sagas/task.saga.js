@@ -77,13 +77,34 @@ function* deleteTask(action) {
 
 function* editTask(action) {
     try {
-        console.log("Editing Task");
-        yield axios.put(`/api/task/${action.payload}`);
-        yield put({ type: 'MY_SAVED_TASKS'});
+        console.log("Editing Task", action.payload);
+        yield axios.put(`/api/task/`, action.payload);
+        yield put({ type: 'EDITED_TASKS'});
     } catch (error) {
         console.log(`Error in completing Edit Task! ${error}`);
     }
 }
+
+function* setCompStatus(action) {
+    try {
+        console.log(`Updating Completion Status`);
+        yield axios.put((`/api/task/complete/${action.payload}`));
+    } catch (error) {
+        console.log(`Error in setting status to Complete ${error}`)
+        alert('Something went wrong!');
+    }
+}
+
+function* setIncompStatus(action) {
+    try {
+        console.log('Setting Completion Status to Incomplete');
+        yield axios.put((`/api/task/incomplete/${action.payload}`));
+    } catch (error) {
+        console.log(`Error in setting status to Incomplete ${error}`);
+        alert('Something went wrong!')
+    }
+}
+
 
 
 

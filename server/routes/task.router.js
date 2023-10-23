@@ -1,5 +1,6 @@
 const express = require("express");
 const pool = require("../modules/pool");
+const { Update } = require("@mui/icons-material");
 const router = express.Router();
 
 
@@ -120,12 +121,10 @@ router.post('/', async (req, res) => {
 
 //*PUT /edit: Updates a task in the database. It expects the updated task data in the request body and performs an update query on the "tasklist" table using the provided information.
 router.put('/:id', (req, res) => {
-  console.log('PUT route hit, id:', req.params.id);
-  console.log('Received data:', req.body);
   console.log('In PUT request');
-  const updatedTasks = req.body;
-  console.log('Updated task:', updatedTasks);
-  console.log('params', req.params)
+  console.log('PUT route hit, id:', req.params.id);
+  const updatedTasks = [req.body.taskname, req.body.dateadded, req.body.duedate, req.body.prioritylvl, req.body.notes, req.body.taskId];
+  console.log('Checking Updated tasks', updatedTasks);
   // Query to update Trip
 
   let updateQuery =
@@ -139,24 +138,13 @@ router.put('/:id', (req, res) => {
    WHERE 
     "id" = $6;`;
 
-  pool.query(updateQuery,
-    [
-      updatedTasks.taskname,
-      updatedTasks.dateadded,
-      updatedTasks.duedate,
-      updatedTasks.prioritylevel,
-      updatedTasks.notes,
-      req.params.id
-
-    ])
-    .then(() => {
-      console.log("Task updated successfully");
-      res.sendStatus(200);
-    })
-    .catch((error) => {
-      console.log('Error in PUT on task.router', error);
-      res.sendStatus(500);
-    });
+  pool.query(updateQuery, [updatedTasks]).then(() => {
+    console.log("Task updated successfully");
+    res.sendStatus(200);
+  }).catch((error) => {
+    console.log('Error in PUT on task.router', error);
+    res.sendStatus(500);
+  });
   console.log('SQL Query:', updateQuery);
 });
 

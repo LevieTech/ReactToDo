@@ -77,8 +77,8 @@ function* deleteTask(action) {
 
 function* editTask(action) {
     try {
-        console.log("Editing Task");
-        yield axios.put(`/api/task/${action.payload}`);
+        console.log("Editing Task", action.payload);
+        yield axios.put(`/api/task`, action.payload);
         yield put({ type: 'EDITED_TASKS'});
     } catch (error) {
         console.log(`Error in completing Edit Task! ${error}`);
@@ -114,7 +114,7 @@ function* taskSaga() {
     yield takeEvery("FETCH_SAVED_TASKS", getSavedTasks);
     yield takeEvery("ADD_TASK", addTask);
     yield takeEvery('DELETE_TASK', deleteTask);
-    yield takeEvery('EDIT_TASK', editTask);
+    yield takeEvery('EDIT_THIS_TASK', editTask);
     yield takeEvery('SET_COMP_STATUS', setCompStatus);
     yield takeEvery('SET_INCOMP_STATUS', setIncompStatus);
     yield takeEvery("FETCH_TASK", fetchTask);

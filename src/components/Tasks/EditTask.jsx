@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 
 function EditTask() {
     const history = useHistory();
-    const  id  = useParams();
+    const  {id}  = useParams();
     console.log('EditTask component, check ID', id)
     const dispatch = useDispatch();
 
@@ -15,7 +15,7 @@ function EditTask() {
         taskname: '',
         dateadded: '',
         duedate: '',
-        prioritylevel: '',
+        prioritylvl: '',
         notes: '',
         taskId: id,
     });
@@ -42,11 +42,10 @@ function EditTask() {
     const handleEditSubmit = (event) => {
         event.preventDefault();
         dispatch({
-            type: 'EDIT_TASK',
-            payload: editedTask,
-            taskId: id
+            type: 'EDIT_THIS_TASK',
+            payload: editedTask
         });
-        history.push('/my_tasks');
+        // history.push('/my_tasks');
     };
 
     return (
@@ -154,8 +153,8 @@ function EditTask() {
                         <TextField
                             label="Priority Level"
                             select
-                            name="prioritylevel"
-                            value={editedTask.prioritylevel}
+                            name="prioritylvl"
+                            value={editedTask.prioritylvl}
                             onChange={handleInputChange}
                             required
                             fullWidth

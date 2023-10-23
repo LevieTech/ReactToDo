@@ -4,7 +4,7 @@ import errors from './errors.reducer';
 import user from './user.reducer';
 import tasks from './task.reducer';
 import savedTasks from './savedTasks.reducer';
-import editedTasks from './tasks.reducer';
+import editedTasks from './editedTasks.reducer';
 import priorities from './priority.reducer';
 import sortedTasks from './sortedTasks.reducer';
 

@@ -78,7 +78,7 @@ function* deleteTask(action) {
 function* editTask(action) {
     try {
         console.log("Editing Task", action.payload);
-        yield axios.put(`/api/task`, action.payload);
+        yield axios.put(`/api/task/`, action.payload);
         yield put({ type: 'EDITED_TASKS'});
     } catch (error) {
         console.log(`Error in completing Edit Task! ${error}`);

@@ -45,7 +45,7 @@ function EditTask() {
             type: 'EDIT_THIS_TASK',
             payload: editedTask
         });
-        // history.push('/my_tasks');
+        history.push('/my_tasks');
     };
 
     return (

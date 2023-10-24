@@ -148,7 +148,7 @@ function AddTask() {
                 fullWidth
                 margin="normal"
                 InputProps={{
-                  shrink: true,
+                  shrink: "true",
                   style: {
                     color: 'black',
                     fontFamily: "Georgia",
@@ -178,7 +178,7 @@ function AddTask() {
                 fullWidth
                 style={{ fontFamily: "Georgia" }}
                 InputProps={{
-                  shrink: true,
+                  shrink: "true",
                   style: {
                     color: 'black',
                     fontFamily: "Georgia",
@@ -249,7 +249,7 @@ function AddTask() {
                 fullWidth
                 style={{ fontFamily: "Georgia" }}
                 InputProps={{
-                  shrink: true,
+                  shrink: "true",
                   style: {
                     color: 'black',
                     fontFamily: "Georgia",

@@ -101,10 +101,6 @@ function* setIncompStatus(action) {
     }
 }
 
-
-
-
-
 function* taskSaga() {
     yield takeLatest("SAVE_TASKS", saveTasks);
     yield takeEvery("FETCH_SAVED_TASKS", getSavedTasks);
@@ -113,5 +109,7 @@ function* taskSaga() {
     yield takeEvery('EDIT_THIS_TASK', editTask);
     yield takeEvery("FETCH_TASK", fetchTask);
     yield takeEvery("UPDATE_TASK_SUCCESS", updateTaskSuccess);
+    yield takeEvery("SET_COMP_STATUS", setCompStatus);
+    yield takeEvery("SET_INCOMP_STATUS", setIncompStatus);
 }
 export default taskSaga;

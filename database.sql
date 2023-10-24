@@ -5,6 +5,11 @@ CREATE TABLE "users" (
     "access_level" INT DEFAULT 0
 );
 
+CREATE TABLE priority (
+	"id" SERIAL PRIMARY KEY,
+	"level" VARCHAR (2000)
+);
+
 -- (task name, date added, due date, priority level, notes, completion status )
 CREATE TABLE tasklist (
     "id" serial PRIMARY KEY,
@@ -17,10 +22,6 @@ CREATE TABLE tasklist (
     "notes" VARCHAR (2000)
 );
 
-CREATE TABLE priority (
-	"id" SERIAL PRIMARY KEY,
-	"level" VARCHAR (2000)
-);
 
 INSERT INTO priority ("level") VALUES ('Low'), ('Medium'), ('High');
 

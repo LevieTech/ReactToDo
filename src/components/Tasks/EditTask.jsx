@@ -100,14 +100,14 @@ function EditTask() {
                             required
                             fullWidth
                             InputProps={{
-                                shrink: true,
+                                shrink: "true",
                                 style: {
                                     color: 'black',
                                     fontFamily: "Georgia"
                                 },
                             }}
                             InputLabelProps={{
-                                shrink: true,
+                                shrink: "true",
                                 style: {
                                     color: 'black',
                                     fontFamily: "Georgia",
@@ -130,14 +130,14 @@ function EditTask() {
                             fullWidth
                             style={{ fontFamily: "Georgia" }}
                             InputProps={{
-                                shrink: true,
+                                shrink: "true",
                                 style: {
                                     color: 'black',
                                     fontFamily: "Georgia"
                                 },
                             }}
                             InputLabelProps={{
-                                shrink: true,
+                                shrink: "true",
                                 style: {
                                     color: 'black',
                                     fontFamily: "Georgia",

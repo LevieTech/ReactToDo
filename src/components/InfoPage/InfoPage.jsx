@@ -19,16 +19,16 @@ function InfoPage() {
         <Typography sx={{ maxWidth: 750, marginBottom: 6, }}>
           LevieTech is a collaborative organization made up of career changers looking
           to break into the tech industry. We all met in the Tanzanite FSE cohort at Prime Digital Academy.
-          After graduating, we all wanted to continue learning and gaining experience in
+          After graduating, we wanted to continue learning and gaining experience in
           the software development process, so we decided to come together and do just that.
           Our goal is to continue building our portfolios, expanding our knowledge, and creating things worth sharing.
           <br /> <br />
-          For questions or inquiries, send us an email at LevieTech@gmail.com
+          For questions or inquiries, send us an email at LevieTech247@gmail.com
           <br /> <br />
           <button className="btn" > Contact us! </button>
         </Typography>
 
-        <Typography variant="h3" sx={{}}> Meet the team: </Typography>
+        <Typography variant="h3"> Meet the team: </Typography>
 
         <hr style={{
           width: 800,
@@ -36,17 +36,28 @@ function InfoPage() {
           backgroundColor: "#4e3055"
         }} />
 
-        <Card sx={{ minHeight: 150, }}>
+        <Card sx={{ maxWidth: 250, boxShadow: 5 }} >
           <Typography variant="h6"> Leigh Stephenson </Typography>
-          <a href=""> Find me on LinkedIn</a>
-          <br/>
-          <img src="./leighs.png" alt="Leigh Stephenson" />
+          <a href={"https://linkedin.com/in/leigh-stephenson"} target="_blank"> LinkedIn </a>
+          <br />
+          <img className="pic" src="./LS.png" alt="Leigh Stephenson" width="200px" />
         </Card>
+        <br />
 
-        <Typography variant="h6"> Julie Gonzalez-Kincaid </Typography>
+        <Card sx={{ maxWidth: 250, boxShadow: 5 }} >
+          <Typography variant="h6"> Julie  </Typography>
+          <a href={"https://linkedin.com/in/"} target="_blank"> LinkedIn </a>
+          <br />
+          <img className="pic" src="" alt="" width="200px" />
+        </Card>
+        <br />
 
-        <Typography variant="h6"> Sam Gossie </Typography>
-
+        <Card sx={{ maxWidth: 250, boxShadow: 5 }} >
+          <Typography variant="h6"> Sam </Typography>
+          <a href={"https://linkedin.com/in/"} target="_blank"> LinkedIn </a>
+          <br />
+          <img className="pic" src="" alt="" width="200px" />
+        </Card>
 
       </div>
     </center>

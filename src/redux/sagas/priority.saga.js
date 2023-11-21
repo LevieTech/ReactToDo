@@ -5,7 +5,6 @@ function* getPriorities() {
     try {
         const priorities = yield axios.get('/api/priority');
         yield put({ type: 'SET_PRIORITIES', payload: priorities.data });
-        console.log('Checking priorities', priorities.data)
     } catch (error) {
         console.log('Error in fetching priorities', error)
     }

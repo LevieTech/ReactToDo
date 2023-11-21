@@ -14,7 +14,6 @@ function* addTask(action) {
 }
 function* fetchTask(action) {
     try {
-        console.log("Attempting to fetch tasks");
         const response = yield call(axios.get, "/api/tasks", action.payload); // assuming action.payload contains any required parameters
         console.log("Tasks fetched successfully:", response.data);
         yield put({ type: "FETCH_TASK_SUCCESS", payload: response.data });  // dispatch success action with fetched tasks
@@ -27,7 +26,6 @@ function* fetchTask(action) {
 function* updateTaskSuccess(action) {
     try {
         const response = yield call(axios.get, "/api/tasks"); // refetch all tasks
-        console.log("Tasks refetched successfully:", response.data);
         yield put({ type: "FETCH_TASK_SUCCESS", payload: response.data });  // dispatch success action with fetched tasks
     } catch (error) {
         console.log("Error refetching tasks after update:", error);
@@ -41,8 +39,6 @@ function* saveTasks(action) {
       const payload = { ...action.payload, userId };
       console.log("Attempting to save tasks with payload:", payload);
       yield call(axios.post, "/api/task/allSave", payload);
-      console.log("Tasks saved successfully");
-      // yield put({ type: "GET_SAVED_TASKS" }); //
     } catch (error) {
       console.log("Error saving task in saveTasks saga:", error);
       yield put({ type: "SAVE_TASK_ERROR" });
@@ -51,9 +47,7 @@ function* saveTasks(action) {
 
 function* getSavedTasks() {
     try {
-        console.log("Attempting to fetch saved tasks");
         const tasks = yield axios.get("/api/task");
-        console.log("Fetched tasks successfully:", tasks.data);
         yield put({ type: "MY_SAVED_TASKS", payload: tasks.data }); 
     } catch (error) {
         console.log("Error fetching saved tasks:", error);
@@ -63,7 +57,6 @@ function* getSavedTasks() {
 
 function* deleteTask(action) {
     try {
-        console.log("Delete Task");
         yield axios.delete(`/api/task/${action.payload}`);
         yield put({ type: 'MY_SAVED_TASKS' })
     } catch (error) {
@@ -83,7 +76,6 @@ function* editTask(action) {
 
 function* setCompStatus(action) {
     try {
-        console.log(`Updating Completion Status`);
         yield axios.put((`/api/task/complete/${action.payload}`));
     } catch (error) {
         console.log(`Error in setting status to Complete ${error}`)
@@ -93,7 +85,6 @@ function* setCompStatus(action) {
 
 function* setIncompStatus(action) {
     try {
-        console.log('Setting Completion Status to Incomplete');
         yield axios.put((`/api/task/incomplete/${action.payload}`));
     } catch (error) {
         console.log(`Error in setting status to Incomplete ${error}`);

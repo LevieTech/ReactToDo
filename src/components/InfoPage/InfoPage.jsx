@@ -54,9 +54,9 @@ function InfoPage() {
 
         <Card sx={{ maxWidth: 250, boxShadow: 5 }} >
           <Typography variant="h6"> Sam </Typography>
-          <a href={"https://linkedin.com/in/"} target="_blank"> LinkedIn </a>
+          <a href={"https://www.linkedin.com/in/sam-gossie-92a9008b/"} target="_blank"> LinkedIn </a>
           <br />
-          <img className="pic" src="" alt="" width="200px" />
+          <img className="pic" src="./IMG_0297.JPG" alt="Sam Gossie" width="200px" />
         </Card>
 
       </div>

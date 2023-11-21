@@ -8,7 +8,6 @@ import { useHistory } from 'react-router-dom';
 function EditTask() {
     const history = useHistory();
     const  {id}  = useParams();
-    console.log('EditTask component, check ID', id)
     const dispatch = useDispatch();
 
     const [editedTask, setEditedTask] = useState({

@@ -85,6 +85,6 @@ Honorable Mention:
 -Stephen Vertucci
 
 ## Support 
-If you have any suggestions or issues, pleasec contact any of the developers on LinkedIn or email Leigh at leighh.stephenson@gmail.com 
+If you have any suggestions or issues, please contact any of the developers on LinkedIn or email Leigh at leighh.stephenson@gmail.com 
 
 Thanks for viewing!

@@ -17,36 +17,26 @@ function AddTask() {
   const [notes, setNotes] = useState('');
   const priorities = useSelector(store => store.priorities);
 
-  console.log('Check priorities AddTask', priorities)
-
   // stores input values into the held states
   const changeTaskName = (event) => {
-    console.log('changeTaskName called with value:', event.target.value);
     setTaskName(event.target.value);
   };
   const changeDateAdded = (event) => {
-    console.log('changeDateAdded called with value:', event.target.value);
     setDateAdded(event.target.value);
   };
   const changeDueDate = (event) => {
-    console.log('changeDueDate called with value:', event.target.value);
-
     setDueDate(event.target.value);
   };
 
   const changePriorityLevel = (event) => {
-    console.log('changePriorityLevel called with value:', event.target.value);
-
     setPriorityLevel(event.target.value);
   };
 
   const changeNotes = (event) => {
-    console.log('changeNotes called with value:', event.target.value);
     setNotes(event.target.value);
   };
 
   useEffect(() => {
-    console.log('useEffect called');
     dispatch({ type: 'FETCH_PRIORITIES' });
   }, []);
 
@@ -75,7 +65,6 @@ function AddTask() {
       notes,
     };
 
-    console.log('handleSave called with taskData:', taskData);
 
     dispatch({
       type: 'ADD_TASK',

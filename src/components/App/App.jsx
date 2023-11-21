@@ -108,7 +108,7 @@ function App() {
           <Route
             // logged in shows InfoPage else shows LoginPage
             exact
-            path="/task/:taskId/edit_task"
+            path="/edit_task/:id"
           >
             <EditTask />
           </Route>

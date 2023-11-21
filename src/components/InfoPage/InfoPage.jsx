@@ -1,31 +1,65 @@
 import React from 'react';
-import { Typography } from '@mui/material';
-
+import { Typography, Card } from '@mui/material';
 
 function InfoPage() {
   return (
     <center>
-    <div className="container">
-      <Typography variant="h3"
-        sx={{ textAlign: 'center', }}>
-        Information
-      </Typography>
+      <div className="container">
+        <Typography variant="h3"
+          sx={{ textAlign: 'center', }}>
+          Information
+        </Typography>
 
-      <hr style={{
-        width: 800,
-        height: 3,
-        backgroundColor: "#4e3055"
-      }} />
+        <hr style={{
+          width: 800,
+          height: 3,
+          backgroundColor: "#4e3055"
+        }} />
 
-      <Typography sx={{maxWidth: 750}}>
-        Let's use this page to summarize what we are trying to do
-        with LevieTech- continue learning and collaborating together.
-        We can also include introductions/photos for each of us, and
-        QR codes to our linkedIn if we want. Even if this isn't
-        hosted, I think it would still be good to include that
-        stuff. -Leigh
-      </Typography>
-    </div>
+        <Typography sx={{ maxWidth: 750, marginBottom: 6, }}>
+          LevieTech is a collaborative organization made up of career changers looking
+          to break into the tech industry. We all met in the Tanzanite FSE cohort at Prime Digital Academy.
+          After graduating, we wanted to continue learning and gaining experience in
+          the software development process, so we decided to come together and do just that.
+          Our goal is to continue building our portfolios, expanding our knowledge, and creating things worth sharing.
+          <br /> <br />
+          For questions or inquiries, send us an email at LevieTech247@gmail.com
+          <br /> <br />
+          <button className="btn" > Contact us! </button>
+        </Typography>
+
+        <Typography variant="h3"> Meet the team: </Typography>
+
+        <hr style={{
+          width: 800,
+          height: 3,
+          backgroundColor: "#4e3055"
+        }} />
+
+        <Card sx={{ maxWidth: 250, boxShadow: 5 }} >
+          <Typography variant="h6"> Leigh Stephenson </Typography>
+          <a href={"https://linkedin.com/in/leigh-stephenson"} target="_blank"> LinkedIn </a>
+          <br />
+          <img className="pic" src="./LS.png" alt="Leigh Stephenson" width="200px" />
+        </Card>
+        <br />
+
+        <Card sx={{ maxWidth: 250, boxShadow: 5 }} >
+          <Typography variant="h6"> Julie  </Typography>
+          <a href={"https://linkedin.com/in/"} target="_blank"> LinkedIn </a>
+          <br />
+          <img className="pic" src="" alt="" width="200px" />
+        </Card>
+        <br />
+
+        <Card sx={{ maxWidth: 250, boxShadow: 5 }} >
+          <Typography variant="h6"> Sam </Typography>
+          <a href={"https://www.linkedin.com/in/sam-gossie-92a9008b/"} target="_blank"> LinkedIn </a>
+          <br />
+          <img className="pic" src="./IMG_0297.JPG" alt="Sam Gossie" width="200px" />
+        </Card>
+
+      </div>
     </center>
   );
 }

@@ -17,36 +17,26 @@ function AddTask() {
   const [notes, setNotes] = useState('');
   const priorities = useSelector(store => store.priorities);
 
-  console.log('Check priorities AddTask', priorities)
-
   // stores input values into the held states
   const changeTaskName = (event) => {
-    console.log('changeTaskName called with value:', event.target.value);
     setTaskName(event.target.value);
   };
   const changeDateAdded = (event) => {
-    console.log('changeDateAdded called with value:', event.target.value);
     setDateAdded(event.target.value);
   };
   const changeDueDate = (event) => {
-    console.log('changeDueDate called with value:', event.target.value);
-
     setDueDate(event.target.value);
   };
 
   const changePriorityLevel = (event) => {
-    console.log('changePriorityLevel called with value:', event.target.value);
-
     setPriorityLevel(event.target.value);
   };
 
   const changeNotes = (event) => {
-    console.log('changeNotes called with value:', event.target.value);
     setNotes(event.target.value);
   };
 
   useEffect(() => {
-    console.log('useEffect called');
     dispatch({ type: 'FETCH_PRIORITIES' });
   }, []);
 
@@ -75,7 +65,6 @@ function AddTask() {
       notes,
     };
 
-    console.log('handleSave called with taskData:', taskData);
 
     dispatch({
       type: 'ADD_TASK',
@@ -102,7 +91,7 @@ function AddTask() {
               fontStyle: "oblique",
               textDecoration: "underline",
               textShadow: '3px 1px 2px rgba(0, 0, 0, 0.3)',
-
+              // textAlign: "center",
               marginBottom: '20px', // Increased margin bottom for spacing
             }}
           >Create A New Task
@@ -148,7 +137,7 @@ function AddTask() {
                 fullWidth
                 margin="normal"
                 InputProps={{
-                  shrink: true,
+                  shrink: "true",
                   style: {
                     color: 'black',
                     fontFamily: "Georgia",
@@ -178,7 +167,7 @@ function AddTask() {
                 fullWidth
                 style={{ fontFamily: "Georgia" }}
                 InputProps={{
-                  shrink: true,
+                  shrink: "true",
                   style: {
                     color: 'black',
                     fontFamily: "Georgia",
@@ -249,7 +238,7 @@ function AddTask() {
                 fullWidth
                 style={{ fontFamily: "Georgia" }}
                 InputProps={{
-                  shrink: true,
+                  shrink: "true",
                   style: {
                     color: 'black',
                     fontFamily: "Georgia",
@@ -276,38 +265,39 @@ function AddTask() {
           <br></br>
           <br></br>
           {notification && <div className="notification">{notification}</div>}
+          {/* <center> */}
+            <div className='bottomButtons'>
+              <Button
+                onClick={handleSave}
+                type="submit"
+                variant="contained"
+                style={{
+                  backgroundColor: '#8ac34e',
+                  fontSize: 20,
+                  color: 'white',
+                  textShadow: '5px 5px 7px rgba(5, 5, 5, 5)',
+                  boxShadow: '5px 5px 10px rgba(3, 3, 3, 1)',
+                  fontFamily: "Georgia"
+                }}>
+                Save
+              </Button>
 
-          <div className='bottomButtons'>
-            <Button
-              onClick={handleSave}
-              type="submit"
-              variant="contained"
-              style={{
-                backgroundColor: '#8ac34e',
-                fontSize: 20,
-                color: 'white',
-                textShadow: '5px 5px 7px rgba(5, 5, 5, 5)',
-                boxShadow: '5px 5px 10px rgba(3, 3, 3, 1)',
-                fontFamily: "Georgia"
-              }}>
-              Save
-            </Button>
-
-            <Button
-              onClick={goBack}
-              variant="contained"
-              style={{
-                backgroundColor: 'red',
-                fontSize: 20,
-                color: 'white',
-                marginLeft: 50,
-                textShadow: '5px 5px 7px rgba(5, 5, 5, 5)',
-                boxShadow: '5px 5px 10px rgba(3, 3, 3, 1)',
-                fontFamily: "Georgia"
-              }}>
-              Back
-            </Button>
-          </div>
+              <Button
+                onClick={goBack}
+                variant="contained"
+                style={{
+                  backgroundColor: 'red',
+                  fontSize: 20,
+                  color: 'white',
+                  marginLeft: 50,
+                  textShadow: '5px 5px 7px rgba(5, 5, 5, 5)',
+                  boxShadow: '5px 5px 10px rgba(3, 3, 3, 1)',
+                  fontFamily: "Georgia"
+                }}>
+                Back
+              </Button>
+            </div>
+          {/* </center> */}
         </form>
       </Container>
       <div>

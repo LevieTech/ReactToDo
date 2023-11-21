@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from '@mui/icons-material/Check';
 import { Button, Card } from "@mui/material";
-import { Link } from "react-router-dom";
 
 
 function EachTask({ task }) {
@@ -25,8 +24,7 @@ function EachTask({ task }) {
   };
 
   const handleEditTask = (id) => {
-    event.preventDefault();
-    dispatch({ type: "EDIT_TASK", payload: id });
+    history.push(`/edit_task/${id}`)
   };
 
   const dateConversion = (oldDate) => {
@@ -67,17 +65,17 @@ function EachTask({ task }) {
     } else {
       return 'white'
     }
-  } 
+  }
 
   const colorizePriority = () => {
     if (task.prioritylvl === 3) {
       return '#c71212'
     } else if (task.prioritylvl === 2) {
       return '#eb7c1c'
-    } else if (task.prioritylvl === 1){
+    } else if (task.prioritylvl === 1) {
       return '#72ab16'
     }
-  } 
+  }
 
   return (
     <div style={{ width: '100%', }}>
@@ -114,22 +112,18 @@ function EachTask({ task }) {
           >
             <DeleteIcon style={{ color: "#4e3055" }} />
           </Button>
-          <Link to={`/task/${task.id}/edit_task`}>
-          
-
-            <Button
-              onClick={(event) => handleEditTask(task.id)}
-              style={{
-                fontFamily: "Georgia",
-                color: "black",
-                fontWeight: "bolder",
-                fontSize: "20px",
-                textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)",
-              }}
-            >
-              <EditIcon sx={{ color: "#4e3055" }} />
-            </Button>
-          </Link>
+          <Button
+            onClick={() => handleEditTask(task.id)}
+            style={{
+              fontFamily: "Georgia",
+              color: "black",
+              fontWeight: "bolder",
+              fontSize: "20px",
+              textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)",
+            }}
+          >
+            <EditIcon sx={{ color: "#4e3055" }} />
+          </Button>
           <Button onClick={() => updateCompletion(task.id)} style={{ color: 'black' }}><CheckIcon /></Button>
         </div>
       </Card>

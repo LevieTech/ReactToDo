@@ -12,7 +12,6 @@ function MyTasks() {
     const dispatch = useDispatch();
     const myTasks = useSelector(store => store.savedTasks);
     const user = useSelector(store => store.user);
-    const [search, setSearch] = useState('');
 
     useEffect(() => {
         dispatch({ type: "FETCH_SAVED_TASKS" });

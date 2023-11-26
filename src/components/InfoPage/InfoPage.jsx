@@ -45,7 +45,7 @@ function InfoPage() {
         <br />
 
         <Card sx={{ maxWidth: 250, boxShadow: 5 }} >
-          <Typography variant="h6"> Julie git Gonzalez-Kincaid </Typography>
+          <Typography variant="h6"> Julie Gonzalez-Kincaid </Typography>
           <a href={"https://linkedin.com/in/"} target="_blank"> LinkedIn </a>
           <br />
           <img className="pic" src="./Julie.jpeg" alt="Julie" width="200px" />

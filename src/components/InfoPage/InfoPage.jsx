@@ -36,7 +36,7 @@ function InfoPage() {
           backgroundColor: "#4e3055"
         }} />
 
-        <Card sx={{ maxWidth: 250, boxShadow: 5 }} >
+        <Card sx={{ maxWidth: 250, boxShadow: 5, margin: 2, padding: 2,}} >
           <Typography variant="h6"> Leigh Stephenson </Typography>
           <a href={"https://linkedin.com/in/leigh-stephenson"} target="_blank"> LinkedIn </a>
           <br />
@@ -44,7 +44,7 @@ function InfoPage() {
         </Card>
         <br />
 
-        <Card sx={{ maxWidth: 250, boxShadow: 5 }} >
+        <Card sx={{ maxWidth: 250, boxShadow: 5, margin: 2, padding: 2,}} >
           <Typography variant="h6"> Julie Gonzalez-Kincaid </Typography>
           <a href={"https://www.linkedin.com/in/julie-g-01b425268/"} target="_blank"> LinkedIn </a>
           <br />
@@ -52,7 +52,7 @@ function InfoPage() {
         </Card>
         <br />
 
-        <Card sx={{ maxWidth: 250, boxShadow: 5 }} >
+        <Card sx={{ maxWidth: 250, boxShadow: 5, margin: 2, padding: 2,}} >
           <Typography variant="h6"> Sam Gossie</Typography>
           <a href={"https://www.linkedin.com/in/sam-gossie-92a9008b/"} target="_blank"> LinkedIn </a>
           <br />

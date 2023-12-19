@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './LandingPage.css';
-import { Card } from '@mui/material';
-
 
 // CUSTOM COMPONENTS
-import RegisterForm from '../RegisterForm/RegisterForm';
 import LoginForm from '../LoginForm/LoginForm';
 
 function LandingPage() {
   const [heading, setHeading] = useState('Welcome');
   const history = useHistory();
 
-  const onLogin = (event) => {
-    history.push('/login');
+  const onRegister = (event) => {
+    history.push('/registration');
   };
 
   return (
@@ -41,7 +38,7 @@ function LandingPage() {
               your responsibilities will be clearly displayed on
               your phone and at your fingertips. Users can set a start 
               and end date, edit the task in case deadlines change, mark as
-              complete when you're finished, or just delete.
+              complete when you're finished it, or just delete.
               It's all up to you, the world is in your hands.
             </p>
 
@@ -59,7 +56,7 @@ function LandingPage() {
 
           <center>
             <h4>New around here?</h4>
-            <button className="btn btn_sizeSm" onClick={onLogin}>
+            <button className="btn btn_sizeSm" onClick={onRegister}>
               Register
             </button>
           </center>

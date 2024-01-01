@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { Button, TextField, MenuItem, Grid, Container, Typography } from '@mui/material';
-import { useHistory } from 'react-router-dom';
 
+//TODO This edit should show the existing task info. Currently is blank
+//! Create selectedTask in saga and another GET in the taskRouter?
+//! We are already storing and getting all tasks in a "savedTasks" array
+//! Can we make it work just using that instead of writing more code?
 
 function EditTask() {
     const history = useHistory();

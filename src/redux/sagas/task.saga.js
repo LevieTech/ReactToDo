@@ -27,7 +27,8 @@ function* fetchTask(action) {
 }
 
 //! Fetch selected task for editing
-//TODO discuss this stuff with Sam and Jules
+//TODO don't forget to make sure the route on line 33 is correct
+//TODO when we hook up the server side
 function* fetchSelectedTask(action) {
     try {
         const selectedTask = yield axios.get(`/api/tasks/selected${action.payload}`);

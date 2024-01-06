@@ -58,10 +58,22 @@ router.get("/task/:id", (req, res) => {
       res.sendStatus(500);
     });
 });
+//TODO IM not sure if I can just use this other function ^^
+//Started changing stuff with this..
+//! * GET /selected/:id
+router.get('/selected/:id', (req, res) => {
+  const taskId = req.params.id
+  const queryText= `SELECT t.* FROM "tasklist" t WHERE t."id" = $1;`;
+  pool.query(queryText, [taskId]).then((result) => {
+    console.log(result.rows)
+    const task = result.rows;
+    res.send(task);
 
-
-
-
+  }).catch((error) => {
+    console.log('ERROR in getting selected task on router', error)
+    res.sendStatus(500)
+  })
+})
 
 //* POST /: Creates a new task in the database.
 router.post('/', async (req, res) => {

@@ -35,33 +35,35 @@ router.get("/", (req, res) => {
 
 
 //* GET /task/:id: Retrieves a specific task along with its associated save ID. It performs a join operation between the "tasklist" and "save" tables to get the task information. The save ID is returned as "saved" in the response.
-router.get("/task/:id", (req, res) => {
-  const taskID = req.params.id; // Retrieve the user ID from the request parameter
-  const queryText = `
-      SELECT 
-        t.*
-      FROM 
-        "tasklist" t
-   WHERE 
-        t."id" = $1;
-    `;
+// router.get("/task/:id", (req, res) => {
+//   const taskID = req.params.id; // Retrieve the user ID from the request parameter
+//   const queryText = `
+//       SELECT 
+//         t.*
+//       FROM 
+//         "tasklist" t
+//    WHERE 
+//         t."id" = $1;
+//     `;
 
-  pool
-    .query(queryText, [taskID])
-    .then((result) => {
-      console.log('Fetched tasklist:', result.rows);
-      const task = result.rows;
-      res.send(task);
-    })
-    .catch((error) => {
-      console.log("Error getting saved tasks:", error);
-      res.sendStatus(500);
-    });
-});
+//   pool
+//     .query(queryText, [taskID])
+//     .then((result) => {
+//       console.log('Fetched tasklist:', result.rows);
+//       const task = result.rows;
+//       res.send(task);
+//     })
+//     .catch((error) => {
+//       console.log("Error getting saved tasks:", error);
+//       res.sendStatus(500);
+//     });
+// });
+
 //TODO IM not sure if I can just use this other function ^^
 //Started changing stuff with this..
 //! * GET /selected/:id
-router.get('/selected/:id', (req, res) => {
+
+router.get('/:id', (req, res) => {
   const taskId = req.params.id
   const queryText= `SELECT t.* FROM "tasklist" t WHERE t."id" = $1;`;
   pool.query(queryText, [taskId]).then((result) => {

@@ -16,13 +16,15 @@ function EditTask() {
     //! Fetch selected task
     useEffect(() => {
         dispatch({ type: 'FETCH_SELECTED_TASK', payload: id });
-        if (Object.keys(selectedTask).length === 0) {
-            setSelectedTaskHook(selectedTask)
-        }
-    }, []);
+        // if (selectedTask.length === 0) {
+        //     setSelectedTaskHook(selectedTask)
+        // }
+    }, [id]);
 
     //! Store selected task
     const selectedTask = useSelector((store) => store.selectedTask);
+
+    console.log('Checking selectedTask in component', selectedTask);
 
     //! States
     const [taskname, setTaskName] = useState(selectedTask.taskname);
@@ -118,12 +120,14 @@ function EditTask() {
                 <form onSubmit={handleEditSubmit}>
                     <Grid container spacing={2}>
 
+{/* Use this one as reference will need to adjust the other inputs with default, val, and onchange function*/}
                         <Grid item xs={12}>
                             <TextField
                                 label="Task Name"
                                 name="taskname"
-                                value={selectedTask.taskname}
-                                onChange={handleTaskNameChange}
+                                defaultValue={selectedTask.taskname}
+                                value={taskname}
+                                onChange={(event) => setTaskName(event.target.value)}
                                 fullWidth
                                 required
                                 style={{ fontFamily: "Georgia" }}
@@ -150,8 +154,9 @@ function EditTask() {
                                 label="Start Date"
                                 type="date"
                                 name="dateadded"
-                                value={selectedTask.dateadded}
-                                onChange={handleDateAddedChange}
+                                defaultValue={selectedTask.dateadded}
+                                value={dateadded}
+                                onChange={(event) => setDateAdded(event.target.value)}
                                 required
                                 fullWidth
                                 InputProps={{
@@ -180,7 +185,7 @@ function EditTask() {
                                 type="date"
                                 name="duedate"
                                 value={selectedTask.duedate}
-                                onChange={handleDueDateChange}
+                                onChange={() => handleDueDateChange}
                                 required
                                 fullWidth
                                 style={{ fontFamily: "Georgia" }}

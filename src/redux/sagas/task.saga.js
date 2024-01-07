@@ -31,10 +31,11 @@ function* fetchTask(action) {
 //TODO when we hook up the server side
 function* fetchSelectedTask(action) {
     try {
-        const selectedTask = yield axios.get(`/api/tasks/selected/${action.payload}`);
+        const selectedTask = yield axios.get(`/api/task/${action.payload}`);
+        console.log(`Checking selectedTask in saga`, selectedTask.data);
         yield put ({ type: 'SET_SELECTED_TASK', payload: selectedTask.data[0] })
     } catch (error) {
-        console.log(`Error in fetchSelectedTask in saga. ${error}`)
+        console.log(`Error in fetchSelectedTask in saga. ${error}`);
     }
 }
 

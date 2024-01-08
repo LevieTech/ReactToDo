@@ -48,25 +48,25 @@ function EditTask() {
     //! Handle changes- one for each value that can change
     // taskname, dateadded, duedate, prioritylvl, notes
 
-    const handleTaskNameChange = (event) => {
-        setTaskName(event.target.value)
-    };
+    // const handleTaskNameChange = (event) => {
+    //     setTaskName(event.target.value)
+    // };
 
-    const handleDateAddedChange = (event) => {
-        setDateAdded(event.target.value)
-    };
+    // const handleDateAddedChange = (event) => {
+    //     setDateAdded(event.target.value)
+    // };
 
-    const handleDueDateChange = (event) => {
-        setDueDate(event.target.value)
-    };
+    // const handleDueDateChange = (event) => {
+    //     setDueDate(event.target.value)
+    // };
 
-    const handlePriorityLvlChange = (event) => {
-        setPriorityLvl(event.target.value)
-    };
+    // const handlePriorityLvlChange = (event) => {
+    //     setPriorityLvl(event.target.value)
+    // };
 
-    const handleNotesChange = (event) => {
-        setNotes(event.target.value)
-    };
+    // const handleNotesChange = (event) => {
+    //     setNotes(event.target.value)
+    // };
 
 
     //? Unsure if we will even keep this but, I changed this to selectedTask- formerly setEditedTask
@@ -120,7 +120,6 @@ function EditTask() {
                 <form onSubmit={handleEditSubmit}>
                     <Grid container spacing={2}>
 
-{/* Use this one as reference will need to adjust the other inputs with default, val, and onchange function*/}
                         <Grid item xs={12}>
                             <TextField
                                 label="Task Name"
@@ -184,8 +183,9 @@ function EditTask() {
                                 label="Due Date"
                                 type="date"
                                 name="duedate"
-                                value={selectedTask.duedate}
-                                onChange={() => handleDueDateChange}
+                                defaultValue={selectedTask.duedate}
+                                value={duedate}
+                                onChange={(event) => setDueDate(event.target.value)}
                                 required
                                 fullWidth
                                 style={{ fontFamily: "Georgia" }}
@@ -214,8 +214,9 @@ function EditTask() {
                                 label="Priority Level"
                                 select
                                 name="prioritylvl"
-                                value={selectedTask.prioritylvl}
-                                onChange={handlePriorityLvlChange}
+                                defaultValue={selectedTask.prioritylvl}
+                                value={prioritylvl}
+                                onChange={(event) => setPriorityLvl(event.target.value)}
                                 required
                                 fullWidth
                                 style={{ fontFamily: "Georgia" }}
@@ -246,8 +247,9 @@ function EditTask() {
                                 label="Notes"
                                 multiline
                                 name="notes"
-                                value={selectedTask.notes}
-                                onChange={handleNotesChange}
+                                defaultValue={selectedTask.notes}
+                                value={notes}
+                                onChange={(event) => setNotes(event.target.value)}
                                 fullWidth
                                 style={{ fontFamily: "Georgia" }}
                                 InputProps={{

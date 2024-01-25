@@ -10,6 +10,8 @@ function EditTask() {
     const  {id}  = useParams();
     const dispatch = useDispatch();
 
+    
+
     const [editedTask, setEditedTask] = useState({
         taskname: '',
         dateadded: '',
@@ -49,6 +51,7 @@ function EditTask() {
 
     return (
         <Container maxWidth="md">
+            <br />
             <center>
                 <Typography variant="h3"
                style={{
@@ -66,6 +69,7 @@ function EditTask() {
                         <TextField
                             label="Task Name"
                             name="taskname"
+                            defaultValue={editedTask.taskname}
                             value={editedTask.taskname}
                             onChange={handleInputChange}
                             fullWidth

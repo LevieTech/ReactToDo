@@ -12,9 +12,10 @@ function* addTask(action) {
         yield put({ type: "ADD_TASK_ERROR" });
     }
 }
+
 function* fetchTask(action) {
     try {
-        const response = yield call(axios.get, "/api/tasks", action.payload); // assuming action.payload contains any required parameters
+        const response = yield call(axios.get, "/api/tasks/", action.payload); // assuming action.payload contains any required parameters
         console.log("Tasks fetched successfully:", response.data);
         yield put({ type: "FETCH_TASK_SUCCESS", payload: response.data });  // dispatch success action with fetched tasks
     } catch (error) {

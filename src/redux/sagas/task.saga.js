@@ -27,8 +27,6 @@ function* fetchTask(action) {
 }
 
 //! Fetch selected task for editing
-//TODO don't forget to make sure the route on line 33 is correct
-//TODO when we hook up the server side
 function* fetchSelectedTask(action) {
     try {
         const selectedTask = yield axios.get(`/api/task/${action.payload}`);
@@ -40,9 +38,10 @@ function* fetchSelectedTask(action) {
 }
 
 //! Update Task Success
+// was using /api/tasks previously?
 function* updateTaskSuccess(action) {
     try {
-        const response = yield call(axios.get, "/api/tasks"); // refetch all tasks
+        const response = yield call(axios.get, "/api/task"); // refetch all tasks
         yield put({ type: "FETCH_TASK_SUCCESS", payload: response.data });  // dispatch success action with fetched tasks
     } catch (error) {
         console.log("Error refetching tasks after update:", error);

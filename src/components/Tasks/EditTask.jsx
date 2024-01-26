@@ -4,8 +4,11 @@ import { useParams, useHistory } from 'react-router-dom';
 import { Button, TextField, MenuItem, Grid, Container, Typography } from '@mui/material';
 import selectedTask from '../../redux/reducers/selectedTask.reducer';
 
-//TODO This edit should show the existing task info. Currently is blank
-// running into a lot of issues now!!!
+//TODO Running into issues~~~
+// The existing info only shows on the 2nd click
+// The correct info + ID is getting stored as selectedTask
+// The update is broken- the changes are getting stored and dispatched
+// But the edits are not saving
 
 function EditTask() {
     const history = useHistory();
@@ -95,6 +98,7 @@ function EditTask() {
     }
 
     //! Submit 
+    //TODO Not working
     const handleEditSubmit = (event) => {
         event.preventDefault();
         dispatch({

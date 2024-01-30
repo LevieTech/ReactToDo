@@ -113,7 +113,7 @@ router.post('/', async (req, res) => {
 //*PUT /edit: Updates a task in the database. It expects the updated task data in the request body and performs an update query on the "tasklist" table using the provided information.
 router.put('/', (req, res) => {
   // const updatedTasks = req.body
-  const updatedTasks = [req.body.taskname, req.body.dateadded, req.body.duedate, req.body.prioritylvl, req.body.notes, req.body.taskId];
+  const updatedTasks = [req.body.taskname, req.body.dateadded, req.body.duedate, req.body.prioritylvl, req.body.notes, req.body.id];
   console.log('Checking Updated tasks', updatedTasks);
   // Query to update Trip
 

@@ -35,7 +35,10 @@ function EditTask() {
     const [duedate, setDueDate] = useState(selectedTask.duedate);
     const [prioritylvl, setPriorityLvl] = useState(selectedTask.prioritylvl);
     const [notes, setNotes] = useState(selectedTask.notes);
-    const [taskId, setTaskId] = useState(selectedTask.taskId)
+    // ! Don't think this one is necessary. the useParams is already pulling the ID
+    // const [taskId, setTaskId] = useState(selectedTask.taskId)
+
+    console.log('Check ID', id);
 
     //! original editedTask code 
     // const [editedTask, setEditedTask] = useState({
@@ -102,10 +105,17 @@ function EditTask() {
     const handleEditSubmit = (event) => {
         event.preventDefault();
         dispatch({
-            type: 'EDIT_TASK',
-            payload: { taskname, dateadded, duedate, prioritylvl, notes, taskId }
+            type: 'EDIT_THIS_TASK',
+            payload: {
+                taskname: taskname,
+                dateadded: dateadded,
+                duedate: duedate,
+                prioritylvl: prioritylvl,
+                notes: notes,
+                id: id
+            }
         });
-        history.push('/my_tasks');
+        // history.push('/my_tasks');
     };
 
     //! What displays

@@ -7,7 +7,7 @@ import savedTasks from './savedTasks.reducer';
 import editedTasks from './editedTasks.reducer';
 import priorities from './priority.reducer';
 import sortedTasks from './sortedTasks.reducer';
-
+import selectedTask from './selectedTask.reducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -22,6 +22,7 @@ const rootReducer = combineReducers({
   editedTasks,
   priorities,
   sortedTasks,
+  selectedTask,
 });
 
 export default rootReducer;

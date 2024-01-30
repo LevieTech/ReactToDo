@@ -3,68 +3,65 @@ import { useHistory } from 'react-router-dom';
 import './LandingPage.css';
 
 // CUSTOM COMPONENTS
-import RegisterForm from '../RegisterForm/RegisterForm';
+import LoginForm from '../LoginForm/LoginForm';
 
 function LandingPage() {
   const [heading, setHeading] = useState('Welcome');
   const history = useHistory();
 
-  const onLogin = (event) => {
-    history.push('/login');
+  const onRegister = (event) => {
+    history.push('/registration');
   };
 
   return (
-    <div className="container">
-      <h2>{heading}</h2>
 
-      <div className="grid">
-        <div className="grid-col grid-col_8">
-          <p>
-            This is the landing page 
-            
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-            id felis metus. Vestibulum et pulvinar tortor. Morbi pharetra lacus
-            ut ex molestie blandit. Etiam et turpis sit amet risus mollis
-            interdum. Suspendisse et justo vitae metus bibendum fringilla sed
-            sed justo. Aliquam sollicitudin dapibus lectus, vitae consequat odio
-            elementum eget. Praesent efficitur eros vitae nunc interdum, eu
-            interdum justo facilisis. Sed pulvinar nulla ac dignissim efficitur.
-            Quisque eget eros metus. Vestibulum bibendum fringilla nibh a
-            luctus. Duis a sapien metus.
-          </p>
+      <div >
+        <center>
+          <h1>{heading}</h1>
+          <div className="textContent">
+            <p>
+              We know you're busy. We know you have a
+              million tasks competing for your attention
+              at any given moment. Wouldn't it be nice
+              if you had an app to keep track of all those
+              things on your to-do list? Forget the
+              masses of sticky notes and memo pad
+              lists, LevieTech has built just the app
+              for you.
+            </p>
 
-          <p>
-            Praesent consectetur orci dui, id elementum eros facilisis id. Sed
-            id dolor in augue porttitor faucibus eget sit amet ante. Nunc
-            consectetur placerat pharetra. Aenean gravida ex ut erat commodo, ut
-            finibus metus facilisis. Nullam eget lectus non urna rhoncus
-            accumsan quis id massa. Curabitur sit amet dolor nisl. Proin
-            euismod, augue at condimentum rhoncus, massa lorem semper lacus, sed
-            lobortis augue mi vel felis. Duis ultrices sapien at est convallis
-            congue.
-          </p>
+            <p>
+              So go ahead, create a new account or log in
+              if you're a returning user. Jot down those
+              pesky tasks, errands you've been avoiding, and
+              other mundane chores. With this app, all of
+              your responsibilities will be clearly displayed on
+              your phone and at your fingertips. Users can set a start 
+              and end date, edit the task in case deadlines change, mark as
+              complete when you're finished it, or just delete.
+              It's all up to you, the world is in your hands.
+            </p>
 
-          <p>
-            Fusce porta diam ac tortor elementum, ut imperdiet metus volutpat.
-            Suspendisse posuere dapibus maximus. Aliquam vitae felis libero. In
-            vehicula sapien at semper ultrices. Vivamus sed feugiat libero. Sed
-            sagittis neque id diam euismod, ut egestas felis ultricies. Nullam
-            non fermentum mauris. Sed in enim ac turpis faucibus pretium in sit
-            amet nisi.
-          </p>
-        </div>
-        <div className="grid-col grid-col_4">
-          <RegisterForm />
+            <p>
+              Login or register below.
+            </p>
+
+          </div>
+        </center>
+
+        <hr />
+
+        <div>
+          <LoginForm />
 
           <center>
-            <h4>Already a Member?</h4>
-            <button className="btn btn_sizeSm" onClick={onLogin}>
-              Login
+            <h4>New around here?</h4>
+            <button className="btn btn_sizeSm" onClick={onRegister}>
+              Register
             </button>
           </center>
         </div>
       </div>
-    </div>
   );
 }
 

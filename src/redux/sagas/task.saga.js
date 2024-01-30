@@ -1,6 +1,7 @@
 import {all, call, put, takeLatest, takeEvery, select } from "redux-saga/effects";
 import axios from "axios";
 
+//! Add Task
 function* addTask(action) {
     try {
         const response = yield call(axios.post, "/api/task", action.payload);
@@ -13,6 +14,7 @@ function* addTask(action) {
     }
 }
 
+//! Fetch Tasks
 function* fetchTask(action) {
     try {
         const response = yield call(axios.get, "/api/tasks/", action.payload); // assuming action.payload contains any required parameters
@@ -24,9 +26,22 @@ function* fetchTask(action) {
     }
 }
 
+//! Fetch selected task for editing
+function* fetchSelectedTask(action) {
+    try {
+        const selectedTask = yield axios.get(`/api/task/${action.payload}`);
+        console.log(`Checking selectedTask in saga`, selectedTask.data);
+        yield put ({ type: 'SET_SELECTED_TASK', payload: selectedTask.data[0] })
+    } catch (error) {
+        console.log(`Error in fetchSelectedTask in saga. ${error}`);
+    }
+}
+
+//! Update Task Success
+// was using /api/tasks previously?
 function* updateTaskSuccess(action) {
     try {
-        const response = yield call(axios.get, "/api/tasks"); // refetch all tasks
+        const response = yield call(axios.get, "/api/task"); // refetch all tasks
         yield put({ type: "FETCH_TASK_SUCCESS", payload: response.data });  // dispatch success action with fetched tasks
     } catch (error) {
         console.log("Error refetching tasks after update:", error);
@@ -34,6 +49,7 @@ function* updateTaskSuccess(action) {
     }
 }
 
+//! Save Tasks
 function* saveTasks(action) {
     try {
       const userId = yield select((state) => state.user.id);
@@ -46,6 +62,7 @@ function* saveTasks(action) {
     }
 }
 
+//! Get saved tasks
 function* getSavedTasks() {
     try {
         const tasks = yield axios.get("/api/task");
@@ -56,6 +73,7 @@ function* getSavedTasks() {
     }
 }
 
+//! Delete task
 function* deleteTask(action) {
     try {
         yield axios.delete(`/api/task/${action.payload}`);
@@ -65,6 +83,7 @@ function* deleteTask(action) {
     }
 }
 
+//! Edit task
 function* editTask(action) {
     try {
         console.log("Editing Task", action.payload);
@@ -75,6 +94,7 @@ function* editTask(action) {
     }
 }
 
+//! Set completion status
 function* setCompStatus(action) {
     try {
         yield axios.put((`/api/task/complete/${action.payload}`));
@@ -84,6 +104,7 @@ function* setCompStatus(action) {
     }
 }
 
+//! Set incomplete status
 function* setIncompStatus(action) {
     try {
         yield axios.put((`/api/task/incomplete/${action.payload}`));
@@ -103,5 +124,6 @@ function* taskSaga() {
     yield takeEvery("UPDATE_TASK_SUCCESS", updateTaskSuccess);
     yield takeEvery("SET_COMP_STATUS", setCompStatus);
     yield takeEvery("SET_INCOMP_STATUS", setIncompStatus);
+    yield takeEvery('FETCH_SELECTED_TASK', fetchSelectedTask);
 }
 export default taskSaga;

@@ -115,7 +115,7 @@ function EditTask() {
                 id: id
             }
         });
-        // history.push('/my_tasks');
+        history.push('/my_tasks');
     };
 
     //! What displays

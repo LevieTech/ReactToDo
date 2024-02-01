@@ -77,7 +77,7 @@ function MyTasks() {
                         fontSize: '40px',
                         fontWeight: 'bold',
                     }}
-                >Current Tasks:</h2>
+                >My Tasks:</h2>
 
                 {myTasks.length === 0 ? (
                     <p>No tasks to show...yet!</p>

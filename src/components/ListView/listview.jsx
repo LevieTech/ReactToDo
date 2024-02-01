@@ -54,13 +54,11 @@ function ListView() {
         <main>
             <center>
                 <div>
-                    {/* This needs to have some refinement added. I think this will loop through all tasks in the DB and create a Sort button for each task
-                        Not each priority level */}
                     {priorities.map(priority => {
                         return (
                             <div key={priority.id} className="Priority Check">
                                 <br />
-                                <button className="btn" onClick={() => sortTasks(priority.id)}>Sort By Priority: {priority.level}</button>
+                                <button className="btn" onClick={() => sortTasks(priority.id)}>View By Priority: {priority.level}</button>
                             </div>
                         )
                     })}

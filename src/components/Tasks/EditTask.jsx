@@ -101,7 +101,6 @@ function EditTask() {
     }
 
     //! Submit 
-    //TODO Not working
     const handleEditSubmit = (event) => {
         event.preventDefault();
         dispatch({
@@ -271,7 +270,7 @@ function EditTask() {
                                 fullWidth
                                 style={{ fontFamily: "Georgia" }}
                                 InputProps={{
-                                    
+
                                     style: {
                                         color: 'black',
                                         fontFamily: "Georgia"

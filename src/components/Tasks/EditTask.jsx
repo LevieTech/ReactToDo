@@ -138,6 +138,7 @@ function EditTask() {
                         <Grid item xs={12}>
                             <TextField
                                 label="Task Name"
+                                multiline
                                 name="taskname"
                                 defaultValue={selectedTask.taskname}
                                 value={taskname}
@@ -152,6 +153,7 @@ function EditTask() {
                                     },
                                 }}
                                 InputLabelProps={{
+                                    shrink: "true",
                                     style: {
                                         color: 'black',
                                         fontFamily: "Georgia",
@@ -242,6 +244,7 @@ function EditTask() {
                                     },
                                 }}
                                 InputLabelProps={{
+                                    shrink: "true",
                                     style: {
                                         color: 'black',
                                         fontFamily: "Georgia",
@@ -268,12 +271,14 @@ function EditTask() {
                                 fullWidth
                                 style={{ fontFamily: "Georgia" }}
                                 InputProps={{
+                                    
                                     style: {
                                         color: 'black',
                                         fontFamily: "Georgia"
                                     },
                                 }}
                                 InputLabelProps={{
+                                    shrink: "true",
                                     style: {
                                         color: 'black',
                                         fontFamily: "Georgia",

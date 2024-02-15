@@ -62,28 +62,35 @@ function ListView() {
                             </div>
                         )
                     })}
-                    {tasks.map(task => {
-                        return (
-                            <div key={task.id} style={{ width: '100%' }}>
-                                <br />
-                                <Card sx={{
-                                    boxShadow: 9,
-                                    maxWidth: '310px',
-                                    fontSize: 18,
-                                    backgroundColor: changeColor(task),
-                                    outlineStyle: "groove",
-                                    outlineWidth: 3,
-                                }}>
-                                    <h2 style={{ textDecoration: "underline" }}> {task.taskname} </h2>
-                                    <p>Date Added: {dateConversion(task.dateadded)}</p>
-                                    <p>Due Date: {dateConversion(task.duedate)}</p>
-                                    <p style={{ color: colorizePriority(task) }}>Priority: {task.level}</p>
-                                    <p>Status: {statusConversion(task)}</p>
-                                    <p>Notes: {task.notes}</p>
-                                </Card>
-                            </div>
-                        )
-                    })}
+
+                    {
+                        tasks.length === 0 ? (
+                            <h4>Sorry, there are no tasks with that priority</h4>
+                        ) : (
+                            tasks.map(task => {
+                                return (
+                                    <div key={task.id} style={{ width: '100%' }}>
+                                        <br />
+                                        <Card sx={{
+                                            boxShadow: 9,
+                                            maxWidth: '310px',
+                                            fontSize: 18,
+                                            backgroundColor: changeColor(task),
+                                            outlineStyle: "groove",
+                                            outlineWidth: 3,
+                                        }}>
+                                            <h2 style={{ textDecoration: "underline" }}> {task.taskname} </h2>
+                                            <p>Date Added: {dateConversion(task.dateadded)}</p>
+                                            <p>Due Date: {dateConversion(task.duedate)}</p>
+                                            <p style={{ color: colorizePriority(task) }}>Priority: {task.level}</p>
+                                            <p>Status: {statusConversion(task)}</p>
+                                            <p>Notes: {task.notes}</p>
+                                        </Card>
+                                    </div>
+                                )
+                            }
+                            )
+                        )}
                 </div>
             </center>
         </main>

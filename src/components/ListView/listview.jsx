@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { Card } from '@mui/material';
+import { Button, Card } from '@mui/material';
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import CheckIcon from '@mui/icons-material/Check';
 
 
 function ListView() {
@@ -41,7 +44,6 @@ function ListView() {
             return '#72ab16'
         }
     }
-
     const changeColor = (task) => {
         if (task.completionstatus === true) {
             return '#d8ffb0'
@@ -49,6 +51,32 @@ function ListView() {
             return 'white'
         }
     }
+
+    const handleDeleteTask = (id) => {
+        dispatch({ type: "DELETE_TASK", payload: id });
+        refreshPage();
+    };
+
+    const handleEditTask = (id) => {
+        history.push(`/edit_task/${id}`)
+    };
+
+    const refreshPage = () => {
+        setTimeout(() => {
+            window.location.reload(false);
+        }, 200);
+    }
+
+    const updateCompletion = (task) => {
+        console.log('Check the task id', task.id);
+        if (task.completionstatus === false) {
+          dispatch({ type: 'SET_COMP_STATUS', payload: task.id });
+        } else if (task.completionstatus === true) {
+          dispatch({ type: 'SET_INCOMP_STATUS', payload: task.id });
+        }
+        refreshPage();
+      }
+
 
     return (
         <main>
@@ -65,7 +93,7 @@ function ListView() {
 
                     {
                         tasks.length === 0 ? (
-                            <h4>Sorry, there are no tasks with that priority</h4>
+                            <h4>Sorry, there are no tasks to show with that priority</h4>
                         ) : (
                             tasks.map(task => {
                                 return (
@@ -85,7 +113,40 @@ function ListView() {
                                             <p style={{ color: colorizePriority(task) }}>Priority: {task.level}</p>
                                             <p>Status: {statusConversion(task)}</p>
                                             <p>Notes: {task.notes}</p>
+                                            <div className="buttons" style={{
+                                                display: "flex",
+                                                justifyContent: "center",
+                                                backgroundColor: "#e8eaed",
+                                                outlineStyle: "groove",
+                                            }}>
+                                                <Button
+                                                    onClick={() => handleDeleteTask(task.id)}
+                                                    style={{
+                                                        fontFamily: "Georgia",
+                                                        color: "black",
+                                                        fontWeight: "bold",
+                                                        fontSize: "20px",
+                                                        textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)",
+                                                    }}
+                                                >
+                                                    <DeleteIcon style={{ color: "#4e3055" }} />
+                                                </Button>
+                                                <Button
+                                                    onClick={() => handleEditTask(task.id)}
+                                                    style={{
+                                                        fontFamily: "Georgia",
+                                                        color: "black",
+                                                        fontWeight: "bolder",
+                                                        fontSize: "20px",
+                                                        textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)",
+                                                    }}
+                                                >
+                                                    <EditIcon sx={{ color: "#4e3055" }} />
+                                                </Button>
+                                                <Button onClick={() => updateCompletion(task)} style={{ color: 'black' }}><CheckIcon /></Button>
+                                            </div>
                                         </Card>
+
                                     </div>
                                 )
                             }

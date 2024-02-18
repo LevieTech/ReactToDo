@@ -103,6 +103,7 @@ function AddTask() {
               <Grid item xs={12}>
                 <TextField
                   className="input-field input-border"
+                  placeholder="Task Name"
                   label="Task Name"
                   value={taskname}
                   onChange={changeTaskName}

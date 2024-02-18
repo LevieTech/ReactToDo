@@ -14,6 +14,7 @@ function* getTasksByPriority(action) {
     try {
         const taskPriorities = yield axios.get(`/api/priority/${action.payload}`);
         // ! This is the attempt to retrieve all tasks from the Priority Saga
+        // ? Maybe move this into the router and create an async function to return the tasklist if the id === 4
         // let taskPriorities = [];
         // console.log('checking action.payload', action.payload);
         // if (action.payload === 4) {

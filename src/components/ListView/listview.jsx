@@ -83,14 +83,14 @@ function ListView() {
             <center>
                 <div maxWidth="200px">
                     <h3>View your tasks by priority level, or all of your previously completed tasks!</h3>
-                    <FormControl fullWidth>
-                        <InputLabel>View Tasks</InputLabel>
-                        <Select>
+                    <FormControl  >
+                        <InputLabel id="tasksLabel" sx={{ justifyContent: 'center' }}>View Tasks</InputLabel>
+                        <Select sx={{ width: '400px' }} labelId="tasksLabel" label="View Tasks">
                             {priorities.map(priority => {
                                 return (
                                     <div key={priority.id} className="Priority Check">
                                         <br />
-                                        <MenuItem className="btn" onClick={() => sortTasks(priority.id)}>{priority.level}</MenuItem>
+                                        <MenuItem sx={{ justifyContent: 'center' }} className="btn" onClick={() => sortTasks(priority.id)}>{priority.level}</MenuItem>
                                     </div>
                                 )
                             })}

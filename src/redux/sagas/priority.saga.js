@@ -12,8 +12,15 @@ function* getPriorities() {
 
 function* getTasksByPriority(action) {
     try {
-        const taskPriorities = yield axios.get(`/api/priority/${action.payload}`);
-        yield put({ type: 'SET_SORTED_TASKS', payload: taskPriorities.data});
+        let taskPriorities = [];
+        console.log('checking action.payload', action.payload);
+        if (action.payload === 4) {
+            yield axios.get("/api/task");
+        } else {
+            yield axios.get(`/api/priority/${action.payload}`);
+            console.log('Trying this out priority saga');
+        }
+        yield put({ type: 'SET_SORTED_TASKS', payload: taskPriorities.data });
     } catch (error) {
         console.log(`Error in fetching sorted Tasks ${error}`);
     }

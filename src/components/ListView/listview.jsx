@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { Button, Card } from '@mui/material';
+import { Button, Card, FormControl, MenuItem, Select, InputLabel } from '@mui/material';
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from '@mui/icons-material/Check';
@@ -70,30 +70,37 @@ function ListView() {
     const updateCompletion = (task) => {
         console.log('Check the task id', task.id);
         if (task.completionstatus === false) {
-          dispatch({ type: 'SET_COMP_STATUS', payload: task.id });
+            dispatch({ type: 'SET_COMP_STATUS', payload: task.id });
         } else if (task.completionstatus === true) {
-          dispatch({ type: 'SET_INCOMP_STATUS', payload: task.id });
+            dispatch({ type: 'SET_INCOMP_STATUS', payload: task.id });
         }
         refreshPage();
-      }
+    }
 
 
     return (
         <main>
             <center>
-                <div>
-                    {priorities.map(priority => {
-                        return (
-                            <div key={priority.id} className="Priority Check">
-                                <br />
-                                <button className="btn" onClick={() => sortTasks(priority.id)}>View By Priority: {priority.level}</button>
-                            </div>
-                        )
-                    })}
+                <div maxWidth="200px">
+                    <h3>View your tasks by priority level, or all of your previously completed tasks!</h3>
+                    <FormControl fullWidth>
+                        <InputLabel>View Tasks</InputLabel>
+                        <Select>
+                            {priorities.map(priority => {
+                                return (
+                                    <div key={priority.id} className="Priority Check">
+                                        <br />
+                                        <MenuItem className="btn" onClick={() => sortTasks(priority.id)}>{priority.level}</MenuItem>
+                                    </div>
+                                )
+                            })}
+                        </Select>
+                    </FormControl>
+
 
                     {
                         tasks.length === 0 ? (
-                            <h4>Sorry, there are no tasks to show with that priority</h4>
+                            <h4>There are no tasks to show, please select an option.</h4>
                         ) : (
                             tasks.map(task => {
                                 return (

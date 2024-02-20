@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, TextField, Typography, Container, Grid } from '@mui/material';
+import { Button, TextField, Typography, Container, Grid, InputLabel } from '@mui/material';
 import { MenuItem } from '@mui/material';
 
 function AddTask() {
@@ -232,6 +232,7 @@ function AddTask() {
                 <TextField
                   className="input-field date-input input border"
                   label="Notes"
+                  labelText="Notes"
                   type="notes"
                   value={notes}
                   onChange={changeNotes}
@@ -239,7 +240,7 @@ function AddTask() {
                   fullWidth
                   style={{ fontFamily: "Georgia" }}
                   InputProps={{
-                    shrink: "true",
+                    // shrink: "true",
                     style: {
                       color: 'black',
                       fontFamily: "Georgia",
@@ -247,7 +248,7 @@ function AddTask() {
                     },
                   }}
                   InputLabelProps={{
-                    shrink: "true",
+                    // shrink: "true",
                     style: {
                       color: 'black',
                       fontFamily: "Georgia",

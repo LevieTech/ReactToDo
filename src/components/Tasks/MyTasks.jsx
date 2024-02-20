@@ -17,7 +17,11 @@ function MyTasks() {
         dispatch({ type: "FETCH_SAVED_TASKS" });
     }, []);
 
-    
+    const refreshPage = () => {
+        setTimeout(() => {
+            window.location.reload(false);
+        }, 200);
+    }
 
     if (!myTasks) {
         return (
@@ -77,32 +81,35 @@ function MyTasks() {
                         fontSize: '40px',
                         fontWeight: 'bold',
                     }}
-                >Current Tasks:</h2>
+                >My Tasks:</h2>
 
                 {myTasks.length === 0 ? (
                     <p>No tasks to show...yet!</p>
                 ) : (
                     myTasks.map((task, i) => {
-                        return (
-                            <EachTask
-                                key={i}
-                                task={{
-                                    id: task.id,
-                                    taskname: task.taskname,
-                                    dateadded: task.dateadded,
-                                    duedate: task.duedate,
-                                    prioritylvl: task.prioritylvl,
-                                    completionstatus: task.completionstatus,
-                                    notes: task.notes,
-                                }}
-                                style={{
-                                    fontFamily: "Georgia",
-                                    fontWeight: "bolder",
-                                    textShadow: '4px 1px 2px rgba(0, 0, 0, 0.8)',
-                                    fontSize: '30px',
-                                }}
-                            />
-                        )
+                        if (task.completionstatus === false) {
+                            return (
+                                <EachTask
+                                    key={i}
+                                    task={{
+                                        id: task.id,
+                                        taskname: task.taskname,
+                                        dateadded: task.dateadded,
+                                        duedate: task.duedate,
+                                        prioritylvl: task.prioritylvl,
+                                        completionstatus: task.completionstatus,
+                                        notes: task.notes,
+                                    }}
+                                    style={{
+                                        fontFamily: "Georgia",
+                                        fontWeight: "bolder",
+                                        textShadow: '4px 1px 2px rgba(0, 0, 0, 0.8)',
+                                        fontSize: '30px',
+                                    }}
+                                />
+                            )
+                        }
+
 
                     })
                 )}

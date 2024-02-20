@@ -122,7 +122,7 @@ router.put('/complete/:id', (req, res) => {
 })
 
 router.put('/incomplete/:id', (req, res) => {
-  const queryText = `UPDATE tasklist SET completionstatus = FALSE, SET prioritylvl = 1 WHERE id= $1;`;
+  const queryText = `UPDATE tasklist SET completionstatus = FALSE, prioritylvl = 1 WHERE id= $1;`;
   pool.query(queryText, [req.params.id]).then((result) => {
     console.log(`Completion Status updated successfully!`)
     res.sendStatus(200);

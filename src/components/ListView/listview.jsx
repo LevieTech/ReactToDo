@@ -117,8 +117,9 @@ function ListView() {
                                             <h2 style={{ textDecoration: "underline" }}> {task.taskname} </h2>
                                             <p>Date Added: {dateConversion(task.dateadded)}</p>
                                             <p>Due Date: {dateConversion(task.duedate)}</p>
-                                            <p style={{ color: colorizePriority(task) }}>Priority: {task.level}</p>
-                                            <p>Status: {statusConversion(task)}</p>
+                                            <p style={{ color: colorizePriority(task) }}>{task.level}</p>
+                                            {/* Commenting this out for now, not sure if we need it now with the completed menu drop down */}
+                                            {/* <p>Status: {statusConversion(task)}</p> */}
                                             <p>Notes: {task.notes}</p>
                                             <div className="buttons" style={{
                                                 display: "flex",

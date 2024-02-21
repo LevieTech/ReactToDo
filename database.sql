@@ -23,7 +23,7 @@ CREATE TABLE tasklist (
 );
 
 
-INSERT INTO priority ("level") VALUES ('Low'), ('Medium'), ('High');
+INSERT INTO priority ("level") VALUES ('Low'), ('Medium'), ('High'), ('Completed');
 
 
 INSERT INTO "tasklist" ("user_id", "taskname", "dateadded", "duedate", "prioritylvl", "completionstatus", "notes")

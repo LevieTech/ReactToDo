@@ -23,7 +23,7 @@ CREATE TABLE tasklist (
 );
 
 
-INSERT INTO priority ("level") VALUES ('Low'), ('Medium'), ('High');
+INSERT INTO priority ("level") VALUES ('Low'), ('Medium'), ('High'), ('Completed');
 
 
 INSERT INTO "tasklist" ("user_id", "taskname", "dateadded", "duedate", "prioritylvl", "completionstatus", "notes")
@@ -33,4 +33,3 @@ VALUES
 ('1', 'Drop off returns', '2023-08-02', '2023-09-25', 1, FALSE, 'Make sure you bring the receipt'),
 ('1', 'Order new product', '2023-08-13', '2023-08-25', 2, TRUE, 'Order before it sells out!'),
 ('1', 'Do laundry', '2023-08-20', '2023-08-23', 3, TRUE, 'Separate colors');
-

@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, TextField, Typography, Container, Grid } from '@mui/material';
 import { MenuItem } from '@mui/material';
+import Select from '@mui/material/Select';
+
 
 function AddTask() {
   const tasks = useSelector(store => store.tasks) || [];
@@ -205,7 +207,7 @@ function AddTask() {
                   },
                 }}
                 InputLabelProps={{
-                  shrink: "true",
+                  // shrink: "true",
                   style: {
                     color: 'black',
                     fontFamily: "Georgia",
@@ -218,7 +220,11 @@ function AddTask() {
               >
                 {priorities.map(priority => {
                   return (
-                    <MenuItem value={priority.id}>{priority.level}</MenuItem>
+                    <MenuItem 
+                    key={priority.id} 
+                    value={priority.id}>
+                      {priority.level}
+                      </MenuItem>
                   )
                 })}
               </TextField>

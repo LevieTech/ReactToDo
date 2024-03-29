@@ -4,11 +4,6 @@ import { useParams, useHistory } from 'react-router-dom';
 import { Button, TextField, MenuItem, Grid, Container, Typography } from '@mui/material';
 import selectedTask from '../../redux/reducers/selectedTask.reducer';
 
-//TODO Running into issues~~~
-// The existing info only shows on the 2nd click
-// The correct info + ID is getting stored as selectedTask
-// The update is broken- the changes are getting stored and dispatched
-// But the edits are not saving
 
 function EditTask() {
     const history = useHistory();
@@ -16,18 +11,28 @@ function EditTask() {
     const dispatch = useDispatch();
     const [selectedTaskHook, setSelectedTaskHook] = useState({});
 
-    //! Fetch selected task
-    useEffect(() => {
-        dispatch({ type: 'FETCH_SELECTED_TASK', payload: id });
-        // if (selectedTask.length === 0) {
-        //     setSelectedTaskHook(selectedTask)
-        // }
-    }, [id]);
 
     //! Store selected task
     const selectedTask = useSelector((store) => store.selectedTask);
 
     console.log('Checking selectedTask in component', selectedTask);
+
+ useEffect(() => {
+        dispatch({ type: 'FETCH_SELECTED_TASK', payload: id });
+      
+    }, [id]);
+
+    useEffect(() => {
+        if (selectedTask.id === parseInt(id)) { // Ensure selectedTask is fetched and matches the current id
+            setTaskName(selectedTask.taskname);
+            setDateAdded(selectedTask.dateadded);
+            setDueDate(selectedTask.duedate);
+            setPriorityLvl(selectedTask.prioritylvl);
+            setNotes(selectedTask.notes);
+        }
+    }, [selectedTask, id]);
+    
+
 
     //! States
     const [taskname, setTaskName] = useState(selectedTask.taskname);
@@ -35,65 +40,8 @@ function EditTask() {
     const [duedate, setDueDate] = useState(selectedTask.duedate);
     const [prioritylvl, setPriorityLvl] = useState(selectedTask.prioritylvl);
     const [notes, setNotes] = useState(selectedTask.notes);
-    // ! Don't think this one is necessary. the useParams is already pulling the ID
-    // const [taskId, setTaskId] = useState(selectedTask.taskId)
-
+  
     console.log('Check ID', id);
-
-    //! original editedTask code 
-    // const [editedTask, setEditedTask] = useState({
-    //     taskname: '',
-    //     dateadded: '',
-    //     duedate: '',
-    //     prioritylvl: '',
-    //     notes: '',
-    //     taskId: id,
-    // });
-
-
-    //! Handle changes- one for each value that can change
-    // taskname, dateadded, duedate, prioritylvl, notes
-
-    // const handleTaskNameChange = (event) => {
-    //     setTaskName(event.target.value)
-    // };
-
-    // const handleDateAddedChange = (event) => {
-    //     setDateAdded(event.target.value)
-    // };
-
-    // const handleDueDateChange = (event) => {
-    //     setDueDate(event.target.value)
-    // };
-
-    // const handlePriorityLvlChange = (event) => {
-    //     setPriorityLvl(event.target.value)
-    // };
-
-    // const handleNotesChange = (event) => {
-    //     setNotes(event.target.value)
-    // };
-
-
-    //? Unsure if we will even keep this but, I changed this to selectedTask- formerly setEditedTask
-    //! This was in every inputs handleChange
-    // is converting the completion status from string to boolean
-
-    // const handleInputChange = (event) => {
-    //     const { name, value } = event.target;
-    //     if (name === "completionstatus") {
-    //         selectedTask(prevState => ({
-    //             ...prevState,
-    //             [name]: value === "true" // convert the string to boolean
-    //         }));
-    //     } else {
-    //         selectedTask(prevState => ({
-    //             ...prevState,
-    //             [name]: value
-    //         }));
-    //     }
-    // };
-
 
     //! Back
     const goBack = () => {

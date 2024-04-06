@@ -5,6 +5,15 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from '@mui/icons-material/Check';
 import { Button, Card } from "@mui/material";
+import Tooltip from '@mui/material/Tooltip';
+import { styled } from '@mui/material/styles';
+
+const StyledTooltipText = styled('div')({
+  fontSize: '24px',
+  color: '#04DED6',
+  textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)",
+
+});
 
 
 function EachTask({ task }) {
@@ -77,6 +86,8 @@ function EachTask({ task }) {
     }
   }
 
+  
+
   return (
     <div style={{ width: '100%', }}>
       <Card sx={{
@@ -124,7 +135,18 @@ function EachTask({ task }) {
           >
             <EditIcon sx={{ color: "#4e3055" }} />
           </Button>
-          <Button onClick={() => updateCompletion(task.id)} style={{ color: 'black' }}><CheckIcon /></Button>
+          <Tooltip title={<StyledTooltipText>Task Completed!!</StyledTooltipText>} placement="bottom"
+         
+         > 
+            <Button 
+              onClick={() => updateCompletion(task.id)} 
+              style={{ color: '' }}
+            >
+              <CheckIcon 
+                sx={{ fontSize: 40 }} // Adjust the size of the icon
+              />
+            </Button>
+          </Tooltip>
         </div>
       </Card>
       <br />

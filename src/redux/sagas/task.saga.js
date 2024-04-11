@@ -38,7 +38,6 @@ function* fetchSelectedTask(action) {
 }
 
 //! Update Task Success
-// was using /api/tasks previously?
 function* updateTaskSuccess(action) {
     try {
         const response = yield call(axios.get, "/api/task"); // refetch all tasks
@@ -94,7 +93,7 @@ function* editTask(action) {
     }
 }
 
-//! Set completion status
+//! Set to complete status
 function* setCompStatus(action) {
     try {
         yield axios.put((`/api/task/complete/${action.payload}`));
@@ -104,7 +103,7 @@ function* setCompStatus(action) {
     }
 }
 
-//! Set incomplete status
+//! Set to incomplete status
 function* setIncompStatus(action) {
     try {
         yield axios.put((`/api/task/incomplete/${action.payload}`));

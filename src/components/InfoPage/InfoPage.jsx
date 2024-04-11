@@ -1,5 +1,6 @@
 import React from 'react';
 import { Typography, Card } from '@mui/material';
+import MailToButton from '../MailToButton/MailToButton';
 
 function InfoPage() {
   return (
@@ -25,7 +26,9 @@ function InfoPage() {
           <br /> <br />
           For questions or inquiries, send us an email at LevieTech247@gmail.com
           <br /> <br />
-          <button className="btn" > Contact us! </button>
+
+         <MailToButton label="Contact us!" mailto="mailto:levietech247@gmail.com"/>
+
         </Typography>
 
         <Typography variant="h3"> Meet the team: </Typography>

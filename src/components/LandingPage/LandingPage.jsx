@@ -38,7 +38,7 @@ function LandingPage() {
               your responsibilities will be clearly displayed on
               your phone and at your fingertips. Users can set a start 
               and end date, edit the task in case deadlines change, mark as
-              complete when you're finished it, or just delete.
+              complete when you've finished, or just delete.
               It's all up to you, the world is in your hands.
             </p>
 
